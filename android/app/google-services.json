@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1021171810579",
+    "firebase_url": "https://herd-3f856.firebaseio.com",
+    "project_id": "herd-3f856",
+    "storage_bucket": "herd-3f856.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021171810579:android:7ef4cf02ba454a4a289ae6",
+        "android_client_info": {
+          "package_name": "com.herd.HERD"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021171810579-rpgvdgta9sh6o4og1eebhklp55vlcbok.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.herd.HERD",
+            "certificate_hash": "9b9fc1a8e82606563f18043f789b3ea29cf73a60"
+          }
+        },
+        {
+          "client_id": "1021171810579-3p57ujqg647k10l5l2u9sl27pk07g6q4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3g5B2U20swDNhwXDaDET96wmP16GJvJU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021171810579-3p57ujqg647k10l5l2u9sl27pk07g6q4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1021171810579-4r1j1s50os1hfcec9tg34d4ai0b2k2r3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.herd.HERD"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
