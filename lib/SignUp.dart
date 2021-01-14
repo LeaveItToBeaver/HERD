@@ -1,23 +1,51 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:herd/AuthUtil.dart';
-import 'package:herd/SignUp.dart';
-import 'package:provider/provider.dart';
-
-class LoginScreen extends StatefulWidget{
+import 'InfoValidation.dart';
+class SignUpScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignUpScreen createState() => _SignUpScreen();
 }
 
-class _LoginScreenState  extends State<LoginScreen>{
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+class CheckInformation{
+}
+
+class _SignUpScreen extends State<SignUpScreen>{
+  bool isEmailValid = false;
+
+  /*bool validateEmail(String userInput) {
+    if(userInput.isEmpty){
+      setState(() {
+        isEmailValid = true;
+      });
+    }
+    if(RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(userInput)){
+     setState(() {
+       isEmailValid = true;
+     });
+    }
+    return false;
+  }*/
+
+  bool isEmail(String userInput) {
+
+    String p = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+
+    RegExp regExp = new RegExp(p);
+
+    return regExp.hasMatch(userInput);
+  }
+
+  static final TextEditingController emailController = TextEditingController();
+  static final TextEditingController usernameController = TextEditingController();
+  static final TextEditingController passwordController = TextEditingController();
+  static final TextEditingController confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: <Widget>[
+          //Background//
           Container(
             height: double.infinity,
             width: double.infinity,
@@ -75,7 +103,19 @@ class _LoginScreenState  extends State<LoginScreen>{
                               borderRadius: BorderRadius.all(Radius.circular(50.0)),
                               borderSide: BorderSide(color: Colors.black38, width: 2.0),
                             ),
-                            labelText: 'Email',
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                              borderSide: BorderSide(color: Colors.red, width: 2.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                              borderSide: BorderSide(color: Colors.red, width: 2.0),
+                            ),
+                            labelText: 'Email ',
+                            errorText: isEmail != null ? null : 'This is not a valid email.',
+                            errorStyle: TextStyle(
+                              color: Colors.white,
+                            ),
                             labelStyle: TextStyle(
                               color: Colors.white,
                               fontFamily: 'OpenSans',
@@ -87,6 +127,7 @@ class _LoginScreenState  extends State<LoginScreen>{
                             ),
                           ),
                         ),
+
                       ),
                       SizedBox(height: 25.0),
                       //Password
@@ -103,7 +144,52 @@ class _LoginScreenState  extends State<LoginScreen>{
                               borderRadius: BorderRadius.all(Radius.circular(50.0)),
                               borderSide: BorderSide(color: Colors.black38, width: 2.0),
                             ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                              borderSide: BorderSide(color: Colors.red, width: 2.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                              borderSide: BorderSide(color: Colors.red, width: 2.0),
+                            ),
                             labelText: 'Password',
+                            labelStyle: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'OpenSans',
+                              fontSize: 15,
+                            ),
+                            prefixIcon: Icon(
+                              Icons.lock_open_rounded,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(height: 25),
+
+                      Container(
+                        child: TextField(
+                          controller: confirmPasswordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                              borderSide: BorderSide(color: Colors.blue, width: 2),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                              borderSide: BorderSide(color: Colors.black38, width: 2.0),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                              borderSide: BorderSide(color: Colors.red, width: 2.0),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                              borderSide: BorderSide(color: Colors.red, width: 2.0),
+                            ),
+                            labelText: 'Confirm Password',
                             labelStyle: TextStyle(
                               color: Colors.white,
                               fontFamily: 'OpenSans',
@@ -118,6 +204,7 @@ class _LoginScreenState  extends State<LoginScreen>{
                       ),
                     ],
                   ),
+
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -126,35 +213,16 @@ class _LoginScreenState  extends State<LoginScreen>{
                         minWidth: 150,
                         height: 50,
                         child: RaisedButton(
-                          onPressed: () {
-                            context.read<AuthenticationService>().signIn(
-                              email: emailController.text.trim(),
-                              password: passwordController.text.trim(),
-                            );
+                          onPressed: () {s
+                            isEmail(emailController.text);
                           },
                           shape: const StadiumBorder(),
                           textColor: Colors.white,
                           color: Colors.blue,
-                          child: Text('Sign In'),
+                          child: Text('Next'),
                         ),
                       ),
                       SizedBox(height: 17),
-                      ButtonTheme(
-                        minWidth: 150,
-                        height: 50,
-                        child: RaisedButton(
-                          onPressed: (){
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => SignUpScreen()),
-                            );
-                          },
-                          shape: const StadiumBorder(),
-                          textColor: Colors.white,
-                          color: Colors.blue,
-                          child: Text('Sign Up'),
-                        ),
-                      ),
                     ],
                   ),
                 ],
