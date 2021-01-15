@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:herd/AuthUtil.dart';
-import 'package:herd/SignUp.dart';
+import 'package:herd/SignUpEmail.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget{
@@ -146,7 +146,7 @@ class _LoginScreenState  extends State<LoginScreen>{
                           onPressed: (){
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => SignUpScreen()),
+                                MaterialPageRoute(builder: (context) => SignUpScreenEmail()),
                             );
                           },
                           shape: const StadiumBorder(),
