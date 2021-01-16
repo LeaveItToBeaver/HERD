@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 
 class SignUpScreenPersonal extends StatefulWidget{
   @override
@@ -12,8 +13,10 @@ class _SignUpScreenPersonal extends State<SignUpScreenPersonal>{
     final TextEditingController userNameController = TextEditingController();
     final _formKey = GlobalKey<FormState>();
 
+
     @override
     Widget build(BuildContext context) {
+      DateTime _selectedDate;
       return Scaffold(
           body: Stack(
             children: <Widget>[
@@ -33,6 +36,7 @@ class _SignUpScreenPersonal extends State<SignUpScreenPersonal>{
                     )
                 ),
               ),
+
               ListView(
                 children: <Widget>[
                   Form(
@@ -52,8 +56,9 @@ class _SignUpScreenPersonal extends State<SignUpScreenPersonal>{
                             ),
                           ),
                         ),
+
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(25, 25, 25, 25),
+                          padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
                           child: TextFormField(
                             controller: firstNameController,
                             decoration: InputDecoration(
@@ -90,8 +95,9 @@ class _SignUpScreenPersonal extends State<SignUpScreenPersonal>{
                             ),
                           ),
                         ),
+
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(25, 25, 25, 25),
+                          padding: const EdgeInsets.fromLTRB(25, 10, 25, 10),
                           child: TextFormField(
                             controller: lastNameController,
                             decoration: InputDecoration(
@@ -128,8 +134,9 @@ class _SignUpScreenPersonal extends State<SignUpScreenPersonal>{
                             ),
                           ),
                         ),
+
                         Padding(
-                          padding: EdgeInsets.fromLTRB(25, 10, 25, 25),
+                          padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
                           child: TextField(
                             controller: userNameController,
                             obscureText: true,
@@ -165,6 +172,41 @@ class _SignUpScreenPersonal extends State<SignUpScreenPersonal>{
                         ),
 
                         Padding(
+                          padding: const EdgeInsets.fromLTRB(25, 25, 25, 0),
+                          child: Text('What\'s your birthday?',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'OpenSans',
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+
+                        Padding(
+                          //Birthday
+                          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: Container(
+                            width: 300,
+                            child: DatePickerWidget(
+                              looping: false, // default is not looping
+                              firstDate: DateTime.now().subtract(Duration(days: 36524)),
+                              lastDate: DateTime.now(),
+                              initialDate: DateTime.now(),
+                              dateFormat: "dd-MMM-yyyy",
+                              locale: DatePicker.localeFromString('en'),
+                              onChange: (DateTime newDate, _) => _selectedDate = newDate,
+                              pickerTheme: DateTimePickerTheme(
+                                backgroundColor: Colors.transparent,
+                                itemTextStyle: TextStyle(color: Colors.black, fontSize: 19),
+                                dividerColor: Colors.yellow,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        Padding(
                           padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                           child: ButtonTheme(
                             minWidth: 150,
@@ -179,7 +221,8 @@ class _SignUpScreenPersonal extends State<SignUpScreenPersonal>{
                               child: Text('Next'),
                             ),
                           ),
-                        )
+                        ),
+
                       ],
                     ),
                   ),

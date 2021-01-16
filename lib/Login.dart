@@ -88,6 +88,7 @@ class _LoginScreenState  extends State<LoginScreen>{
                           ),
                         ),
                       ),
+
                       SizedBox(height: 25.0),
                       //Password
                       Container(
@@ -118,6 +119,7 @@ class _LoginScreenState  extends State<LoginScreen>{
                       ),
                     ],
                   ),
+
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -138,6 +140,7 @@ class _LoginScreenState  extends State<LoginScreen>{
                           child: Text('Sign In'),
                         ),
                       ),
+
                       SizedBox(height: 17),
                       ButtonTheme(
                         minWidth: 150,

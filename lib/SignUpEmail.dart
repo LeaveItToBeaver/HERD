@@ -48,8 +48,8 @@ class _SignUpScreenEmail extends State<SignUpScreenEmail>{
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.fromLTRB(25, 40, 25, 25),
-                      child: Text('Hi \n'
-                          'We\'re gonna need some info',
+                      child: Text('Welcome! \n'
+                          'Let\'s learn about you.',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,

@@ -26,6 +26,7 @@ dependencies:
   firebase_auth: ^0.20.0
   cloud_firestore: ^0.16.0
   firebase_core: ^0.7.0
+  flutter_holo_date_picker: ^0.3.0
 
   provider: ^4.3.2+1
 
