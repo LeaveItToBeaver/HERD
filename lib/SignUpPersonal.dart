@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUpScreenPersonal extends StatefulWidget{
   @override
@@ -213,7 +214,21 @@ class _SignUpScreenPersonal extends State<SignUpScreenPersonal>{
                             height: 50,
                             child: RaisedButton(
                               onPressed: (){
+                                try {
+                                  if(userNameController.text != null||
+                                      firstNameController.text != null||
+                                      lastNameController != null ||
+                                      _selectedDate != DateTime.now()){
+                                    FirebaseFirestore.instance.collection('Users').add({
+                                      'Username': userNameController.text,
+                                      'First_Name': firstNameController.text,
+                                      'Last_Name': lastNameController.text,
+                                      'Birthday': _selectedDate
+                                    });
+                                  }
+                                } catch (e){
 
+                                }
                               },
                               shape: const StadiumBorder(),
                               textColor: Colors.white,
@@ -222,7 +237,6 @@ class _SignUpScreenPersonal extends State<SignUpScreenPersonal>{
                             ),
                           ),
                         ),
-
                       ],
                     ),
                   ),
@@ -231,5 +245,5 @@ class _SignUpScreenPersonal extends State<SignUpScreenPersonal>{
             ],
           )
       );
-  }
+    }
 }

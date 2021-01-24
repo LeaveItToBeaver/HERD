@@ -20,14 +20,26 @@ class AuthenticationService {
     }
   }
 
-  Future<void> userSetup(String displayName) async {
+  static Future<void> userSetup(String email, String password) async {
     CollectionReference users = FirebaseFirestore.instance.collection('Users');
     FirebaseAuth auth = FirebaseAuth.instance;
     String uid = auth.currentUser.uid.toString();
     users.add({
-      'displayName': displayName,
-      'uid': uid,
+      'email': email,
+      'password': password,
+      //'uid': uid,
     });
     return;
   }
+}
+
+Future<void> userSetup(String username) async{
+  CollectionReference users = FirebaseFirestore.instance.collection('Users');
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String uid = auth.currentUser.uid.toString();
+  users.add({
+  'username': username,
+  'uid': uid
+  });
+  return;
 }
