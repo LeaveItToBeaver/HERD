@@ -16,8 +16,10 @@ class SignUpScreenEmail extends StatefulWidget {
 
 class _SignUpScreenEmail extends State<SignUpScreenEmail> {
   static final TextEditingController emailController = TextEditingController();
+  String emailPass = emailController.text;
   static final TextEditingController passwordController = TextEditingController();
   static final TextEditingController confirmPasswordController = TextEditingController();
+  String passPass = passwordController.text;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -225,32 +227,16 @@ class _SignUpScreenEmail extends State<SignUpScreenEmail> {
                       height: 50,
                       child: RaisedButton(
                         onPressed: () async {
-                          try {
-                            UserCredential user = await FirebaseAuth
-                                .instance
-                                .createUserWithEmailAndPassword(
-                                    email: emailController.text,
-                                    password: passwordController.text).then((result) {
-                                      FirebaseFirestore.instance
-                                          .collection('Users')
-                                          .doc(result.user.uid)
-                                          .set({
-                                        'email': emailController.text,
-                                        "uid": result.user.uid
-                                      });
-                              }).then((success)
-                              { Navigator.pushReplacement(context,
+                          if(_formKey.currentState.validate()){
+                            Navigator.pushReplacement(context,
                                 MaterialPageRoute(
-                                builder: (context) => SignUpScreenPersonal()),
-                              );
-                              return;
-                            });
-                            } on FirebaseException catch (e) {
-                              print(e);
-                              /*emailController.text = "";
-                              passwordController.text = "";
-                              confirmPasswordController.text = "";*/
-                            }
+                                    builder: (context) => SignUpScreenPersonal(
+                                        email: emailPass,
+                                        password : passPass
+                                    )
+                                )
+                            );
+                          }
                         },
                         shape: const StadiumBorder(),
                         textColor: Colors.white,
@@ -268,3 +254,4 @@ class _SignUpScreenEmail extends State<SignUpScreenEmail> {
     ));
   }
 }
+

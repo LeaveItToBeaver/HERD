@@ -1,20 +1,25 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:herd/SignUpEmail.dart';
+import 'package:herd/UserMainScreen.dart';
 
 class SignUpScreenPersonal extends StatefulWidget{
+  SignUpScreenPersonal({Key key, this.email, this.password}) : super (key : key);
+  final String email;
+  final String password;
   @override
   _SignUpScreenPersonal createState() => _SignUpScreenPersonal();
 }
 
 class _SignUpScreenPersonal extends State<SignUpScreenPersonal>{
+    SignUpScreenPersonal controllers = SignUpScreenPersonal();
     final TextEditingController firstNameController = TextEditingController();
     final TextEditingController lastNameController = TextEditingController();
     final TextEditingController userNameController = TextEditingController();
     final _formKey = GlobalKey<FormState>();
-
-
     @override
     Widget build(BuildContext context) {
       DateTime _selectedDate;
@@ -140,7 +145,7 @@ class _SignUpScreenPersonal extends State<SignUpScreenPersonal>{
                           padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
                           child: TextField(
                             controller: userNameController,
-                            obscureText: true,
+                            obscureText: false,
                             decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -213,23 +218,43 @@ class _SignUpScreenPersonal extends State<SignUpScreenPersonal>{
                             minWidth: 150,
                             height: 50,
                             child: RaisedButton(
-                              onPressed: (){
+                              onPressed: () async {
                                 try {
-                                  if(userNameController.text != null||
-                                      firstNameController.text != null||
-                                      lastNameController != null ||
+                                  if(userNameController.text != null &&
+                                      firstNameController.text != null&&
+                                      lastNameController != null&&
                                       _selectedDate != DateTime.now()){
-                                    FirebaseFirestore.instance.collection('Users').add({
-                                      'Username': userNameController.text,
-                                      'First_Name': firstNameController.text,
-                                      'Last_Name': lastNameController.text,
-                                      'Birthday': _selectedDate
-                                    });
+                                    UserCredential user = await FirebaseAuth
+                                        .instance.createUserWithEmailAndPassword(
+                                        email: widget.email,
+                                        password: widget.password).then((result) {
+                                          FirebaseFirestore.instance
+                                              .collection('Users')
+                                              .doc(result.user.uid)
+                                              .set({
+                                                'email': widget.email,
+                                                'uid': result.user.uid
+                                              }).then((success){
+                                            FirebaseFirestore.instance.collection('Users').add({
+                                                  'Email': controllers.email,
+                                                  'Username': userNameController.text,
+                                                  'First_Name': firstNameController.text,
+                                                  'Last_Name': lastNameController.text,
+                                                  'Birthday': _selectedDate
+                                                });
+                                                Navigator.pushReplacement(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) => UserMainScreen()
+                                                  ),
+                                                );
+                                              });
+                                          return;
+                                        });
                                   }
-                                } catch (e){
+                                } on FirebaseException catch (e){
 
                                 }
-                              },
+                                },
                               shape: const StadiumBorder(),
                               textColor: Colors.white,
                               color: Colors.blue,
