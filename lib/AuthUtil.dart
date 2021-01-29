@@ -10,7 +10,8 @@ class AuthenticationService {
 
   Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
 
-  Future<String> signIn({ String email,  String password}) async {
+
+  Future<String> signIn({ String email, String password}) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -19,21 +20,24 @@ class AuthenticationService {
       return e.message;
     }
   }
+}
 
-  static Future<void> userSetup(String email, String password) async {
+  Future<void> userSetup(String email, String password, String birthday, String firstName, String lastName) async {
     CollectionReference users = FirebaseFirestore.instance.collection('Users');
     FirebaseAuth auth = FirebaseAuth.instance;
     String uid = auth.currentUser.uid.toString();
     users.add({
+      'firstName': firstName,
+      'lastName': lastName,
+      'birthday': birthday,
       'email': email,
       'password': password,
-      //'uid': uid,
+      'uid': uid,
     });
     return;
   }
-}
 
-Future<void> userSetup(String username) async{
+/*Future<void> userSetup(String username) async{
   CollectionReference users = FirebaseFirestore.instance.collection('Users');
   FirebaseAuth auth = FirebaseAuth.instance;
   String uid = auth.currentUser.uid.toString();
@@ -42,4 +46,4 @@ Future<void> userSetup(String username) async{
   'uid': uid
   });
   return;
-}
+}*/
