@@ -226,12 +226,10 @@ class _SignUpScreenPersonal extends State<SignUpScreenPersonal>{
                                       firstNameController.text != null&&
                                       lastNameController != null&&
                                       _selectedDate != DateTime.now()){
-                                    userSetup(
-                                        widget.email, 
-                                        widget.password,
-                                        _selectedDate.toString(),
-                                        firstNameController.text,
-                                        lastNameController.text);
+                                    FirebaseAuth auth = FirebaseAuth.instance;
+                                    String uids = auth.currentUser.uid.toString();
+
+                                    //TODO add login logic here for information validation.//
                                   }
                                 } on FirebaseException catch (e){
 

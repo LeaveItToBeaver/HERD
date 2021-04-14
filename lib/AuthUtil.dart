@@ -1,41 +1,43 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
 //https://www.youtube.com/watch?v=oJ5Vrya3wCQ <= this
 
 class AuthenticationService {
-  final FirebaseAuth _firebaseAuth;
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-  AuthenticationService(this._firebaseAuth);
+  AuthenticationService(FirebaseAuth instance);
 
-  Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
+  Future loginWithEmail({
+    @required String email,
+    @required String password
+  }) async {
+    try{
+      var user = await firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password
+      );
+    } catch(e){
+      return e.message;
+    }
+  }
 
-
-  Future<String> signIn({ String email, String password}) async {
-    try {
-      await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
-      return 'Signed In';
-    } on FirebaseAuthException catch (e) {
+  Future signUpWithEmail({
+    @required String email,
+    @required String password
+  }) async {
+    try{
+      var authResult = await firebaseAuth.createUserWithEmailAndPassword(
+          email: email,
+          password: password
+      );
+      return authResult.user != null;
+    } catch(e){
       return e.message;
     }
   }
 }
 
-  Future<void> userSetup(String email, String password, String birthday, String firstName, String lastName) async {
-    CollectionReference users = FirebaseFirestore.instance.collection('Users');
-    FirebaseAuth auth = FirebaseAuth.instance;
-    String uid = auth.currentUser.uid.toString();
-    users.add({
-      'firstName': firstName,
-      'lastName': lastName,
-      'birthday': birthday,
-      'email': email,
-      'password': password,
-      'uid': uid,
-    });
-    return;
-  }
 
 /*Future<void> userSetup(String username) async{
   CollectionReference users = FirebaseFirestore.instance.collection('Users');
