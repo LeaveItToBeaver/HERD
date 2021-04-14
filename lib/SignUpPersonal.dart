@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:herd/AuthUtil.dart';
-import 'package:herd/FirebaseRegister.dart';
 import 'package:herd/SignUpEmail.dart';
 import 'package:herd/UserMainScreen.dart';
 
@@ -226,10 +224,32 @@ class _SignUpScreenPersonal extends State<SignUpScreenPersonal>{
                                       firstNameController.text != null&&
                                       lastNameController != null&&
                                       _selectedDate != DateTime.now()){
-                                    FirebaseAuth auth = FirebaseAuth.instance;
-                                    String uids = auth.currentUser.uid.toString();
-
-                                    //TODO add login logic here for information validation.//
+                                    UserCredential user = await FirebaseAuth
+                                        .instance.createUserWithEmailAndPassword(
+                                        email: widget.email,
+                                        password: widget.password).then((result) {
+                                          FirebaseFirestore.instance
+                                              .collection('Users')
+                                              .doc(result.user.uid)
+                                              .set({
+                                                'email': widget.email,
+                                                'uid': result.user.uid
+                                              }).then((success){
+                                            FirebaseFirestore.instance.collection('Users').add({
+                                                  'Email': controllers.email,
+                                                  'Username': userNameController.text,
+                                                  'First_Name': firstNameController.text,
+                                                  'Last_Name': lastNameController.text,
+                                                  'Birthday': _selectedDate
+                                                });
+                                                Navigator.pushReplacement(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) => UserMainScreen()
+                                                  ),
+                                                );
+                                              });
+                                          return;
+                                        });
                                   }
                                 } on FirebaseException catch (e){
 

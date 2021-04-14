@@ -28,7 +28,9 @@ dependencies:
   firebase_core: ^0.7.0
   email_validator: ^1.0.6
   flutter_holo_date_picker: ^0.3.0
-  provider: ^4.3.2+1
+  provider: ^5.0.0
+  equatable: ^2.0.0
+  flutter_bloc: ^7.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
