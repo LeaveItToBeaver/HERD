@@ -1,42 +1,25 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:herd/blocs/authentication_bloc/authentication_bloc.dart';
-import 'package:herd/blocs/authentication_bloc/authentication_event.dart';
-import 'package:herd/repositories/user_repository.dart';
+import 'package:herd/config/custom_router.dart';
+import 'package:herd/screens/screens.dart';
 
-main(){
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(Herd());
 }
 
-class Herd extends StatefulWidget {
-  State<Herd> createState() => _herdState();
-}
-
-class _herdState extends State<Herd>{ 
-  final UserRepository _userRepository = UserRepository as UserRepository;
-  AuthenticationBloc _authenticationBloc;
-
-  @override
-  void initState(){
-    _authenticationBloc = AuthenticationBloc(userRepository: _userRepository);
-    _authenticationBloc.add(AuthenticationStarted());
-  }
-
+class Herd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (BuildContext context) => _authenticationBloc,
-        child: MaterialApp (
-          home: BlocBuilder(
-            bloc: _authenticationBloc,
-            builder: (BuildContext context),
-          ),
-        ),
+    return MaterialApp(
+      title: 'Herd',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      onGenerateRoute: CustomRouter.onGeneratedRoute,
+      initialRoute: SplashScreen.routeName,
     );
   }
-}
-
-class AppStarted {
 }
