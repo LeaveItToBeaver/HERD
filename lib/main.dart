@@ -15,7 +15,7 @@ class Herd extends StatefulWidget {
 }
 
 class _herdState extends State<Herd>{
-  final UserRepository _userRepository = UserRepository();
+  final UserRepository _userRepository = UserRepository as UserRepository;
   AuthenticationBloc _authenticationBloc;
 
   @override
