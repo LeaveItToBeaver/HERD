@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:herd/screens/login/login_screen.dart';
+import 'package:herd/screens/nav/nav_screen.dart';
 import 'package:herd/screens/splash/splash_screen.dart';
 
 class CustomRouter {
@@ -13,6 +15,10 @@ class CustomRouter {
     );
       case SplashScreen.routeName:
         return SplashScreen.route();
+      case LoginScreen.routeName:
+        return LoginScreen.route();
+      case NavScreen.routeName:
+        return NavScreen.route();
       default:
         return _errorRoute();
     }

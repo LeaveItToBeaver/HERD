@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herd/blocs/auth/auth_bloc.dart';
+import 'package:herd/blocs/simple_bloc_observer.dart';
 import 'package:herd/config/custom_router.dart';
 import 'package:herd/repositories/auth/auth_repository.dart';
 import 'package:herd/screens/screens.dart';
@@ -9,6 +10,7 @@ import 'package:herd/screens/screens.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  Bloc.observer = SimpleBlocObserver();
   runApp(Herd());
 }
 
@@ -26,7 +28,8 @@ class Herd extends StatelessWidget {
           providers: [
             BlocProvider<AuthBloc>(
                 create: (context) =>
-                    AuthBloc(authRepository: context.read<AuthRepository>())),
+                    AuthBloc(authRepository: context.read<AuthRepository>())
+            ),
           ],
           child: MaterialApp(
             title: 'Herd',
