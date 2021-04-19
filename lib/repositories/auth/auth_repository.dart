@@ -11,35 +11,32 @@ class AuthRepository extends BaseAuthRepository {
   final auth.FirebaseAuth _firebaseAuth;
 
   AuthRepository({
-   FirebaseFirestore firebaseFirestore,
-   auth.FirebaseAuth firebaseAuth,
-  }): _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance,
-        _firebaseAuth = firebaseAuth ??  auth.FirebaseAuth.instance;
+    FirebaseFirestore firebaseFirestore,
+    auth.FirebaseAuth firebaseAuth,
+  })  : _firebaseFirestore = firebaseFirestore ?? FirebaseFirestore.instance,
+        _firebaseAuth = firebaseAuth ?? auth.FirebaseAuth.instance;
 
   @override
   Stream<auth.User> get user => _firebaseAuth.userChanges();
 
   @override
-  Future<auth.User> signUpWithEmailAndPassword({
-    @required String username,
-    @required String email,
-    @required String password
-  }) async {
+  Future<auth.User> signUpWithEmailAndPassword(
+      {@required String username,
+      @required String email,
+      @required String password}) async {
     try {
-     final credential = await _firebaseAuth.createUserWithEmailAndPassword(
-          email: email,
-          password: password
-      );
-     final user = credential.user;
-     _firebaseFirestore.collection(Paths.users).doc(user.uid).set({
+      final credential = await _firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      final user = credential.user;
+      _firebaseFirestore.collection(Paths.users).doc(user.uid).set({
         'username': username,
         'email': email,
         'following': 0,
         'followers': 0,
         'friends': 0,
         'points': 0,
-     });
-     return user;
+      });
+      return user;
     } on auth.FirebaseAuthException catch (err) {
       throw Failure(code: err.code, message: err.message);
     } on PlatformException catch (err) {
@@ -47,22 +44,17 @@ class AuthRepository extends BaseAuthRepository {
     }
   }
 
-
   @override
-  Future<auth.User> logInWithEmailAndPassword({
-    @required String email,
-    @required String password
-  }) async {
+  Future<auth.User> logInWithEmailAndPassword(
+      {@required String email, @required String password}) async {
     try {
       final credential = await _firebaseAuth.signInWithEmailAndPassword(
-          email: email,
-          password: password
-      );
+          email: email, password: password);
       return credential.user;
     } on auth.FirebaseAuthException catch (err) {
-        throw Failure(code: err.code, message: err.message);
+      throw Failure(code: err.code, message: err.message);
     } on PlatformException catch (err) {
-        throw Failure(code: err.code, message: err.message);
+      throw Failure(code: err.code, message: err.message);
     }
   }
 

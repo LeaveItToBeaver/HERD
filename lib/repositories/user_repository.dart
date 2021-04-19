@@ -8,31 +8,22 @@ class UserRepository {
 
   UserRepository(FirebaseAuth instance);
 
-  Future loginWithEmail({
-  @required String email,
-    @required String password
-  }) async {
-    try{
+  Future loginWithEmail(
+      {@required String email, @required String password}) async {
+    try {
       var user = await firebaseAuth.signInWithEmailAndPassword(
-          email: email,
-          password: password
-      );
-    } catch(e){
+          email: email, password: password);
+    } catch (e) {
       return e.message;
     }
   }
 
-  Future signUpWithEmail({
-    @required email,
-    @required password
-  }) async {
-    try{
+  Future signUpWithEmail({@required email, @required password}) async {
+    try {
       var authResult = await firebaseAuth.createUserWithEmailAndPassword(
-          email: email,
-          password: password
-      );
-    return authResult.user != null;
-    } catch(e){
+          email: email, password: password);
+      return authResult.user != null;
+    } catch (e) {
       return e.message;
     }
   }
