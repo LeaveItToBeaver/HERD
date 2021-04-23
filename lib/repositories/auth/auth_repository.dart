@@ -21,14 +21,18 @@ class AuthRepository extends BaseAuthRepository {
 
   @override
   Future<auth.User> signUpWithEmailAndPassword(
-      {@required String username,
-      @required String email,
-      @required String password}) async {
+      { @required String firstName,
+        @required String lastName,
+        @required String username,
+        @required String email,
+        @required String password}) async {
     try {
       final credential = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       final user = credential.user;
       _firebaseFirestore.collection(Paths.users).doc(user.uid).set({
+        'First name' : firstName,
+        'Last name' : lastName,
         'username': username,
         'email': email,
         'following': 0,
