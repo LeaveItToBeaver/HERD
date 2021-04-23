@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herd/repositories/auth/auth_repository.dart';
-import 'package:herd/screens/signup/signup_screen.dart';
 import 'package:herd/widgets/wave_widget_0.dart';
 import 'package:herd/widgets/wave_widget_1.dart';
 import 'package:wave/config.dart';
@@ -11,22 +10,20 @@ import 'package:wave/config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'cubit/login_cubit.dart';
+import 'cubit/signup_cubit.dart';
 
-class LoginScreen extends StatelessWidget {
-  static const String routeName = '/login';
+class SignupScreen extends StatelessWidget {
+  static const String routeName = '/signup';
 
   static Route route() {
-    return PageRouteBuilder(
+    return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      transitionDuration: const Duration(seconds: 0),
-      pageBuilder: (
-        context, _, __,) =>
-          BlocProvider<LoginCubit>(
+      builder: (context) =>
+          BlocProvider<SignupCubit>(
             create: (_) =>
-            LoginCubit(authRepository: context.read<AuthRepository>()),
-            child: LoginScreen(),
-      ),
+                SignupCubit(authRepository: context.read<AuthRepository>()),
+            child: SignupScreen(),
+          ),
     );
   }
 
@@ -41,8 +38,8 @@ class LoginScreen extends StatelessWidget {
       onWillPop: () async => false,
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
-          if (state.status == LoginStatus.error) {
+        child: BlocConsumer<SignupCubit, SignupState>(listener: (context, state) {
+          if (state.status == SignupStatus.error) {
             showDialog(
               context: context,
               builder: (context) => AlertDialog(
@@ -120,7 +117,7 @@ class LoginScreen extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               const Text(
-                                'Login',
+                                'Sign Up',
                                 style: TextStyle(
                                   fontSize: 28,
                                   fontWeight: FontWeight.bold,
@@ -133,15 +130,65 @@ class LoginScreen extends StatelessWidget {
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(50.0)),
+                                    BorderRadius.all(Radius.circular(50.0)),
                                     borderSide: BorderSide(
                                         color: Colors.blue, width: 2),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(50.0)),
+                                    BorderRadius.all(Radius.circular(50.0)),
                                     borderSide: BorderSide(
                                         color: Colors.black38, width: 2.0),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                    borderSide: BorderSide(color: Colors.red, width: 2.0),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                    borderSide: BorderSide(color: Colors.red, width: 2.0),
+                                  ),
+                                  labelText: 'Username',
+                                  labelStyle: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'OpenSans',
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  prefixIcon: Icon(
+                                    Icons.account_circle_rounded,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                onChanged: (value) => context
+                                    .read<SignupCubit>()
+                                    .usernameChanged(value),
+                                validator: (value) => value.trim().isEmpty
+                                    ? 'Please enter a valid username.'
+                                    : null,
+                              ),
+                              const SizedBox(height: 12.0),
+                              TextFormField(
+                                decoration: InputDecoration(
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(50.0)),
+                                    borderSide: BorderSide(
+                                        color: Colors.blue, width: 2),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(50.0)),
+                                    borderSide: BorderSide(
+                                        color: Colors.black38, width: 2.0),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                    borderSide: BorderSide(color: Colors.red, width: 2.0),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                    borderSide: BorderSide(color: Colors.red, width: 2.0),
                                   ),
                                   labelText: 'Email',
                                   labelStyle: TextStyle(
@@ -156,13 +203,13 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                 ),
                                 onChanged: (value) => context
-                                    .read<LoginCubit>()
+                                    .read<SignupCubit>()
                                     .emailChanged(value),
                                 validator: (value) => !value.contains(value)
                                     ? 'Please enter a valid email.'
                                     : null,
                               ),
-                              const SizedBox(height: 17.0),
+                              const SizedBox(height: 12.0),
                               Container(
                                 child: TextFormField(
                                   obscureText: true,
@@ -179,6 +226,14 @@ class LoginScreen extends StatelessWidget {
                                       borderSide: BorderSide(
                                           color: Colors.black38, width: 2.0),
                                     ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                      borderSide: BorderSide(color: Colors.red, width: 2.0),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                      borderSide: BorderSide(color: Colors.red, width: 2.0),
+                                    ),
                                     labelText: 'Password',
                                     labelStyle: TextStyle(
                                       color: Colors.black,
@@ -192,7 +247,7 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                   ),
                                   onChanged: (value) => context
-                                      .read<LoginCubit>()
+                                      .read<SignupCubit>()
                                       .passwordChanged(value),
                                   validator: (value) => value.length < 6
                                       ? 'Password or Email is incorrect.'
@@ -200,28 +255,6 @@ class LoginScreen extends StatelessWidget {
                                 ),
                               ),
                               //SizedBox(height: 5.0),
-                              Container(
-                                child: TextButton(
-                                  onPressed: () {},
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.transparent),
-                                    shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(25.0),
-                                      ),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    'Forgot Password?',
-                                    style: TextStyle(
-                                        color: Colors.red, fontSize: 15),
-                                  ),
-                                ),
-                              ),
                               Container(
                                 child: Card(
                                   elevation: 5,
@@ -240,7 +273,7 @@ class LoginScreen extends StatelessWidget {
                                         padding: EdgeInsets.all(12),
                                         child: Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                           children: [
                                             Container(
                                               child: SizedBox(
@@ -248,29 +281,29 @@ class LoginScreen extends StatelessWidget {
                                                 height: 45,
                                                 child: TextButton(
                                                   child: Text(
-                                                    'Sign In',
+                                                    'Sign Up',
                                                     style: TextStyle(
                                                       color: Colors.black,
                                                     ),
                                                   ),
                                                   style: ButtonStyle(
                                                     backgroundColor:
-                                                        MaterialStateProperty
-                                                            .all<Color>(
-                                                                Colors.white),
+                                                    MaterialStateProperty
+                                                        .all<Color>(
+                                                        Colors.white),
                                                     shape: MaterialStateProperty
                                                         .all<
-                                                            RoundedRectangleBorder>(
+                                                        RoundedRectangleBorder>(
                                                       RoundedRectangleBorder(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(25.0),
+                                                        BorderRadius
+                                                            .circular(25.0),
                                                       ),
                                                     ),
                                                   ),
                                                   onPressed: () => _submitForm(
                                                       context,
-                                                      state.status == LoginStatus.submitting),
+                                                      state.status == SignupStatus.submitting),
                                                 ),
                                               ),
                                             ),
@@ -281,33 +314,27 @@ class LoginScreen extends StatelessWidget {
                                                 height: 45,
                                                 child: TextButton(
                                                   child: Text(
-                                                    'Register',
+                                                    'Back',
                                                     style: TextStyle(
                                                       color: Colors.black,
                                                     ),
                                                   ),
                                                   style: ButtonStyle(
                                                     backgroundColor:
-                                                        MaterialStateProperty
-                                                            .all<Color>(
-                                                                Colors.white
-                                                        ),
+                                                    MaterialStateProperty
+                                                        .all<Color>(
+                                                        Colors.white
+                                                    ),
                                                     shape: MaterialStateProperty
                                                         .all<RoundedRectangleBorder>(
                                                       RoundedRectangleBorder(
                                                         borderRadius:
-                                                            BorderRadius
-                                                                .circular(25.0),
+                                                        BorderRadius
+                                                            .circular(25.0),
                                                       ),
                                                     ),
                                                   ),
-                                                  onPressed: () =>
-                                                      Navigator
-                                                          .of(context)
-                                                          .pushNamed(
-                                                          SignupScreen
-                                                          .routeName
-                                                      ),
+                                                  onPressed: () => Navigator.of(context).pop(),
                                                 ),
                                               ),
                                             ),
@@ -335,7 +362,7 @@ class LoginScreen extends StatelessWidget {
 
   void _submitForm(BuildContext context, bool isSubmitting){
     if (_formKey.currentState.validate() && !isSubmitting){
-      context.read<LoginCubit>().loginInWithCredentials();
+      context.read<SignupCubit>().signUpInWithCredentials();
     }
   }
 }

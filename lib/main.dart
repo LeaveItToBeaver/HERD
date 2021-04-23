@@ -17,7 +17,6 @@ void main() async {
 class Herd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //context.read<AuthRepository>();
     return MultiRepositoryProvider(
         providers: [
           RepositoryProvider<AuthRepository>(
