@@ -20,12 +20,10 @@ class LoginScreen extends StatelessWidget {
     return PageRouteBuilder(
       settings: const RouteSettings(name: routeName),
       transitionDuration: const Duration(seconds: 0),
-      pageBuilder: (
-        context, _, __,) =>
-          BlocProvider<LoginCubit>(
-            create: (_) =>
+      pageBuilder: (context, _, __) => BlocProvider<LoginCubit>(
+        create: (_) =>
             LoginCubit(authRepository: context.read<AuthRepository>()),
-            child: LoginScreen(),
+        child: LoginScreen(),
       ),
     );
   }
@@ -306,8 +304,7 @@ class LoginScreen extends StatelessWidget {
                                                           .of(context)
                                                           .pushNamed(
                                                           SignupScreen
-                                                          .routeName
-                                                      ),
+                                                          .routeName),
                                                 ),
                                               ),
                                             ),

@@ -7,7 +7,6 @@ import 'package:herd/repositories/auth/auth_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'auth_event.dart';
-
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
@@ -29,9 +28,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   @override
-  Stream<AuthState> mapEventToState(
-    AuthEvent event,
-  ) async* {
+  Stream<AuthState> mapEventToState(AuthEvent event) async* {
     if (event is AuthUserChanged) {
       yield* _mapAuthUserChangedToState(event);
     } else if (event is AuthLogoutRequested) {

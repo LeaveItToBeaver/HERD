@@ -17,11 +17,14 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
+      onWillPop: () async => false,
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state.status == AuthStatus.unauthenticated) {
+            // Go to the Login Screen.
             Navigator.of(context).pushNamed(LoginScreen.routeName);
           } else if (state.status == AuthStatus.authenticated) {
+            // Go to the Nav Screen.
             Navigator.of(context).pushNamed(NavScreen.routeName);
           }
         },
@@ -31,7 +34,6 @@ class SplashScreen extends StatelessWidget {
           ),
         ),
       ),
-      onWillPop: () async => false,
     );
   }
 }
