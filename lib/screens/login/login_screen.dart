@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herd/repositories/auth/auth_repository.dart';
 import 'package:herd/screens/signup/signup_screen.dart';
-import 'package:herd/widgets/wave_widget_0.dart';
-import 'package:herd/widgets/wave_widget_1.dart';
-import 'package:wave/config.dart';
-//import 'package:wave/wave.dart';
+import 'package:herd/widgets/widgets.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,10 +40,9 @@ class LoginScreen extends StatelessWidget {
           if (state.status == LoginStatus.error) {
             showDialog(
               context: context,
-              builder: (context) => AlertDialog(
-                title: Text('Error'),
-                content: Text(state.failure.message),
-              ),
+              builder: (context) => ErrorDialog(
+                content: state.failure.message,
+              )
             );
           }
         }, builder: (context, state) {

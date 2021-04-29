@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herd/repositories/auth/auth_repository.dart';
-import 'package:herd/widgets/wave_widget_0.dart';
-import 'package:herd/widgets/wave_widget_1.dart';
 import 'package:wave/config.dart';
-//import 'package:wave/wave.dart';
+import 'package:herd/widgets/widgets.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -52,9 +50,8 @@ class SignupScreen extends StatelessWidget {
             if (state.status == SignupStatus.error) {
               showDialog(
                 context: context,
-                builder: (context) => AlertDialog(
-                  title: Text('Error'),
-                  content: Text(state.failure.message),
+                builder: (context) => ErrorDialog(
+                  content: state.failure.message,
                 ),
               );
             }
@@ -179,7 +176,7 @@ class SignupScreen extends StatelessWidget {
                                                 .read<SignupCubit>()
                                                 .firstNameChanged(value),
                                             validator: (value) => value.trim().isEmpty
-                                                ? 'null'
+                                                ? null
                                                 : null,
                                           ),
                                         ),
@@ -221,7 +218,7 @@ class SignupScreen extends StatelessWidget {
                                                 .read<SignupCubit>()
                                                 .lastNameChanged(value),
                                             validator: (value) => value.trim().isEmpty
-                                                ? 'null'
+                                                ? null
                                                 : null,
                                           ),
                                         ),
