@@ -19,6 +19,14 @@ class NavScreen extends StatelessWidget {
     );
   }
 
+  final Map<BottomNavItem, GlobalKey<NavigatorState>> navigatorKeys = {
+    BottomNavItem.search: GlobalKey<NavigatorState>(),
+    BottomNavItem.feed: GlobalKey<NavigatorState>(),
+    BottomNavItem.create: GlobalKey<NavigatorState>(),
+    BottomNavItem.anonFeed: GlobalKey<NavigatorState>(),
+    BottomNavItem.notifications: GlobalKey<NavigatorState>(),
+  };
+
   final Map<BottomNavItem, IconData> items = const {
     BottomNavItem.search: Icons.search,
     BottomNavItem.feed: Icons.home,
@@ -39,8 +47,14 @@ class NavScreen extends StatelessWidget {
               items: items,
               selectedItem: state.selectedItem,
               onTap: (index) {
-                final selecteItem = BottomNavItem.values[index];
-                context.read<BottomNavBarCubit>().updateSelectedItem(selecteItem);
+                final selectedItem = BottomNavItem.values[index];
+                context
+                    .read<BottomNavBarCubit>()
+                    .updateSelectedItem(selectedItem);
+                _selectedBottomNavItem(
+                    context,
+                    selectedItem,
+                    selectedItem == state.selectedItem);
               },
             ),
           );
@@ -48,4 +62,15 @@ class NavScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+void _selectedBottomNavItem(
+  BuildContext context,
+  BottomNavItem selectedItem,
+  bool isSameItem,
+  ){
+    if (isSameItem){
+      // feel screen --> post comments.
+    }
+    context.read<BottomNavBarCubit>().updateSelectedItem(selectedItem);
 }
