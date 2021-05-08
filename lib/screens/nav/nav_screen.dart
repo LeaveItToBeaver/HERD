@@ -5,6 +5,8 @@ import 'package:herd/enums/enums.dart';
 import 'package:herd/screens/nav/cubit/bottom_nav_bar_cubit.dart';
 import 'package:herd/screens/nav/widgets/bottom_nav_bar.dart';
 
+import 'widgets/widgets.dart';
+
 class NavScreen extends StatelessWidget {
   static const String routeName = '/nav';
 
@@ -42,7 +44,13 @@ class NavScreen extends StatelessWidget {
       child: BlocBuilder<BottomNavBarCubit, BottomNavBarState>(
         builder: (context, state){
           return Scaffold(
-            body: Text('Nav Screen'),
+            body: Stack(
+              children: items.map((item, _) => MapEntry(
+                  item, _buildOffstageNavigator(
+                  item, item == state.selectedItem
+              ))
+              ).values.toList(),
+            ),
             bottomNavigationBar: BottomNavBar(
               items: items,
               selectedItem: state.selectedItem,
@@ -62,15 +70,26 @@ class NavScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-void _selectedBottomNavItem(
-  BuildContext context,
-  BottomNavItem selectedItem,
-  bool isSameItem,
-  ){
+  void _selectedBottomNavItem(
+      BuildContext context,
+      BottomNavItem selectedItem,
+      bool isSameItem,
+      ){
     if (isSameItem){
-      // feel screen --> post comments.
+      navigatorKeys[selectedItem]
+          .currentState
+          .popUntil((route) => route.isFirst);
     }
     context.read<BottomNavBarCubit>().updateSelectedItem(selectedItem);
+  }
+
+  Widget _buildOffstageNavigator(BottomNavItem currentItem, bool isSelected){
+    return Offstage(
+      offstage: !isSelected,
+      child: TabNavigator(
+          navigatorKey: navigatorKeys[currentItem],
+          item: currentItem
+      ),
+    );
+  }
 }
