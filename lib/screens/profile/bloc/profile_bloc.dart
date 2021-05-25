@@ -33,7 +33,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       ProfileLoadUser event
       ) async*{
     yield state.copyWith(
-      status: state.status.
+      status: ProfileStatus.loading,
+
     );
     try {
       final user = await _userRepository.getUserWithId(userId: event.userId);
