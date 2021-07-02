@@ -7,6 +7,7 @@ import 'package:herd/blocs/auth/auth_bloc.dart';
 import 'package:herd/blocs/simple_bloc_observer.dart';
 import 'package:herd/config/custom_router.dart';
 import 'package:herd/repositories/auth/auth_repository.dart';
+import 'package:herd/repositories/user/user_repository.dart';
 import 'package:herd/screens/screens.dart';
 
 void main() async {
@@ -24,6 +25,9 @@ class Herd extends StatelessWidget {
         providers: [
           RepositoryProvider<AuthRepository>(
             create: (_) => AuthRepository(),
+          ),
+          RepositoryProvider<UserRepository>(
+            create: (_) => UserRepository(),
           ),
         ],
         child: MultiBlocProvider(

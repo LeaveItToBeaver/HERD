@@ -25,16 +25,16 @@ class NavScreen extends StatelessWidget {
     BottomNavItem.search: GlobalKey<NavigatorState>(),
     BottomNavItem.feed: GlobalKey<NavigatorState>(),
     BottomNavItem.create: GlobalKey<NavigatorState>(),
-    BottomNavItem.anonFeed: GlobalKey<NavigatorState>(),
     BottomNavItem.notifications: GlobalKey<NavigatorState>(),
+    BottomNavItem.profile: GlobalKey<NavigatorState>(),
   };
 
   final Map<BottomNavItem, IconData> items = const {
     BottomNavItem.search: Icons.search,
     BottomNavItem.feed: Icons.home,
     BottomNavItem.create: Icons.add,
-    BottomNavItem.anonFeed: Icons.home_outlined,
-    BottomNavItem.notifications: Icons.notifications,
+    BottomNavItem.notifications: Icons.home_outlined,
+    BottomNavItem.profile: Icons.account_circle_outlined,
   };
 
   @override
