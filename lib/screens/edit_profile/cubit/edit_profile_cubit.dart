@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
@@ -29,4 +27,24 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     final user =_profileBloc.state.user;
     emit(state.copyWith(username: user.username, bio: user.bio));
   }
+
+  void profileImageChanged(File image){
+    emit(
+      state.copyWith(profileImage: image, status: EditProfileStatus.initial);
+    );
+  }
+
+  void usernameChanged(String username){
+    emit(
+        state.copyWith(username: username, status: EditProfileStatus.initial);
+    );
+  }
+
+  void bioChanged(String bio){
+    emit(
+        state.copyWith(bio: bio, status: EditProfileStatus.initial);
+    );
+  }
+
+
 }
