@@ -7,6 +7,7 @@ import 'package:herd/blocs/auth/auth_bloc.dart';
 import 'package:herd/blocs/simple_bloc_observer.dart';
 import 'package:herd/config/custom_router.dart';
 import 'package:herd/repositories/auth/auth_repository.dart';
+import 'package:herd/repositories/storage/storage_repository.dart';
 import 'package:herd/repositories/user/user_repository.dart';
 import 'package:herd/screens/screens.dart';
 
@@ -28,6 +29,9 @@ class Herd extends StatelessWidget {
           ),
           RepositoryProvider<UserRepository>(
             create: (_) => UserRepository(),
+          ),
+          RepositoryProvider<StorageRepository>(
+            create: (_) => StorageRepository(),
           ),
         ],
         child: MultiBlocProvider(

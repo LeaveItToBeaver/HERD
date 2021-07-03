@@ -31,7 +31,6 @@ class ProfileScreen extends StatelessWidget {
               expandedHeight: 180.0,
               flexibleSpace: FlexibleSpaceBar(
                 title: Text(state.user.username),
-                //background: ,
               ),
               actions: <Widget>[
                 if (state.isCurrentUser)
