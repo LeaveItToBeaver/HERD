@@ -27,7 +27,8 @@ class StorageRepository extends BaseStorageRepository {
   }
 
   @override
-  Future<String> uploadProfileImage({@required String url, @required File image}) async {
+  Future<String> uploadProfileImage({@required String url, @required File image})
+  async {
     var imageId = Uuid().v4();
 
     //Update user profile image.
