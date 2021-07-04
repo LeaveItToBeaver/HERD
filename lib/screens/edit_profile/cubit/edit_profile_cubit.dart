@@ -30,19 +30,19 @@ class EditProfileCubit extends Cubit<EditProfileState> {
 
   void profileImageChanged(File image){
     emit(
-      state.copyWith(profileImage: image, status: EditProfileStatus.initial);
+      state.copyWith(profileImage: image, status: EditProfileStatus.initial),
     );
   }
 
   void usernameChanged(String username){
     emit(
-        state.copyWith(username: username, status: EditProfileStatus.initial);
+        state.copyWith(username: username, status: EditProfileStatus.initial),
     );
   }
 
   void bioChanged(String bio){
     emit(
-        state.copyWith(bio: bio, status: EditProfileStatus.initial);
+        state.copyWith(bio: bio, status: EditProfileStatus.initial),
     );
   }
 
@@ -58,6 +58,18 @@ class EditProfileCubit extends Cubit<EditProfileState> {
             image: state.profileImage,
         );
       }
+
+      final updatedUser = user.copyWith(
+        username: state.username,
+        bio: state.bio,
+        profileImageURL: profileImageUrl
+      );
+
+      await _userRepository.updateUser(user: updatedUser);
+
+      _profileBloc.add(ProfileLoadUser(userId: user.id));
+
+      emit(state.copyWith(status: EditProfileStatus.success));
     } catch (err) {
       emit(
           state.copyWith(
