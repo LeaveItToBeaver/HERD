@@ -46,5 +46,25 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     );
   }
 
+  void submit() async {
+    emit(state.copyWith(status: EditProfileStatus.submitting));
+    try {
+      final user = _profileBloc.state.user;
+      var profileImageUrl = user.profileImageURL;
 
+      if (state.profileImage != null){
+        profileImageUrl = await _storageRepository.uploadProfileImage(
+            url: profileImageUrl,
+            image: state.profileImage,
+        );
+      }
+    } catch (err) {
+      emit(
+          state.copyWith(
+              status: EditProfileStatus.error,
+              failure: const Failure(message: 'Sorry, we were unable to update your profile.'),
+          )
+      );
+    }
+  }
 }
