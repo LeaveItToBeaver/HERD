@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herd/blocs/auth/auth_bloc.dart';
-import 'package:herd/widgets/widgets.dart';
 import 'package:herd/screens/profile/widgets/widgets.dart';
+import 'package:herd/widgets/widgets.dart';
 
 import 'bloc/profile_bloc.dart';
 
@@ -28,9 +28,9 @@ class ProfileScreen extends StatelessWidget {
               pinned: true,
               snap: false,
               floating: true,
-              expandedHeight: 180.0,
+              expandedHeight: 150.0,
               flexibleSpace: FlexibleSpaceBar(
-                title: Text(state.user.username),
+
               ),
               actions: <Widget>[
                 if (state.isCurrentUser)
