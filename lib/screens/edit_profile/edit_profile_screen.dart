@@ -60,10 +60,54 @@ class EditProfileScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: 32.0,),
                   //Wrap UserProfileImage in a gesture detector.
-                  UserProfileImage(
-                    radius: 80.0,
-                    profileImageUrl: user.profileImageURL,
-                    profileImage: state.profileImage,)
+                  GestureDetector(
+                    onTap: () => _selectedProfileImage(context),
+                    child: UserProfileImage(
+                      radius: 80.0,
+                      profileImageUrl: user.profileImageURL,
+                      profileImage: state.profileImage,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(24.0),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          TextFormField(
+                            initialValue: user.username,
+                            decoration: InputDecoration(hintText: 'Username'),
+                            onChanged: (value) => context
+                            .read<EditProfileCubit>()
+                            .usernameChanged(value),
+                            validator: (value) => value.trim().isEmpty
+                                ? 'Username can not be empty.'
+                                : null ,
+                          ),
+                          const SizedBox(height: 16.0,),
+                          TextFormField(
+                            initialValue: user.bio,
+                            decoration: InputDecoration(hintText: 'Bio'),
+                            onChanged: (value) => context
+                            .read<EditProfileCubit>()
+                            .bioChanged(value),
+                            validator: (value) => value.trim().isEmpty
+                            ? 'Sorry, gotta add something to your bio.'
+                            : null,
+                          ),
+                          const SizedBox(height: 28.0,),
+                          TextButton(
+                              onPressed: () => _submitForm(
+                                context,
+                                state.status == EditProfileStatus.submitting,
+                              ),
+                              child: Text('Update'),
+                          ),
+                        ],
+                      ) ,
+                    ),
+                  ),
                 ],
               ),
             );
@@ -71,5 +115,8 @@ class EditProfileScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+  void _selectProfileImage(BuildContext context){
+    // TODO: implement
   }
 }
