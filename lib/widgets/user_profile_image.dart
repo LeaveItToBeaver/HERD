@@ -29,6 +29,7 @@ class UserProfileImage extends StatelessWidget{
       child: _noProfileIcon(),
     );
   }
+
   Icon _noProfileIcon() {
     if(profileImage == null && profileImageUrl.isEmpty) {
       return Icon(
