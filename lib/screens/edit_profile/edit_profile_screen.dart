@@ -64,6 +64,7 @@ class EditProfileScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: () => _selectedCoverImage(context),
                     child: UserCoverImage(
+                      // TODO: Add tappable instance for uploading. Right now there is nothing.
                       coverImageUrl: user.coverImageURL,
                       coverFile: state.coverImage,
                     ),
