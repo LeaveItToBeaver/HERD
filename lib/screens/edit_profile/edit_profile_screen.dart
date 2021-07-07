@@ -5,6 +5,7 @@ import 'package:herd/repositories/repositories.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herd/screens/edit_profile/cubit/edit_profile_cubit.dart';
 import 'package:herd/screens/profile/bloc/profile_bloc.dart';
+import 'package:herd/widgets/user_cover_image.dart';
 import 'package:herd/widgets/widgets.dart';
 
 class EditProfileScreenArgs {
@@ -58,8 +59,16 @@ class EditProfileScreen extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
+                  if (state.status == EditProfileStatus.submitting)
+                    const LinearProgressIndicator(),
+                  GestureDetector(
+                    onTap: () => _selectedCoverImage(context),
+                    child: UserCoverImage(
+                      coverImageUrl: user.coverImageURL,
+                      coverFile: state.coverImage,
+                    ),
+                  ),
                   const SizedBox(height: 32.0,),
-                  //Wrap UserProfileImage in a gesture detector.
                   GestureDetector(
                     onTap: () => _selectedProfileImage(context),
                     child: UserProfileImage(
@@ -116,7 +125,18 @@ class EditProfileScreen extends StatelessWidget {
       ),
     );
   }
-  void _selectProfileImage(BuildContext context){
-    // TODO: implement
+
+  void _selectedCoverImage (BuildContext context){
+    // TODO: implement Cover Image.
+  }
+
+  void _selectedProfileImage (BuildContext context){
+    // TODO: implement profile Image
+  }
+
+  void _submitForm (BuildContext context, bool isSubmitting){
+    if (_formKey.currentState.validate() && !isSubmitting) {
+      context.read<EditProfileCubit>().submit();
+    }
   }
 }

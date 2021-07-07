@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:herd/models/models.dart';
 import 'package:herd/repositories/repositories.dart';
 import 'package:herd/screens/profile/bloc/profile_bloc.dart';
@@ -26,6 +27,12 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     emit(state.copyWith(username: user.username, bio: user.bio));
   }
 
+  void coverImageChanged(File image) {
+    emit(
+      state.copyWith(coverImage: image, status: EditProfileStatus.initial),
+    );
+  }
+
   void profileImageChanged(File image) {
     emit(
       state.copyWith(profileImage: image, status: EditProfileStatus.initial),
@@ -48,6 +55,14 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     emit(state.copyWith(status: EditProfileStatus.submitting));
     try {
       final user = _profileBloc.state.user;
+
+      var coverImageUrl = user.coverImageURL;
+      if (state.profileImage != null){
+        coverImageUrl = await _storageRepository.uploadCoverImage(
+            url: coverImageUrl,
+            image: state.coverImage,
+        );
+      }
 
       var profileImageUrl = user.profileImageURL;
       if (state.profileImage != null) {

@@ -54,4 +54,22 @@ class StorageRepository extends BaseStorageRepository {
     );
     return downloadUrl;
   }
+
+  @override
+  Future<String> uploadCoverImage({@required String url, @required File image}) async {
+    var imageId = Uuid().v4();
+
+    //Upload a cover photo
+
+    if (url.isNotEmpty){
+      final exp = RegExp(r'userCover_(.*).jpg');
+      imageId = exp.firstMatch(url)[1];
+    }
+
+    final downloadUrl = await _uploadImage(
+        image: image,
+        ref: 'images/users/userCover_$imageId.jpg'
+    );
+    throw UnimplementedError();
+  }
 }

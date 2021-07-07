@@ -5,6 +5,7 @@ enum EditProfileStatus { initial, submitting, success, error }
 class EditProfileState extends Equatable {
 
   final File profileImage;
+  final File coverImage;
   final String username;
   final String bio;
   final EditProfileStatus status;
@@ -12,6 +13,7 @@ class EditProfileState extends Equatable {
 
   const EditProfileState({
     @required this.profileImage,
+    @required this.coverImage,
     @required this.username,
     @required this.bio,
     @required this.status,
@@ -20,12 +22,14 @@ class EditProfileState extends Equatable {
 
   EditProfileState copyWith({
     File profileImage,
+    File coverImage,
     String username,
     String bio,
     EditProfileStatus status,
     Failure failure,
   }) {
     if ((profileImage == null || identical(profileImage, this.profileImage)) &&
+        (BoxFit.cover == null) || identical(coverImage, this.coverImage) &&
         (username == null || identical(username, this.username)) &&
         (bio == null || identical(bio, this.bio)) &&
         (status == null || identical(status, this.status)) &&
@@ -35,6 +39,7 @@ class EditProfileState extends Equatable {
 
     return new EditProfileState(
       profileImage: profileImage ?? this.profileImage,
+      coverImage: coverImage ?? this.coverImage,
       username: username ?? this.username,
       bio: bio ?? this.bio,
       status: status ?? this.status,
@@ -45,6 +50,7 @@ class EditProfileState extends Equatable {
   factory EditProfileState.initial(){
     return const EditProfileState(
         profileImage: null,
+        coverImage: null,
         username: '',
         bio: '',
         status: EditProfileStatus.initial,
@@ -55,6 +61,7 @@ class EditProfileState extends Equatable {
   @override
   List<Object> get props => [
     profileImage,
+    coverImage,
     username,
     bio,
     status,
