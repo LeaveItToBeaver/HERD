@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herd/blocs/auth/auth_bloc.dart';
 import 'package:herd/screens/profile/widgets/widgets.dart';
+import 'package:herd/widgets/user_cover_image.dart';
 import 'package:herd/widgets/widgets.dart';
 
 import 'bloc/profile_bloc.dart';
@@ -29,8 +30,14 @@ class ProfileScreen extends StatelessWidget {
               snap: false,
               floating: true,
               expandedHeight: 150.0,
-              flexibleSpace: FlexibleSpaceBar(
-
+              flexibleSpace: Stack(
+                children: <Widget>[
+                  Positioned.fill(
+                      child: UserCoverImage(
+                        coverImageUrl: state.user.coverImageURL,
+                      )
+                  ),
+                ],
               ),
               actions: <Widget>[
                 if (state.isCurrentUser)

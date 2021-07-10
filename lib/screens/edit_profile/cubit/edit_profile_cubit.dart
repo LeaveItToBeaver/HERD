@@ -27,9 +27,9 @@ class EditProfileCubit extends Cubit<EditProfileState> {
     emit(state.copyWith(username: user.username, bio: user.bio));
   }
 
-  void coverImageChanged(File image) {
+  void coverImageChanged(File image2) {
     emit(
-      state.copyWith(coverImage: image, status: EditProfileStatus.initial),
+      state.copyWith(coverImage: image2, status: EditProfileStatus.initial),
     );
   }
 

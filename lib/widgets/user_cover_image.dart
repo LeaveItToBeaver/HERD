@@ -15,35 +15,30 @@ class UserCoverImage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: coverFile != null ?
-        DecorationImage(
-          image: FileImage(coverFile),
-          fit: BoxFit.cover,
-            ) : coverImageUrl.isNotEmpty
-                ? CachedNetworkImageProvider(coverImageUrl)
-                  : null,
-      ),
-      child: _noCoverPhoto(),
-    );
-  }
-
-  Widget _noCoverPhoto(){
     if(coverFile == null && coverImageUrl.isEmpty) {
       return Container(
-        child: Column(
-          children: [
-            Icon(
-              Icons.add,
-              color: Colors.grey[200],
-              size: 200,
-            ),
-            Text("Tap Here To Add Cover Photo"),
-          ],
+          child: Column(
+            children: [
+              Icon(
+                Icons.add,
+                color: Colors.grey[200],
+                size: 200,
+              ),
+              Text("Tap Here To Add Cover Photo"),
+            ],
+          ),
+        );
+      } else {
+      return Container(
+        child: Image(
+          image: coverFile != null
+              ? FileImage(coverFile)
+                : coverImageUrl.isNotEmpty
+                  ? CachedNetworkImageProvider(coverImageUrl)
+                    : null,
+          fit: BoxFit.cover,
         ),
       );
     }
-    return null;
+    }
   }
-}

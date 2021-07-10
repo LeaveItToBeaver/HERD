@@ -56,7 +56,8 @@ class StorageRepository extends BaseStorageRepository {
   }
 
   @override
-  Future<String> uploadCoverImage({@required String url, @required File image}) async {
+  Future<String> uploadCoverImage({@required String url, @required File image})
+  async {
     var imageId = Uuid().v4();
 
     //Upload a cover photo
@@ -70,6 +71,6 @@ class StorageRepository extends BaseStorageRepository {
         image: image,
         ref: 'images/users/userCover_$imageId.jpg'
     );
-    throw UnimplementedError();
+     return downloadUrl;
   }
 }
