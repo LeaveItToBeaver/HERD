@@ -62,11 +62,19 @@ class _Stats extends StatelessWidget {
         children: [
           Text(
             count.toString(),
-            style: const TextStyle(fontSize: 16.0),
+            style: const TextStyle(
+              fontSize: 16.0,
+              fontFamily: 'OpenSans',
+              color: Colors.white,
+            ),
           ),
           Text(
             label,
-            style: TextStyle(fontSize: 16.0),
+            style: TextStyle(
+              fontSize: 16.0,
+              fontFamily: 'OpenSans',
+              color: Colors.white,
+            ),
           ),
         ]
     );

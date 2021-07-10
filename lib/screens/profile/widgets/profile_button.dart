@@ -21,12 +21,13 @@ class ProfileButton extends StatelessWidget {
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(25.0),
-                side: BorderSide(color: Colors.blue[200], width: 3.0),
+                side: BorderSide(color: Colors.purple, width: 3.0),
               )),
             ),
-            child: const Text(
+            child: Text(
               'Edit Profile',
               style: TextStyle(
+                color: Colors.purple[50],
                 fontSize: 16.0,
               ),
             ),

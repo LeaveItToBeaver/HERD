@@ -20,7 +20,9 @@ class ProfileInfo extends StatelessWidget {
           username,
           style: const TextStyle(
             fontSize: 18.0,
+            fontFamily: 'OpenSans',
             fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
         SizedBox(height: 8.0,),
@@ -28,9 +30,13 @@ class ProfileInfo extends StatelessWidget {
           bio,
           style: const TextStyle(
             fontSize: 15.0,
+            fontFamily: 'OpenSans',
+            color: Colors.white
           ),
         ),
-        const Divider(),
+        const Divider(
+          color: Colors.white,
+        ),
       ],
     );
   }

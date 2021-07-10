@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:herd/helpers/helpers.dart';
 import 'package:herd/models/models.dart';
 import 'package:herd/repositories/repositories.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:herd/screens/edit_profile/cubit/edit_profile_cubit.dart';
 import 'package:herd/screens/profile/bloc/profile_bloc.dart';
 import 'package:herd/widgets/user_cover_image.dart';
 import 'package:herd/widgets/widgets.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditProfileScreenArgs {
@@ -197,7 +199,11 @@ class EditProfileScreen extends StatelessWidget {
   }
 
   void _selectedCoverImage (BuildContext context) async {
-    final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+    final pickedFile = await ImageHelper.pickImageFromGallary(
+        context: context,
+        cropStyle: CropStyle.rectangle,
+        title: 'Cover Photo'
+    );
     if(pickedFile != null){
       context
       .read<EditProfileCubit>()
@@ -206,7 +212,10 @@ class EditProfileScreen extends StatelessWidget {
   }
 
   void _selectedProfileImage (BuildContext context) async {
-    final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+    final pickedFile = await ImageHelper.pickImageFromGallary(
+        context: context,
+        cropStyle: CropStyle.circle,
+        title: 'Profile Image');
     if (pickedFile != null) {
       context
           .read<EditProfileCubit>()

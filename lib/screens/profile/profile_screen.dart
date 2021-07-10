@@ -23,6 +23,7 @@ class ProfileScreen extends StatelessWidget {
       }
     }, builder: (context, state) {
       return Scaffold(
+        backgroundColor: Colors.black,
         body: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
@@ -76,7 +77,8 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 10.0),
+                          horizontal: 30.0, vertical: 10.0
+                      ),
                     child: ProfileInfo(
                       username: state.user.username,
                       bio: state.user.bio,
