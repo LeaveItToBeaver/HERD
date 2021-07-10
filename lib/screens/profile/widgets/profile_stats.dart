@@ -60,6 +60,7 @@ class _Stats extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
         children: [
+          SizedBox(height: 10,),
           Text(
             count.toString(),
             style: const TextStyle(

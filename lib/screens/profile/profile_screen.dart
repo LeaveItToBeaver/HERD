@@ -55,36 +55,49 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(24, 10, 24, 5),
-                    child: Row(
-                      children: [
-                        UserProfileImage(
-                          radius: 40.0,
-                          profileImageUrl: state.user.profileImageURL,
-                        ),
-                        ProfileStats(
-                          isCurrentUser: state.isCurrentUser,
-                          isFollowing: state.isFollowing,
-                          posts: 0,
-                          followers: state.user.followers,
-                          following: state.user.following,
-                        ),
-                      ],
+              child: Card(
+                  elevation: 20,
+                  borderOnForeground: false,
+                  color: Colors.white.withAlpha(25),
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                        color: Colors.transparent,
+                        width: 1
                     ),
+                    borderRadius: BorderRadius.circular(50),
                   ),
-                  Padding(
+                  shadowColor: Colors.white.withAlpha(50),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(24, 10, 24, 5),
+                      child: Row(
+                        children: [
+                          UserProfileImage(
+                            radius: 40.0,
+                            profileImageUrl: state.user.profileImageURL,
+                          ),
+                          ProfileStats(
+                            isCurrentUser: state.isCurrentUser,
+                            isFollowing: state.isFollowing,
+                            posts: 0,
+                            followers: state.user.followers,
+                            following: state.user.following,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 30.0, vertical: 10.0
                       ),
-                    child: ProfileInfo(
-                      username: state.user.username,
-                      bio: state.user.bio,
+                      child: ProfileInfo(
+                        username: state.user.username,
+                        bio: state.user.bio,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             )
           ],

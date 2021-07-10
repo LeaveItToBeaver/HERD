@@ -35,7 +35,8 @@ class ProfileInfo extends StatelessWidget {
           ),
         ),
         const Divider(
-          color: Colors.white,
+          color: Colors.transparent,
+          thickness: 0,
         ),
       ],
     );
