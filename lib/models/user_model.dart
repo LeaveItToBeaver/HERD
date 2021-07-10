@@ -65,21 +65,6 @@ class User extends Equatable {
     int following,
     String bio,
   }) {
-    if ((id == null || identical(id, this.id)) &&
-        (username == null || identical(username, this.username)) &&
-        (email == null || identical(email, this.email)) &&
-        (profileImageURL == null ||
-            identical(profileImageURL, this.profileImageURL)) &&
-        (coverImageURL == null ||
-            identical(coverImageURL, this.coverImageURL)) &&
-        (firstName == null || identical(firstName, this.firstName)) &&
-        (lastName == null || identical(lastName, this.lastName)) &&
-        (followers == null || identical(followers, this.followers)) &&
-        (following == null || identical(following, this.following)) &&
-        (bio == null || identical(bio, this.bio))) {
-      return this;
-    }
-
     return new User(
       id: id ?? this.id,
       username: username ?? this.username,
@@ -104,6 +89,7 @@ class User extends Equatable {
       'lastName': lastName,
       'followers': followers,
       'following': following,
+      'bio': bio,
     };
   }
 

@@ -20,41 +20,14 @@ class EditProfileState extends Equatable {
     @required this.failure,
   });
 
-  EditProfileState copyWith({
-    File profileImage,
-    File coverImage,
-    String username,
-    String bio,
-    EditProfileStatus status,
-    Failure failure,
-  }) {
-    if ((profileImage == null || identical(profileImage, this.profileImage)) &&
-        (BoxFit.cover == null) || identical(coverImage, this.coverImage) &&
-        (username == null || identical(username, this.username)) &&
-        (bio == null || identical(bio, this.bio)) &&
-        (status == null || identical(status, this.status)) &&
-        (failure == null || identical(failure, this.failure))) {
-      return this;
-    }
-
-    return new EditProfileState(
-      profileImage: profileImage ?? this.profileImage,
-      coverImage: coverImage ?? this.coverImage,
-      username: username ?? this.username,
-      bio: bio ?? this.bio,
-      status: status ?? this.status,
-      failure: failure ?? this.failure,
-    );
-  }
-
   factory EditProfileState.initial(){
     return const EditProfileState(
-        profileImage: null,
-        coverImage: null,
-        username: '',
-        bio: '',
-        status: EditProfileStatus.initial,
-        failure: Failure(),
+      profileImage: null,
+      coverImage: null,
+      username: '',
+      bio: '',
+      status: EditProfileStatus.initial,
+      failure: Failure(),
     );
   }
 
@@ -68,4 +41,21 @@ class EditProfileState extends Equatable {
     failure,
   ];
 
+  EditProfileState copyWith({
+    File profileImage,
+    File coverImage,
+    String username,
+    String bio,
+    EditProfileStatus status,
+    Failure failure,
+  }) {
+    return new EditProfileState(
+      profileImage: profileImage ?? this.profileImage,
+      coverImage: coverImage ?? this.coverImage,
+      username: username ?? this.username,
+      bio: bio ?? this.bio,
+      status: status ?? this.status,
+      failure: failure ?? this.failure,
+    );
+  }
 }

@@ -23,12 +23,11 @@ class ProfileInfo extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 15.0,),
+        SizedBox(height: 8.0,),
         Text(
           bio,
           style: const TextStyle(
             fontSize: 15.0,
-
           ),
         ),
         const Divider(),

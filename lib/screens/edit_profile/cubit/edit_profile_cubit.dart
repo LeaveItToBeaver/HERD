@@ -76,6 +76,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         username: state.username,
         bio: state.bio,
         profileImageURL: profileImageUrl,
+        coverImageURL: coverImageUrl,
       );
 
       await _userRepository.updateUser(user: updatedUser);
