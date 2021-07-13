@@ -76,7 +76,9 @@ class Post extends Equatable {
    final data = doc.data();
    final authorRef = data['author'] as DocumentReference;
    if (authorRef != null){
+
      final authorDoc = await authorRef.get();
+
      if(authorDoc.exists){
        return Post(
            id: doc.id,

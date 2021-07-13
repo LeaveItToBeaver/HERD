@@ -248,11 +248,12 @@ class LoginScreen extends StatelessWidget {
                                                     ),
                                                   ),
                                                   style: ButtonStyle(
-                                                    backgroundColor: MaterialStateProperty
-                                                        .all<Color>(
+                                                    backgroundColor:
+                                                    MaterialStateProperty.all<Color>(
                                                         Colors.white
                                                     ),
-                                                    shape: MaterialStateProperty
+                                                    shape:
+                                                    MaterialStateProperty
                                                         .all<RoundedRectangleBorder>(
                                                       RoundedRectangleBorder(
                                                         borderRadius: BorderRadius

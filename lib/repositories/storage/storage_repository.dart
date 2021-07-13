@@ -1,9 +1,7 @@
 import 'dart:io';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:herd/models/user_model.dart';
 import 'package:herd/repositories/repositories.dart';
 import 'package:herd/repositories/storage/base_storage_repository.dart';
 import 'package:uuid/uuid.dart';
