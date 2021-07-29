@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:herd/blocs/auth/auth_bloc.dart';
@@ -7,6 +5,7 @@ import 'package:herd/models/failure_model.dart';
 import 'package:herd/models/models.dart';
 import 'package:herd/repositories/repositories.dart';
 import 'package:meta/meta.dart';
+import 'dart:io';
 
 part 'create_post_state.dart';
 
@@ -29,5 +28,55 @@ class CreatePostCubit extends Cubit<CreatePostState> {
       postImage: file,
       status: CreatePostStatus.initial,
     ));
+  }
+
+  void captionChanged(String caption) {
+    emit(state.copyWith(
+      caption: caption,
+      status: CreatePostStatus.initial,
+    ));
+  }
+
+  void titleChanged(String title) {
+    emit(state.copyWith(
+      title: title,
+      status: CreatePostStatus.initial,
+    ));
+  }
+
+  void submit() async {
+    emit(state.copyWith(status: CreatePostStatus.submitting));
+    try {
+      final author = User.empty.copyWith(id: _authBloc.state.user.uid);
+      final postImageUrl = await _storageRepository.uploadPostImage(image: state.postImage);
+
+      final post = Post(
+          author: author,
+          imageUrl: postImageUrl,
+          caption: state.caption,
+          title: state.title,
+          likes: 0,
+          dislikes: 0,
+          date: DateTime.now()
+      );
+
+      await _postRepository.createPost(
+          post: post
+      );
+      
+      emit(state.copyWith(status: CreatePostStatus.success));
+    }
+    catch (err) {
+      emit(state.copyWith(
+          status: CreatePostStatus.error,
+          failure: const Failure(
+              message: "We were unable to create your post"
+          )
+      ));
+    }
+  }
+
+  void reset() {
+    emit(CreatePostState.initial());
   }
 }
