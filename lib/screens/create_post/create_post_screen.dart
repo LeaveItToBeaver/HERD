@@ -72,7 +72,31 @@ class CreatePostScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           TextFormField(
-                            decoration: InputDecoration(hintText: 'Caption'),
+                            decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                borderSide: BorderSide(
+                                  color: Colors.blue, width: 2,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                borderSide: BorderSide(
+                                  color: Colors.blue, width: 2,
+                                ),
+                              ),
+                              labelText: 'Title',
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'OpenSans',
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              prefixIcon: Icon(
+                                Icons.article_rounded,
+                                color: Colors.black,
+                              ),
+                            ),
                             onChanged: (value) => context
                                 .read<CreatePostCubit>()
                                 .titleChanged(value),
@@ -82,7 +106,31 @@ class CreatePostScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 28,),
                           TextFormField(
-                            decoration: InputDecoration(hintText: 'Your post text goes here.'),
+                            decoration: InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                borderSide: BorderSide(
+                                  color: Colors.blue, width: 2,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                borderSide: BorderSide(
+                                  color: Colors.blue, width: 2,
+                                ),
+                              ),
+                              labelText: 'Your post text goes here.',
+                              labelStyle: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'OpenSans',
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              prefixIcon: Icon(
+                                Icons.article_outlined,
+                                color: Colors.black,
+                              ),
+                            ),
                             onChanged: (value) => context
                                 .read<CreatePostCubit>()
                                 .captionChanged(value),
@@ -90,14 +138,28 @@ class CreatePostScreen extends StatelessWidget {
                             ? null // They don't have to post a text body.
                             : null,
                           ),
-                          MaterialButton(
-                            elevation: 1.0,
+                          TextButton(
                               onPressed: () => _submitForm(
                                 context,
                                 state.postImage,
                                 state.status == CreatePostStatus.submitting
                               ),
-                            child: const Text("Post"),
+                            child: const Text(
+                              "Post",
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all<Color>(
+                                    Colors.white
+                                ),
+                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(25.0),
+                                    )
+                                )
+                            ),
                           ),
                         ],
                       ),
