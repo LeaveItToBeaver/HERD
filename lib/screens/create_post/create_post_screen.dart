@@ -74,8 +74,8 @@ class CreatePostScreen extends StatelessWidget {
                           TextFormField(
                             decoration: InputDecoration(hintText: 'Caption'),
                             onChanged: (value) => context
-                            .read<CreatePostCubit>()
-                            .captionChanged(value),
+                                .read<CreatePostCubit>()
+                                .titleChanged(value),
                             validator: (value) => value.trim().isEmpty
                             ? "Text Cannot Be Empty."
                             : null,
@@ -85,7 +85,7 @@ class CreatePostScreen extends StatelessWidget {
                             decoration: InputDecoration(hintText: 'Your post text goes here.'),
                             onChanged: (value) => context
                                 .read<CreatePostCubit>()
-                            .captionChanged(value),
+                                .captionChanged(value),
                             validator: (value) => value.trim().isEmpty
                             ? null // They don't have to post a text body.
                             : null,
