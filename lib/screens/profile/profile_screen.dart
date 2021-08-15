@@ -8,8 +8,31 @@ import 'package:herd/widgets/widgets.dart';
 
 import 'bloc/profile_bloc.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   static const String routeName = '/profile';
+
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen>
+    with SingleTickerProviderStateMixin {
+  TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+        length: 3,
+        vsync: this
+    );
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +58,8 @@ class ProfileScreen extends StatelessWidget {
                 children: <Widget>[
                   Positioned.fill(
                       child: UserCoverImage(
-                        coverImageUrl: state.user.coverImageURL,
-                      )
-                  ),
+                    coverImageUrl: state.user.coverImageURL,
+                  )),
                 ],
               ),
               actions: <Widget>[
@@ -55,51 +77,85 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             SliverToBoxAdapter(
-              child: Card(
+              child: Padding(
+                padding: EdgeInsets.all(5),
+                child: Card(
                   elevation: 20,
                   borderOnForeground: false,
                   color: Colors.white.withAlpha(25),
                   shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                        color: Colors.transparent,
-                        width: 1
-                    ),
+                    side: BorderSide(color: Colors.transparent, width: 1),
                     borderRadius: BorderRadius.circular(50),
                   ),
                   shadowColor: Colors.white.withAlpha(50),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(24, 10, 24, 5),
-                      child: Row(
-                        children: [
-                          UserProfileImage(
-                            radius: 40.0,
-                            profileImageUrl: state.user.profileImageURL,
-                          ),
-                          ProfileStats(
-                            isCurrentUser: state.isCurrentUser,
-                            isFollowing: state.isFollowing,
-                            posts: 0,
-                            followers: state.user.followers,
-                            following: state.user.following,
-                          ),
-                        ],
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(24, 10, 24, 5),
+                        child: Row(
+                          children: [
+                            UserProfileImage(
+                              radius: 40.0,
+                              profileImageUrl: state.user.profileImageURL,
+                            ),
+                            ProfileStats(
+                              isCurrentUser: state.isCurrentUser,
+                              isFollowing: state.isFollowing,
+                              posts: 0,
+                              followers: state.user.followers,
+                              following: state.user.following,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30.0, vertical: 10.0),
+                        child: ProfileInfo(
+                          username: state.user.username,
+                          bio: state.user.bio,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.all(15.0),
+                child: TabBar(
+                  controller: _tabController,
+                  indicator: BoxDecoration(
+                    gradient: LinearGradient(
+                        colors: [Colors.redAccent, Colors.purpleAccent]
+                    ),
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.redAccent,
+                  ),
+                  tabs: [
+                    Tab(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text('Posts'),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 10.0
+                    Tab(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text('Comments'),
                       ),
-                      child: ProfileInfo(
-                        username: state.user.username,
-                        bio: state.user.bio,
+                    ),
+                    Tab(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text('History'),
                       ),
                     ),
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       );
