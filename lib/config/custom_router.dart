@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:herd/screens/edit_profile/edit_profile_screen.dart';
 import 'package:herd/screens/login/login_screen.dart';
 import 'package:herd/screens/nav/nav_screen.dart';
+import 'package:herd/screens/resetpassword/reset_pass_screen.dart';
 import 'package:herd/screens/screens.dart';
 import 'package:herd/screens/splash/splash_screen.dart';
 
@@ -21,6 +22,8 @@ class CustomRouter {
         return LoginScreen.route();
       case SignupScreen.routeName:
         return SignupScreen.route();
+      case ResetPassScreen.routeName:
+        return ResetPassScreen.route();
       case NavScreen.routeName:
         return NavScreen.route();
       default:

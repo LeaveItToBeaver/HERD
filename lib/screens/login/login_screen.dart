@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herd/repositories/auth/auth_repository.dart';
+import 'package:herd/screens/resetpassword/reset_pass_screen.dart';
 import 'package:herd/screens/signup/signup_screen.dart';
 import 'package:herd/widgets/widgets.dart';
 
@@ -37,15 +38,16 @@ class LoginScreen extends StatelessWidget {
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
-          if (state.status == LoginStatus.error) {
+          /*if (state.status == LoginStatus.error) {
             showDialog(
               context: context,
               builder: (context) => ErrorDialog(
                 content: state.failure.message,
               )
             );
-          }
+          }*/
         }, builder: (context, state) {
+          final bool loginErr = state.status == LoginStatus.error;
           return Scaffold(
             backgroundColor: Colors.white,
             resizeToAvoidBottomInset: false,
@@ -160,7 +162,7 @@ class LoginScreen extends StatelessWidget {
                               Container(
                                 child: TextFormField(
                                   obscureText: true,
-                                  decoration: InputDecoration(
+                                  decoration: loginErr ? InputDecoration(
                                     focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(50.0)),
@@ -172,6 +174,46 @@ class LoginScreen extends StatelessWidget {
                                           Radius.circular(50.0)),
                                       borderSide: BorderSide(
                                           color: Colors.black38, width: 2.0),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                      borderSide: BorderSide(color: Colors.red, width: 2.0),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                      borderSide: BorderSide(color: Colors.red, width: 2.0),
+                                    ),
+                                    labelText: 'Password',
+                                    labelStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'OpenSans',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    prefixIcon: Icon(
+                                      Icons.lock,
+                                      color: Colors.black,
+                                    ),
+                                  ) : InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(50.0)),
+                                      borderSide: BorderSide(
+                                          color: Colors.blue, width: 2),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(50.0)),
+                                      borderSide: BorderSide(
+                                          color: Colors.black38, width: 2.0),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                      borderSide: BorderSide(color: Colors.red, width: 2.0),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                      borderSide: BorderSide(color: Colors.red, width: 2.0),
                                     ),
                                     labelText: 'Password',
                                     labelStyle: TextStyle(
@@ -189,14 +231,19 @@ class LoginScreen extends StatelessWidget {
                                       .read<LoginCubit>()
                                       .passwordChanged(value),
                                   validator: (value) => value.length < 6
-                                      ? 'Password or Email is incorrect.'
+                                      ? 'Email or Password is incorrect.'
                                       : null,
                                 ),
                               ),
                               //SizedBox(height: 5.0),
                               Container(
                                 child: TextButton(
-                                  onPressed: () {},
+                                  onPressed: () =>
+                                      Navigator
+                                          .of(context)
+                                          .pushNamed(
+                                          ResetPassScreen
+                                              .routeName),
                                   style: ButtonStyle(
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(

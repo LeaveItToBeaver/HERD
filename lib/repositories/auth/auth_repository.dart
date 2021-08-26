@@ -67,6 +67,21 @@ class AuthRepository extends BaseAuthRepository {
   }
 
   @override
+  Future<void> resetPassword({
+  @required String email,
+  }) async {
+    try{
+      await _firebaseAuth.sendPasswordResetEmail(
+          email: email,
+      );
+    } on auth.FirebaseAuthException catch (err) {
+      throw Failure(code: err.code, message: err.message);
+    } on PlatformException catch (err) {
+      throw Failure(code: err.code, message: err.message);
+    }
+  }
+
+  @override
   Future<void> logOut() async {
     await _firebaseAuth.signOut();
   }
