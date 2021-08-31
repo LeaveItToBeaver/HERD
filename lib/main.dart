@@ -6,10 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herd/blocs/auth/auth_bloc.dart';
 import 'package:herd/blocs/simple_bloc_observer.dart';
 import 'package:herd/config/custom_router.dart';
-import 'package:herd/repositories/auth/auth_repository.dart';
-import 'package:herd/repositories/storage/storage_repository.dart';
-import 'package:herd/repositories/user/user_repository.dart';
 import 'package:herd/screens/screens.dart';
+import 'package:herd/repositories/repositories.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +30,9 @@ class Herd extends StatelessWidget {
           ),
           RepositoryProvider<StorageRepository>(
             create: (_) => StorageRepository(),
+          ),
+          RepositoryProvider<PostRepository>(
+            create: (_) => PostRepository(),
           ),
         ],
         child: MultiBlocProvider(

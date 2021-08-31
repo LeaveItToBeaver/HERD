@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +6,7 @@ import 'package:herd/blocs/auth/auth_bloc.dart';
 import 'package:herd/screens/profile/widgets/widgets.dart';
 import 'package:herd/widgets/user_cover_image.dart';
 import 'package:herd/widgets/widgets.dart';
+import 'dart:io';
 
 import 'bloc/profile_bloc.dart';
 
@@ -153,9 +155,24 @@ class _ProfileScreenState extends State<ProfileScreen>
                       ),
                     ),
                   ],
+                  onTap: (i) => context.read<ProfileBloc>()
+                  .add(ProfileToggleListView(isListView: i == 0)),
                 ),
               ),
             ),
+           /* state.isListView ?
+                SliverList(
+                    delegate: SliverChildBuilderDelegate((content, index){
+                      final post = state.posts[index];
+                      return GestureDetector(
+                        onTap: {},
+                        child: CachedNetworkImage(
+                          imageUrl: post.postUrl,
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    }),
+                ) : SliverList(),*/
           ],
         ),
       );

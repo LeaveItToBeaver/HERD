@@ -5,7 +5,8 @@ enum ProfileStatus {initial, loading, loaded, error}
 @immutable
 class ProfileState {
   final User user;
-  //final List<Post> Posts;
+  final List<Post> posts;
+  final bool isListView;
   final bool isCurrentUser;
   final bool isFollowing;
   final ProfileStatus status;
@@ -13,6 +14,8 @@ class ProfileState {
 
   const ProfileState({
     @required this.user,
+    @required this.posts,
+    @required this.isListView,
     @required this.isCurrentUser,
     @required this.isFollowing,
     @required this.status,
@@ -22,6 +25,8 @@ class ProfileState {
   factory ProfileState.initial(){
     return const ProfileState(
         user: User.empty,
+        posts: [],
+        isListView: true,
         isCurrentUser: false,
         isFollowing: false,
         status: ProfileStatus.initial,
@@ -32,6 +37,8 @@ class ProfileState {
   @override
   List<Object> get props => [
     user,
+    posts,
+    isListView,
     isCurrentUser,
     isFollowing,
     status,
@@ -40,7 +47,8 @@ class ProfileState {
 
   ProfileState copyWith({
     User user,
-    //final List<Post> Posts;
+    List<Post> posts,
+    bool isListView,
     bool isCurrentUser,
     bool isFollowing,
     ProfileStatus status,
@@ -48,6 +56,8 @@ class ProfileState {
   }) {
     return ProfileState(
     user: user ?? this.user,
+    posts: posts ?? this.posts,
+    isListView: isListView ?? this.isListView,
     isCurrentUser: isCurrentUser ?? this.isCurrentUser,
     isFollowing: isFollowing ?? this.isFollowing,
     status: status ?? this.status,

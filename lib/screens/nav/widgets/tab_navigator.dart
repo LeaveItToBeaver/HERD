@@ -5,6 +5,7 @@ import 'package:herd/blocs/auth/auth_bloc.dart';
 import 'package:herd/config/custom_router.dart';
 import 'package:herd/enums/bottom_nav_item.dart';
 import 'package:herd/repositories/repositories.dart';
+import 'package:herd/screens/create_post/create_post_cubit/create_post_cubit.dart';
 import 'package:herd/screens/profile/bloc/profile_bloc.dart';
 import 'package:herd/screens/profile/profile_screen.dart';
 import 'package:herd/screens/screens.dart';
@@ -51,13 +52,22 @@ class TabNavigator extends StatelessWidget {
       case BottomNavItem.feed:
         return FeedScreen();
       case BottomNavItem.create:
-        return CreatePostsScreen();
+        return BlocProvider<CreatePostCubit>(
+            create: (context) =>
+                CreatePostCubit(
+                    postRepository: context.read<PostRepository>(),
+                    storageRepository: context.read<StorageRepository>(),
+                    authBloc: context.read<AuthBloc>()
+                ),
+          child: CreatePostScreen(),
+        );
       case BottomNavItem.notifications:
         return NotificationScreen();
       case BottomNavItem.profile:
         return BlocProvider<ProfileBloc>(
           create: (_) => ProfileBloc(
             userRepository: context.read<UserRepository>(),
+            postRepository: context.read<PostRepository>(),
             authBloc: context.read<AuthBloc>()
           )..add(
             ProfileLoadUser(userId: context.read<AuthBloc>().state.user.uid),
