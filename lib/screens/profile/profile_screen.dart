@@ -49,133 +49,152 @@ class _ProfileScreenState extends State<ProfileScreen>
     }, builder: (context, state) {
       return Scaffold(
         backgroundColor: Colors.black,
-        body: CustomScrollView(
-          slivers: <Widget>[
-            SliverAppBar(
-              pinned: true,
-              snap: false,
-              floating: true,
-              expandedHeight: 150.0,
-              flexibleSpace: Stack(
-                children: <Widget>[
-                  Positioned.fill(
-                      child: UserCoverImage(
-                    coverImageUrl: state.user.coverImageURL,
-                  )),
+        body: _buildBody(state),
+      );
+    }
+    );
+  }
+
+  Widget _buildBody(ProfileState state){
+    switch(state.status) {
+      case ProfileStatus.loading:
+        return Center(child: CircularProgressIndicator());
+      default:
+        return RefreshIndicator(
+          onRefresh: () async {
+            context
+                .read<ProfileBloc>()
+                .add(ProfileLoadUser(userId: state.user.id));
+            return true;
+          },
+          child: CustomScrollView(
+            slivers: <Widget>[
+              SliverAppBar(
+                pinned: true,
+                snap: false,
+                floating: true,
+                expandedHeight: 150.0,
+                flexibleSpace: Stack(
+                  children: <Widget>[
+                    Positioned.fill(
+                        child: UserCoverImage(
+                          coverImageUrl: state.user.coverImageURL,
+                        )),
+                  ],
+                ),
+                actions: <Widget>[
+                  if (state.isCurrentUser)
+                    IconButton(
+                      onPressed: () =>
+                          context.read<AuthBloc>().add(AuthLogoutRequested()),
+                      icon: const Icon(Icons.exit_to_app),
+                    ),
                 ],
               ),
-              actions: <Widget>[
-                if (state.isCurrentUser)
-                  IconButton(
-                    onPressed: () =>
-                        context.read<AuthBloc>().add(AuthLogoutRequested()),
-                    icon: const Icon(Icons.exit_to_app),
-                  ),
-              ],
-            ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 20,
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: 20,
+                ),
               ),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.all(5),
-                child: Card(
-                  elevation: 20,
-                  borderOnForeground: false,
-                  color: Colors.white.withAlpha(25),
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.transparent, width: 1),
-                    borderRadius: BorderRadius.circular(50),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Card(
+                    elevation: 20,
+                    borderOnForeground: false,
+                    color: Colors.white.withAlpha(25),
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: Colors.transparent, width: 1),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    shadowColor: Colors.white.withAlpha(50),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(24, 10, 24, 5),
+                          child: Row(
+                            children: [
+                              UserProfileImage(
+                                radius: 40.0,
+                                profileImageUrl: state.user.profileImageURL,
+                              ),
+                              ProfileStats(
+                                isCurrentUser: state.isCurrentUser,
+                                isFollowing: state.isFollowing,
+                                posts: state.posts.length,
+                                followers: state.user.followers,
+                                following: state.user.following,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30.0, vertical: 10.0),
+                          child: ProfileInfo(
+                            username: state.user.username,
+                            bio: state.user.bio,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  shadowColor: Colors.white.withAlpha(50),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(24, 10, 24, 5),
-                        child: Row(
-                          children: [
-                            UserProfileImage(
-                              radius: 40.0,
-                              profileImageUrl: state.user.profileImageURL,
-                            ),
-                            ProfileStats(
-                              isCurrentUser: state.isCurrentUser,
-                              isFollowing: state.isFollowing,
-                              posts: 0,
-                              followers: state.user.followers,
-                              following: state.user.following,
-                            ),
-                          ],
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.all(15.0),
+                  child: TabBar(
+                    controller: _tabController,
+                    indicator: BoxDecoration(
+                      gradient: LinearGradient(
+                          colors: [Colors.redAccent, Colors.purpleAccent]
+                      ),
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.redAccent,
+                    ),
+                    tabs: [
+                      Tab(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text('Posts'),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 30.0, vertical: 10.0),
-                        child: ProfileInfo(
-                          username: state.user.username,
-                          bio: state.user.bio,
+                      Tab(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text('Comments'),
+                        ),
+                      ),
+                      Tab(
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text('History'),
                         ),
                       ),
                     ],
+                    onTap: (i) => context.read<ProfileBloc>()
+                        .add(ProfileToggleListView(isListView: i == 0)),
                   ),
                 ),
               ),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.all(15.0),
-                child: TabBar(
-                  controller: _tabController,
-                  indicator: BoxDecoration(
-                    gradient: LinearGradient(
-                        colors: [Colors.redAccent, Colors.purpleAccent]
-                    ),
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.redAccent,
-                  ),
-                  tabs: [
-                    Tab(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text('Posts'),
-                      ),
-                    ),
-                    Tab(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text('Comments'),
-                      ),
-                    ),
-                    Tab(
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text('History'),
-                      ),
-                    ),
-                  ],
-                  onTap: (i) => context.read<ProfileBloc>()
-                  .add(ProfileToggleListView(isListView: i == 0)),
+              state.isListView
+                  ? SliverList(
+                delegate: SliverChildBuilderDelegate((BuildContext context, int index){
+                  final post = state.posts[index];
+                  return Container(
+                    margin: EdgeInsets.all(10.0),
+                    height: 100.0,
+                    width: double.infinity,
+                    color: Colors.red,
+                  );
+                },
+                  childCount: state.posts.length,
                 ),
-              ),
-            ),
-           /* state.isListView ?
-                SliverList(
-                    delegate: SliverChildBuilderDelegate((content, index){
-                      final post = state.posts[index];
-                      return GestureDetector(
-                        onTap: {},
-                        child: CachedNetworkImage(
-                          imageUrl: post.postUrl,
-                          fit: BoxFit.cover,
-                        ),
-                      );
-                    }),
-                ) : SliverList(),*/
-          ],
-        ),
-      );
-    });
+              ) : null
+            ],
+          ),
+        );
+    }
   }
 }
