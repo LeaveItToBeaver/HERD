@@ -182,12 +182,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   ? SliverList(
                 delegate: SliverChildBuilderDelegate((BuildContext context, int index){
                   final post = state.posts[index];
-                  return Container(
-                    margin: EdgeInsets.all(10.0),
-                    height: 100.0,
-                    width: double.infinity,
-                    color: Colors.red,
-                  );
+                  return PostView(post: post);
                 },
                   childCount: state.posts.length,
                 ),
