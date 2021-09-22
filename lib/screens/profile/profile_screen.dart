@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herd/blocs/auth/auth_bloc.dart';
+import 'package:herd/repositories/repositories.dart';
 import 'package:herd/screens/profile/widgets/widgets.dart';
 import 'package:herd/widgets/user_cover_image.dart';
 import 'package:herd/widgets/widgets.dart';
@@ -10,8 +11,28 @@ import 'dart:io';
 
 import 'bloc/profile_bloc.dart';
 
+class ProfileScreenArgs {
+  final String userId;
+
+  const ProfileScreenArgs({@required this.userId});
+}
 class ProfileScreen extends StatefulWidget {
   static const String routeName = '/profile';
+
+  static Route route({@required ProfileScreenArgs args}) {
+    return MaterialPageRoute(
+      settings: const RouteSettings(name: routeName),
+        builder: (context) => BlocProvider<ProfileBloc> (
+          create: (_) => ProfileBloc(
+            userRepository: context.read<UserRepository>(),
+            postRepository: context.read<PostRepository>(),
+            authBloc: context.read<AuthBloc>(),
+          )..add(
+            ProfileLoadUser(userId: args.userId),
+          ),
+        ),
+    );
+  }
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();

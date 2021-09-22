@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:herd/models/post_model.dart';
+import 'package:herd/screens/edit_profile/edit_profile_screen.dart';
+import 'package:herd/screens/profile/profile_screen.dart';
 import 'package:herd/widgets/user_profile_image.dart';
 
 class PostView extends StatelessWidget {
@@ -25,6 +27,16 @@ class PostView extends StatelessWidget {
             children: [
               Row(
                 children: [
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).pushNamed(
+                        ProfileScreen.routeName,
+                      arguments: ProfileScreenArgs(userId: post.author.id),
+                    ),
+                    child: UserProfileImage(
+                      radius: 20,
+                      profileImageUrl: post.author.profileImageURL,
+                    ),
+                  ),
                   UserProfileImage(
                     radius: 20,
                     profileImageUrl: post.author.profileImageURL,
@@ -32,16 +44,49 @@ class PostView extends StatelessWidget {
                   SizedBox(
                     width: 8.0,
                   ),
-                  Expanded(
-                    child: Text(
-                      post.author.firstName,
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            post.caption,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 10,
+                            ),
+                          ),
+                          Text(
+                            post.author.username,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ),
+                      Row(
+                        children: [
+                          Text(
+                            post.author.firstName,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 10,
+                            ),
+                          ),
+                          Text(
+                            post.author.lastName,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 10,
+                            ),
+                          )
+                        ],
+                      ),
+                      Container(
+
+                      ),
+                    ],
+                  )
                 ],
               ),
             ],
