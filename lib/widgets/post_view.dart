@@ -17,7 +17,7 @@ class PostView extends StatelessWidget {
     return Column(
       children: [
         Card(
-          color: Colors.black12,
+          color: Colors.cyan,
           shadowColor: Colors.white10,
           shape: RoundedRectangleBorder(
             side: BorderSide(color: Colors.transparent, width: 1),
@@ -37,10 +37,6 @@ class PostView extends StatelessWidget {
                       profileImageUrl: post.author.profileImageURL,
                     ),
                   ),
-                  UserProfileImage(
-                    radius: 20,
-                    profileImageUrl: post.author.profileImageURL,
-                  ),
                   SizedBox(
                     width: 8.0,
                   ),
@@ -51,15 +47,18 @@ class PostView extends StatelessWidget {
                           Text(
                             post.caption,
                             style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
+                              color: Colors.white,
+                              fontSize: 15,
                             ),
+                          ),
+                          SizedBox(
+                            width: 10,
                           ),
                           Text(
                             post.author.username,
                             style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 10,
+                              color: Colors.white,
+                              fontSize: 15,
                             ),
                           ),
                         ],
@@ -69,14 +68,14 @@ class PostView extends StatelessWidget {
                           Text(
                             post.author.firstName,
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontSize: 10,
                             ),
                           ),
                           Text(
                             post.author.lastName,
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontSize: 10,
                             ),
                           )
