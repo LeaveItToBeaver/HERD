@@ -55,23 +55,27 @@ class PhotoPost extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                      onTap: () => Navigator.of(context).pushNamed(
-                        ProfileScreen.routeName,
-                        arguments: ProfileScreenArgs(userId: post.author.id),
-                      ),
-                      child: UserProfileImage(
-                        radius: 25,
-                        profileImageUrl: post.author.profileImageURL,
+                    Padding(
+                        padding: EdgeInsets.all(5),
+                      child: GestureDetector(
+                        onTap: () => Navigator.of(context).pushNamed(
+                          ProfileScreen.routeName,
+                          arguments: ProfileScreenArgs(userId: post.author.id),
+                        ),
+                        child: UserProfileImage(
+                          radius: 25,
+                          profileImageUrl: post.author.profileImageURL,
+                        ),
                       ),
                     ),
                     SizedBox(
-                      width: 10.0,
+                      width: 5.0,
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(height: 5),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -84,6 +88,12 @@ class PhotoPost extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              post.date.timeAgo(),
+                            ),
                           ],  // children
                         ),
                         SizedBox(height: 5),
@@ -91,19 +101,22 @@ class PhotoPost extends StatelessWidget {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              post.title,
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
+                          children: <Widget>[
+                            Container(
+                              constraints: new BoxConstraints(
+                                maxWidth: MediaQuery.of(context).size.width - 100,
                               ),
-                            ),
-                            Text(
-                              post.date.timeAgo(),
+                                child: Text(
+                                  post.title,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                  ),
+                                ),
                             ),
                           ],
                         ),
+                        SizedBox(height: 5),
                       ],
                     )
                   ],
@@ -137,7 +150,7 @@ class PhotoPost extends StatelessWidget {
                 shadowColor: Colors.black,
                 shape: RoundedRectangleBorder(
                   side: BorderSide(color: Colors.transparent, width: 2),
-                  borderRadius: BorderRadius.circular(25),
+                  borderRadius: BorderRadius.circular(50),
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,

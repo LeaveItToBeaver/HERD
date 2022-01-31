@@ -32,24 +32,19 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final bool keyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
+    bool loginErr = false;
 
     return WillPopScope(
       onWillPop: () async => false,
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
-          /*if (state.status == LoginStatus.error) {
-            showDialog(
-              context: context,
-              builder: (context) => ErrorDialog(
-                content: state.failure.message,
-              )
-            );
-          }*/
+          if (state.status == LoginStatus.error) {
+            loginErr = true;
+          }
         }, builder: (context, state) {
-          final bool loginErr = state.status == LoginStatus.error;
           return Scaffold(
-            backgroundColor: Colors.black,
+            backgroundColor: Colors.white,
             resizeToAvoidBottomInset: false,
             body: Stack(
               children: <Widget>[
@@ -62,7 +57,7 @@ class LoginScreen extends StatelessWidget {
                   child: WaveWidget_0(
                     size: size,
                     yOffset: size.height / 2.170,
-                    color: Colors.red,
+                    color: Color(0xff88b388),
                   ),
                 ),
                 AnimatedPositioned(
@@ -72,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                   child: WaveWidget_1(
                     size: size,
                     yOffset: size.height / 2.130,
-                    color: Colors.yellow,
+                    color: Color(0xffa488b3),
                   ),
                 ),
                 AnimatedPositioned(
@@ -82,7 +77,7 @@ class LoginScreen extends StatelessWidget {
                   child: WaveWidget_0(
                     size: size,
                     yOffset: size.height / 2.120,
-                    color: Colors.indigoAccent,
+                    color: Color(0xffc2ffc2),
                   ),
                 ),
                 AnimatedPositioned(
@@ -92,19 +87,20 @@ class LoginScreen extends StatelessWidget {
                   child: WaveWidget_1(
                     size: size,
                     yOffset: size.height / 2.070,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
+
                 Center(
                   child: Padding(
                     padding: EdgeInsets.all(22.0),
                     child: Card(
                       elevation: 2,
                       borderOnForeground: false,
-                      color: Colors.transparent,
+                      color: Color(0xff88b388).withAlpha(20),
                       shape: RoundedRectangleBorder(
                         side: BorderSide(
-                            color: Colors.white60.withAlpha(50), width: 2),
+                            color: Color(0xff88b388).withAlpha(70), width: 2),
                         borderRadius: BorderRadius.circular(55),
                       ),
                       shadowColor: Colors.indigoAccent.withAlpha(40),
@@ -122,22 +118,22 @@ class LoginScreen extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 28,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
                               const SizedBox(height: 12.0),
 
-                              //Email Text Box
+///Email Text Box
                               TextFormField(
                                 style: TextStyle(
-                                  color: Colors.white
+                                  color: Colors.black
                                 ),
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(Radius.circular(50.0)),
                                     borderSide: BorderSide(
-                                        color: Colors.blue, width: 2),
+                                        color: Color(0xff88b388), width: 2),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -146,7 +142,7 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                   labelText: 'Email',
                                   labelStyle: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     fontFamily: 'OpenSans',
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -165,11 +161,11 @@ class LoginScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 17.0),
 
-                              //Password Text Box
+///Password Text Box
                               Container(
                                 child: TextFormField(
                                   style: TextStyle(
-                                      color: Colors.white
+                                      color: Colors.black
                                   ),
                                   obscureText: true,
                                   decoration: loginErr ? InputDecoration(
@@ -177,13 +173,13 @@ class LoginScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(50.0)),
                                       borderSide: BorderSide(
-                                          color: Colors.blue, width: 2),
+                                          color: Color(0xff88b388), width: 2),
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(50.0)),
                                       borderSide: BorderSide(
-                                          color: Colors.white, width: 2.0),
+                                          color: Color(0xff88b388), width: 2.0),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -195,7 +191,7 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                     labelText: 'Password',
                                     labelStyle: TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.black,
                                       fontFamily: 'OpenSans',
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
@@ -209,7 +205,7 @@ class LoginScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(50.0)),
                                       borderSide: BorderSide(
-                                          color: Colors.blue, width: 2),
+                                          color: Color(0xff88b388), width: 2),
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
@@ -227,7 +223,7 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                     labelText: 'Password',
                                     labelStyle: TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.black,
                                       fontFamily: 'OpenSans',
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
@@ -247,7 +243,7 @@ class LoginScreen extends StatelessWidget {
                               ),
                               //SizedBox(height: 5.0),
 
-                              //Forgot Password Button
+///Forgot Password Button
                               Container(
                                 child: TextButton(
                                   onPressed: () =>
@@ -279,15 +275,15 @@ class LoginScreen extends StatelessWidget {
                               Container(
                                 child: Card(
                                   elevation: 5,
+                                  shadowColor: Colors.black,
                                   borderOnForeground: false,
-                                  color: Colors.transparent,
+                                  color: Color(0xffc2ffc2),
                                   shape: RoundedRectangleBorder(
                                     side: BorderSide(
                                         color: Colors.indigo.withAlpha(20),
                                         width: 2),
                                     borderRadius: BorderRadius.circular(55),
                                   ),
-                                  shadowColor: Colors.indigo.withAlpha(15),
                                   child: Stack(
                                     children: [
                                       Padding(
@@ -325,13 +321,14 @@ class LoginScreen extends StatelessWidget {
                                                   ),
                                                   onPressed: () => _submitForm(
                                                       context,
-                                                      state.status == LoginStatus.submitting),
+                                                      state.status == LoginStatus.submitting
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                             SizedBox(width: 24.0),
 
-                                            //Register Button
+///Register Button
                                             Container(
                                               child: SizedBox(
                                                 width: 95,
