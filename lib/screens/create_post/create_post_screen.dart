@@ -61,8 +61,8 @@ class CreatePostScreen extends StatelessWidget {
                         size: 120,
                       ),
                     ),
-
                   ),
+
                   if (state.status == CreatePostStatus.submitting)
                     const LinearProgressIndicator(),
                   Padding(
@@ -115,6 +115,7 @@ class CreatePostScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 15,),
                           TextFormField(
+                            maxLines: null,
                             decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -177,7 +178,6 @@ class CreatePostScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-
                           ),
                         ],
                       ),
@@ -191,6 +191,7 @@ class CreatePostScreen extends StatelessWidget {
       ),
     );
   }
+
   void _selectPostImage(BuildContext context) async {
     final pickedFile = await ImageHelper.pickImageFromGallary(
         context: context,
@@ -204,7 +205,6 @@ class CreatePostScreen extends StatelessWidget {
 
   void _submitForm(BuildContext context, File postImage, bool isSubmitting){
     if (_formKey.currentState.validate()
-    && postImage != null
     && !isSubmitting){
       context.read<CreatePostCubit>().submit();
     }

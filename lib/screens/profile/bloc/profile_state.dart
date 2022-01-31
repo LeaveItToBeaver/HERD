@@ -6,7 +6,10 @@ enum ProfileStatus {initial, loading, loaded, error}
 class ProfileState {
   final User user;
   final List<Post> posts;
+  final List<Comment> comments;
   final bool isListView;
+  final bool isCommentView;
+  final bool isHistoryView;
   final bool isCurrentUser;
   final bool isFollowing;
   final ProfileStatus status;
@@ -15,7 +18,10 @@ class ProfileState {
   const ProfileState({
     @required this.user,
     @required this.posts,
+    @required this.comments,
     @required this.isListView,
+    @required this.isCommentView,
+    @required this.isHistoryView,
     @required this.isCurrentUser,
     @required this.isFollowing,
     @required this.status,
@@ -26,7 +32,10 @@ class ProfileState {
     return const ProfileState(
         user: User.empty,
         posts: [],
+        comments: [],
         isListView: true,
+        isCommentView: false,
+        isHistoryView: false,
         isCurrentUser: false,
         isFollowing: false,
         status: ProfileStatus.initial,
@@ -38,7 +47,10 @@ class ProfileState {
   List<Object> get props => [
     user,
     posts,
+    comments,
     isListView,
+    isCommentView,
+    isHistoryView,
     isCurrentUser,
     isFollowing,
     status,
@@ -48,7 +60,10 @@ class ProfileState {
   ProfileState copyWith({
     User user,
     List<Post> posts,
+    List<Comment> comments,
     bool isListView,
+    bool isCommentView,
+    bool isHistoryView,
     bool isCurrentUser,
     bool isFollowing,
     ProfileStatus status,
@@ -57,7 +72,10 @@ class ProfileState {
     return ProfileState(
     user: user ?? this.user,
     posts: posts ?? this.posts,
+    comments: comments ?? this.comments,
     isListView: isListView ?? this.isListView,
+      isCommentView: isCommentView ?? this.isCommentView,
+      isHistoryView: isHistoryView ?? this.isHistoryView,
     isCurrentUser: isCurrentUser ?? this.isCurrentUser,
     isFollowing: isFollowing ?? this.isFollowing,
     status: status ?? this.status,

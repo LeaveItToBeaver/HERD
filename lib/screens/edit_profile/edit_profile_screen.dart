@@ -69,14 +69,19 @@ class EditProfileScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: () => _selectedCoverImage(context),
                     child: Container(
+                      color: Colors.blue,
                       height: 200,
                       width: double.infinity,
                       child: UserCoverImage(
+                        isSelected: true,
                         coverImageUrl: user.coverImageURL,
                         coverFile: state.coverImage,
                       ),
                     ),
                   ),
+
+                  if (state.status == EditProfileStatus.submitting)
+                    const LinearProgressIndicator(),
                   const SizedBox(height: 32.0,),
                   GestureDetector(
                     onTap: () => _selectedProfileImage(context),
@@ -129,6 +134,9 @@ class EditProfileScreen extends StatelessWidget {
                           ),
                           const SizedBox(height: 16.0,),
                           TextFormField(
+                            maxLines: 10,
+                            minLines: 1,
+                            maxLength: 250,
                             initialValue: user.bio,
                             decoration: InputDecoration(
                                 focusedBorder: OutlineInputBorder(
@@ -204,7 +212,7 @@ class EditProfileScreen extends StatelessWidget {
         cropStyle: CropStyle.rectangle,
         title: 'Cover Photo'
     );
-    if(pickedFile != null){
+    if(pickedFile != null || pickedFile == null){
       context
       .read<EditProfileCubit>()
           .coverImageChanged(File(pickedFile.path));

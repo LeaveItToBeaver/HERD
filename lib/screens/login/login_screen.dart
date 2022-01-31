@@ -49,10 +49,12 @@ class LoginScreen extends StatelessWidget {
         }, builder: (context, state) {
           final bool loginErr = state.status == LoginStatus.error;
           return Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: Colors.black,
             resizeToAvoidBottomInset: false,
             body: Stack(
               children: <Widget>[
+
+                //Animation
                 AnimatedPositioned(
                   duration: Duration(milliseconds: 500),
                   curve: Curves.easeOutQuad,
@@ -90,7 +92,7 @@ class LoginScreen extends StatelessWidget {
                   child: WaveWidget_1(
                     size: size,
                     yOffset: size.height / 2.070,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 Center(
@@ -120,35 +122,38 @@ class LoginScreen extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 28,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                                  color: Colors.white,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
                               const SizedBox(height: 12.0),
+
+                              //Email Text Box
                               TextFormField(
+                                style: TextStyle(
+                                  color: Colors.white
+                                ),
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50.0)),
+                                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
                                     borderSide: BorderSide(
                                         color: Colors.blue, width: 2),
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(50.0)),
+                                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
                                     borderSide: BorderSide(
-                                        color: Colors.black38, width: 2.0),
+                                        color: Colors.white, width: 2.0),
                                   ),
                                   labelText: 'Email',
                                   labelStyle: TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontFamily: 'OpenSans',
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                   ),
                                   prefixIcon: Icon(
                                     Icons.email,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                   ),
                                 ),
                                 onChanged: (value) => context
@@ -159,8 +164,13 @@ class LoginScreen extends StatelessWidget {
                                     : null,
                               ),
                               const SizedBox(height: 17.0),
+
+                              //Password Text Box
                               Container(
                                 child: TextFormField(
+                                  style: TextStyle(
+                                      color: Colors.white
+                                  ),
                                   obscureText: true,
                                   decoration: loginErr ? InputDecoration(
                                     focusedBorder: OutlineInputBorder(
@@ -173,7 +183,7 @@ class LoginScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(50.0)),
                                       borderSide: BorderSide(
-                                          color: Colors.black38, width: 2.0),
+                                          color: Colors.white, width: 2.0),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -185,14 +195,14 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                     labelText: 'Password',
                                     labelStyle: TextStyle(
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       fontFamily: 'OpenSans',
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                     ),
                                     prefixIcon: Icon(
                                       Icons.lock,
-                                      color: Colors.black,
+                                      color: Colors.white,
                                     ),
                                   ) : InputDecoration(
                                     focusedBorder: OutlineInputBorder(
@@ -205,7 +215,7 @@ class LoginScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(50.0)),
                                       borderSide: BorderSide(
-                                          color: Colors.black38, width: 2.0),
+                                          color: Colors.white, width: 2.0),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -217,14 +227,14 @@ class LoginScreen extends StatelessWidget {
                                     ),
                                     labelText: 'Password',
                                     labelStyle: TextStyle(
-                                      color: Colors.black,
+                                      color: Colors.white,
                                       fontFamily: 'OpenSans',
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                     ),
                                     prefixIcon: Icon(
                                       Icons.lock,
-                                      color: Colors.black,
+                                      color: Colors.white,
                                     ),
                                   ),
                                   onChanged: (value) => context
@@ -236,6 +246,8 @@ class LoginScreen extends StatelessWidget {
                                 ),
                               ),
                               //SizedBox(height: 5.0),
+
+                              //Forgot Password Button
                               Container(
                                 child: TextButton(
                                   onPressed: () =>
@@ -263,6 +275,7 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
+
                               Container(
                                 child: Card(
                                   elevation: 5,
@@ -283,6 +296,8 @@ class LoginScreen extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
+
+                                            //Sign In Button
                                             Container(
                                               child: SizedBox(
                                                 width: 95,
@@ -315,6 +330,8 @@ class LoginScreen extends StatelessWidget {
                                               ),
                                             ),
                                             SizedBox(width: 24.0),
+
+                                            //Register Button
                                             Container(
                                               child: SizedBox(
                                                 width: 95,

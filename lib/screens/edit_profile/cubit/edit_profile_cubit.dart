@@ -57,15 +57,22 @@ class EditProfileCubit extends Cubit<EditProfileState> {
       final user = _profileBloc.state.user;
 
       var coverImageUrl = user.coverImageURL;
-      if (state.profileImage != null){
+      var profileImageUrl = user.profileImageURL;
+      if (state.coverImage != null && state.profileImage != null){
         coverImageUrl = await _storageRepository.uploadCoverImage(
             url: coverImageUrl,
             image: state.coverImage,
         );
-      }
-
-      var profileImageUrl = user.profileImageURL;
-      if (state.profileImage != null) {
+        profileImageUrl = await _storageRepository.uploadProfileImage(
+          url: profileImageUrl,
+          image: state.profileImage,
+        );
+      } else if (state.profileImage == null && state.coverImage != null){
+        coverImageUrl = await _storageRepository.uploadCoverImage(
+          url: coverImageUrl,
+          image: state.coverImage,
+        );
+      } else if (state.coverImage == null && state.profileImage != null) {
         profileImageUrl = await _storageRepository.uploadProfileImage(
           url: profileImageUrl,
           image: state.profileImage,

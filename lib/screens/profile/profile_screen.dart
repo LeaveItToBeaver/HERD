@@ -30,6 +30,7 @@ class ProfileScreen extends StatefulWidget {
           )..add(
             ProfileLoadUser(userId: args.userId),
           ),
+          child: ProfileScreen(),
         ),
     );
   }
@@ -69,7 +70,7 @@ class _ProfileScreenState extends State<ProfileScreen>
       }
     }, builder: (context, state) {
       return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         body: _buildBody(state),
       );
     }
@@ -99,12 +100,20 @@ class _ProfileScreenState extends State<ProfileScreen>
                   children: <Widget>[
                     Positioned.fill(
                         child: UserCoverImage(
+                          isSelected: false,
                           coverImageUrl: state.user.coverImageURL,
                         )),
                   ],
                 ),
                 actions: <Widget>[
                   if (state.isCurrentUser)
+                    IconButton(
+                      onPressed: null,
+                      icon: const Icon(
+                        Icons.settings_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
                     IconButton(
                       onPressed: () =>
                           context.read<AuthBloc>().add(AuthLogoutRequested()),
@@ -121,18 +130,18 @@ class _ProfileScreenState extends State<ProfileScreen>
                 child: Padding(
                   padding: EdgeInsets.all(5),
                   child: Card(
-                    elevation: 20,
+                    elevation: 10,
                     borderOnForeground: false,
-                    color: Colors.white.withAlpha(25),
+                    color: Colors.white,
                     shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.transparent, width: 1),
+                      side: BorderSide(color: Color(0xffc2ffc2), width: 5),
                       borderRadius: BorderRadius.circular(50),
                     ),
-                    shadowColor: Colors.white.withAlpha(50),
+                    shadowColor: Colors.black,
                     child: Column(
                       children: [
                         Padding(
-                          padding: EdgeInsets.fromLTRB(24, 10, 24, 5),
+                          padding: EdgeInsets.fromLTRB(20, 10, 24, 5),
                           child: Row(
                             children: [
                               UserProfileImage(
@@ -164,50 +173,64 @@ class _ProfileScreenState extends State<ProfileScreen>
               ),
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: EdgeInsets.all(15.0),
+                  padding: EdgeInsets.all(5.0),
                   child: TabBar(
+                    automaticIndicatorColorAdjustment: true,
                     controller: _tabController,
                     indicator: BoxDecoration(
                       gradient: LinearGradient(
-                          colors: [Colors.redAccent, Colors.purpleAccent]
+                          colors: [const Color(0xffebc2ff), const Color(0xffa488b3)]
                       ),
                       borderRadius: BorderRadius.circular(50),
-                      color: Colors.redAccent,
+                      color: const Color(0xffc2ffc2),
                     ),
                     tabs: [
                       Tab(
                         child: Align(
                           alignment: Alignment.center,
-                          child: Text('Posts'),
+                          child: Text('Posts',
+                            style: TextStyle(
+                                color: Colors.black
+                            ),
+                          ),
                         ),
                       ),
                       Tab(
                         child: Align(
                           alignment: Alignment.center,
-                          child: Text('Comments'),
+                          child: Text('Comments',
+                            style: TextStyle(
+                                color: Colors.black
+                            ),
+                          ),
                         ),
                       ),
                       Tab(
                         child: Align(
                           alignment: Alignment.center,
-                          child: Text('History'),
+                          child: Text('History',
+                            style: TextStyle(
+                              color: Colors.black
+                            ),
+                          ),
                         ),
                       ),
                     ],
                     onTap: (i) => context.read<ProfileBloc>()
-                        .add(ProfileToggleListView(isListView: i == 0)),
+                        .add(
+                      ProfileToggleListView(isListView: i == 0)
+                    ),
                   ),
                 ),
               ),
-              state.isListView
-                  ? SliverList(
+              SliverList(
                 delegate: SliverChildBuilderDelegate((BuildContext context, int index){
                   final post = state.posts[index];
                   return PostView(post: post);
-                },
+                  },
                   childCount: state.posts.length,
                 ),
-              ) : null
+              ),
             ],
           ),
         );

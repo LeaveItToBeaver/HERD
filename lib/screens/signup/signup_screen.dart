@@ -141,10 +141,11 @@ class SignupScreen extends StatelessWidget {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         SizedBox(
-                                          width: 120,
-                                          height: 45,
+                                          width: 125,
+                                          height: 50,
                                           child: TextFormField(
                                             decoration: InputDecoration(
+                                              isDense: true,
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                 BorderRadius.all(Radius.circular(50.0)),
@@ -181,12 +182,13 @@ class SignupScreen extends StatelessWidget {
                                                 : null,
                                           ),
                                         ),
-                                        SizedBox(width: 12,),
+                                        SizedBox(width: 5,),
                                         SizedBox(
-                                          width: 120,
-                                          height: 45,
+                                          width: 125,
+                                          height: 50,
                                           child: TextFormField(
                                             decoration: InputDecoration(
+                                              isDense: true,
                                               focusedBorder: OutlineInputBorder(
                                                 borderRadius:
                                                 BorderRadius.all(Radius.circular(50.0)),

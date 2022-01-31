@@ -4,6 +4,7 @@ enum CreatePostStatus{initial, submitting, success, error}
 
 class CreatePostState extends Equatable {
   final File postImage;
+  final bool isImage;
   final String title;
   final String caption;
   final CreatePostStatus status;
@@ -12,6 +13,7 @@ class CreatePostState extends Equatable {
   factory CreatePostState.initial() {
     return const CreatePostState(
         postImage: null,
+        isImage: false,
         title: '',
         caption: '',
         status: CreatePostStatus.initial,
@@ -21,6 +23,7 @@ class CreatePostState extends Equatable {
 
   CreatePostState copyWith({
     File postImage,
+    bool isImage,
     String title,
     String caption,
     CreatePostStatus status,
@@ -28,6 +31,7 @@ class CreatePostState extends Equatable {
   }) {
     return new CreatePostState(
       postImage: postImage ?? this.postImage,
+      isImage: isImage ?? this.isImage,
       title: title ?? this.title,
       caption: caption ?? this.caption,
       status: status ?? this.status,
@@ -37,6 +41,7 @@ class CreatePostState extends Equatable {
 
   const CreatePostState({
     @required this.postImage,
+    @required this.isImage,
     @required this.title,
     @required this.caption,
     @required this.status,
@@ -46,6 +51,7 @@ class CreatePostState extends Equatable {
   @override
   List<Object> get props => [
     postImage,
+    isImage,
     title,
     caption,
     status,

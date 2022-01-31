@@ -40,6 +40,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       yield* _mapProfileLoadUserToState(event);
     } else if (event is ProfileToggleListView){
       yield* _mapProfileToggleListViewState(event);
+    }else if (event is ProfileToggleCommentView){
+      yield* _mapProfileToggleCommentViewState(event);
+    }else if (event is ProfileToggleHistoryView){
+      yield* _mapProfileToggleHistoryViewState(event);
     } else if  (event is ProfileUpdatePosts) {
       yield* _mapProfileUpdatePostsToState(event);
     }
@@ -78,7 +82,12 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   Stream<ProfileState> _mapProfileToggleListViewState(ProfileToggleListView event) async*{
     yield state.copyWith(isListView: event.isListView);
   }
-
+  Stream<ProfileState> _mapProfileToggleCommentViewState(ProfileToggleCommentView event) async*{
+    yield state.copyWith(isCommentView: event.isCommentView);
+  }
+  Stream<ProfileState> _mapProfileToggleHistoryViewState(ProfileToggleHistoryView event) async*{
+    yield state.copyWith(isHistoryView: event.isHistoryView);
+  }
   Stream<ProfileState> _mapProfileUpdatePostsToState(ProfileUpdatePosts event) async* {
     yield state.copyWith(posts: event.posts);
   }

@@ -35,3 +35,23 @@ class ProfileUpdatePosts extends ProfileEvent {
   @override
   List<Object> get props => [posts];
 }
+
+class ProfileToggleCommentView extends ProfileEvent {
+  final bool isCommentView;
+
+  const ProfileToggleCommentView({@required this.isCommentView});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [isCommentView];
+}
+
+class ProfileToggleHistoryView extends ProfileEvent {
+  final bool isHistoryView;
+
+  const ProfileToggleHistoryView({@required this.isHistoryView});
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [isHistoryView];
+}

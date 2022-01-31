@@ -22,16 +22,17 @@ class ProfileInfo extends StatelessWidget {
             fontSize: 18.0,
             fontFamily: 'OpenSans',
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: Colors.black,
           ),
         ),
         SizedBox(height: 8.0,),
         Text(
           bio,
+          maxLines: 10,
           style: const TextStyle(
             fontSize: 15.0,
             fontFamily: 'OpenSans',
-            color: Colors.white
+            color: Colors.black
           ),
         ),
         const Divider(

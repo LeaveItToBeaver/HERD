@@ -48,9 +48,45 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     emit(state.copyWith(status: CreatePostStatus.submitting));
     try {
       final author = User.empty.copyWith(id: _authBloc.state.user.uid);
-      final postImageUrl = await _storageRepository.uploadPostImage(image: state.postImage);
 
-      final post = Post(
+      if(state.postImage != null) {
+        final postImageUrl = await _storageRepository.uploadPostImage(image: state.postImage);
+        final post = Post(
+            author: author,
+            imageUrl: postImageUrl,
+            isImage: true,
+            caption: state.caption,
+            title: state.title,
+            likes: 0,
+            dislikes: 0,
+            date: DateTime.now()
+        );
+
+        await _postRepository.createPost(
+            post: post
+        );
+
+        emit(state.copyWith(status: CreatePostStatus.success));
+      } else if (state.postImage == null){
+        final post = Post(
+            author: author,
+            imageUrl: null,
+            isImage: false,
+            caption: state.caption,
+            title: state.title,
+            likes: 0,
+            dislikes: 0,
+            date: DateTime.now()
+        );
+
+        await _postRepository.createPost(
+            post: post
+        );
+
+        emit(state.copyWith(status: CreatePostStatus.success));
+      }
+
+      /*final post = Post(
           author: author,
           imageUrl: postImageUrl,
           caption: state.caption,
@@ -58,13 +94,7 @@ class CreatePostCubit extends Cubit<CreatePostState> {
           likes: 0,
           dislikes: 0,
           date: DateTime.now()
-      );
-
-      await _postRepository.createPost(
-          post: post
-      );
-      
-      emit(state.copyWith(status: CreatePostStatus.success));
+      );*/
     }
     catch (err) {
       emit(state.copyWith(

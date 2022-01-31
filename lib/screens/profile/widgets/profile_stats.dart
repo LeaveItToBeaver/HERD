@@ -66,7 +66,7 @@ class _Stats extends StatelessWidget {
             style: const TextStyle(
               fontSize: 16.0,
               fontFamily: 'OpenSans',
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
           Text(
@@ -74,7 +74,7 @@ class _Stats extends StatelessWidget {
             style: TextStyle(
               fontSize: 16.0,
               fontFamily: 'OpenSans',
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
         ]
