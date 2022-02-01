@@ -17,26 +17,19 @@ class UserCoverImage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+      return Container(
+        child: Image(
+          image: coverFile != null
+              ? FileImage(coverFile)
+              : coverImageUrl.isNotEmpty
+              ? CachedNetworkImageProvider(coverImageUrl)
+              : null,
+          fit: BoxFit.cover,
 
-    if (!isSelected) {
-      if(coverFile == null && coverImageUrl.isEmpty) {
-        return Container(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 100,
-              ),
-              Text(
-                "Tap Edit Profile to add a cover photo.",
-                style: TextStyle(
-                  fontFamily: 'OpenSans',
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        );
-      } else {
+        ),
+      );
+
+    /*if (!isSelected) {
         return Container(
           child: Image(
             image: coverFile != null
@@ -47,24 +40,26 @@ class UserCoverImage extends StatelessWidget{
             fit: BoxFit.cover,
           ),
         );
-      }
     } else {
       return Container(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
+            Container(
               height: 100,
-            ),
-            Text(
-              "Tap here to change your cover photo.",
-              style: TextStyle(
-                fontFamily: 'OpenSans',
-                fontWeight: FontWeight.bold,
+              child: Text(
+                "Tap here to change your cover photo.",
+                style: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],
         ),
       );
-    }
+    }*/
+
     }
   }

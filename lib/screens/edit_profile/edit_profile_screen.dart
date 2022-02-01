@@ -37,7 +37,7 @@ class EditProfileScreen extends StatelessWidget {
   }
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
+  bool isSelected = false;
   final User user;
   EditProfileScreen({Key key, this.user}) : super(key: key);
 
@@ -68,15 +68,42 @@ class EditProfileScreen extends StatelessWidget {
                     const LinearProgressIndicator(),
                   GestureDetector(
                     onTap: () => _selectedCoverImage(context),
-                    child: Container(
-                      color: Colors.blue,
-                      height: 200,
-                      width: double.infinity,
-                      child: UserCoverImage(
-                        isSelected: true,
-                        coverImageUrl: user.coverImageURL,
-                        coverFile: state.coverImage,
-                      ),
+                    child: isSelected ? UserCoverImage(
+                      isSelected: true,
+                      coverImageUrl: user.coverImageURL,
+                      coverFile: state.coverImage,
+                    ) : Stack(
+                      children: [
+                        UserCoverImage(
+                          isSelected: true,
+                          coverImageUrl: user.coverImageURL,
+                          coverFile: state.coverImage,
+                        ),
+                          Card(
+                            color: Colors.white.withAlpha(30),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.camera_alt_rounded,
+                                      size: 100,
+                                    ),
+                                    Text(
+                                      "Tap here to add a cover photo.",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
                     ),
                   ),
 
@@ -91,6 +118,7 @@ class EditProfileScreen extends StatelessWidget {
                       profileImage: state.profileImage,
                     ),
                   ),
+
                   Padding(
                     padding: const EdgeInsets.all(24.0),
                     child: Form(
@@ -213,6 +241,7 @@ class EditProfileScreen extends StatelessWidget {
         title: 'Cover Photo'
     );
     if(pickedFile != null || pickedFile == null){
+      isSelected = true;
       context
       .read<EditProfileCubit>()
           .coverImageChanged(File(pickedFile.path));

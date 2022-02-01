@@ -131,13 +131,13 @@ class _ProfileScreenState extends State<ProfileScreen>
                   padding: EdgeInsets.all(5),
                   child: Card(
                     elevation: 10,
+                    shadowColor: Color(0xffc2ffc2),
                     borderOnForeground: false,
                     color: Colors.white,
                     shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Color(0xffc2ffc2), width: 5),
+                      side: BorderSide(color: Color(0xffc2ffc2).withAlpha(85), width: 2),
                       borderRadius: BorderRadius.circular(50),
                     ),
-                    shadowColor: Colors.black,
                     child: Column(
                       children: [
                         Padding(

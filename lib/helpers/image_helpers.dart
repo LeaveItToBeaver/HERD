@@ -20,9 +20,9 @@ class ImageHelper {
         cropStyle: cropStyle,
         androidUiSettings: AndroidUiSettings(
           toolbarTitle: title,
-          toolbarColor: Colors.purple,
+          toolbarColor: Colors.greenAccent,
           toolbarWidgetColor: Colors.black,
-          initAspectRatio: CropAspectRatioPreset.original ,
+          initAspectRatio: CropAspectRatioPreset.ratio16x9 ,
           lockAspectRatio: false,
         ),
         iosUiSettings: IOSUiSettings(

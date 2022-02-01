@@ -153,13 +153,13 @@ class SignupScreen extends StatelessWidget {
                                               borderRadius:
                                               BorderRadius.all(Radius.circular(50.0)),
                                               borderSide: BorderSide(
-                                                  color: Colors.blue, width: 2),
+                                                  color: Color(0xffc2ffc2), width: 2),
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderRadius:
                                               BorderRadius.all(Radius.circular(50.0)),
                                               borderSide: BorderSide(
-                                                  color: Colors.black38, width: 2.0),
+                                                  color: Colors.white, width: 2.0),
                                             ),
                                             focusedErrorBorder: OutlineInputBorder(
                                               borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -196,13 +196,13 @@ class SignupScreen extends StatelessWidget {
                                               borderRadius:
                                               BorderRadius.all(Radius.circular(50.0)),
                                               borderSide: BorderSide(
-                                                  color: Colors.blue, width: 2),
+                                                  color: Color(0xffc2ffc2), width: 2),
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderRadius:
                                               BorderRadius.all(Radius.circular(50.0)),
                                               borderSide: BorderSide(
-                                                  color: Colors.black38, width: 2.0),
+                                                  color: Colors.white, width: 2.0),
                                             ),
                                             focusedErrorBorder: OutlineInputBorder(
                                               borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -237,13 +237,13 @@ class SignupScreen extends StatelessWidget {
                                         borderRadius:
                                         BorderRadius.all(Radius.circular(50.0)),
                                         borderSide: BorderSide(
-                                            color: Colors.blue, width: 2),
+                                            color: Color(0xffc2ffc2), width: 2),
                                       ),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius:
                                         BorderRadius.all(Radius.circular(50.0)),
                                         borderSide: BorderSide(
-                                            color: Colors.black38, width: 2.0),
+                                            color: Colors.white, width: 2.0),
                                       ),
                                       focusedErrorBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -279,13 +279,13 @@ class SignupScreen extends StatelessWidget {
                                         borderRadius:
                                         BorderRadius.all(Radius.circular(50.0)),
                                         borderSide: BorderSide(
-                                            color: Colors.blue, width: 2),
+                                            color: Color(0xffc2ffc2), width: 2),
                                       ),
                                       enabledBorder: OutlineInputBorder(
                                         borderRadius:
                                         BorderRadius.all(Radius.circular(50.0)),
                                         borderSide: BorderSide(
-                                            color: Colors.black38, width: 2.0),
+                                            color: Colors.white, width: 2.0),
                                       ),
                                       focusedErrorBorder: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -317,17 +317,17 @@ class SignupScreen extends StatelessWidget {
                                   const SizedBox(height: 5.0),
                                   Container(
                                     child: Card(
-                                      color: Colors.white,
-                                      elevation: 5,
-                                      shadowColor: Colors.black,
+                                      color: Colors.white.withAlpha(90),
+                                      elevation: 2,
+                                      shadowColor: Colors.black.withAlpha(50),
                                       shape: RoundedRectangleBorder(
                                         side: BorderSide(
-                                            color: Colors.indigo.withAlpha(20),
+                                            color: Colors.white,
                                             width: 2),
                                         borderRadius: BorderRadius.circular(55),
                                       ),
                                       child: Padding(
-                                          padding: EdgeInsets.all(5),
+                                          padding: EdgeInsets.all(10),
                                         child: Column(
                                           children: [
                                             Row(
@@ -415,13 +415,13 @@ class SignupScreen extends StatelessWidget {
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(50.0)),
                                           borderSide: BorderSide(
-                                              color: Colors.blue, width: 2),
+                                              color: Color(0xffc2ffc2), width: 2),
                                         ),
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(50.0)),
                                           borderSide: BorderSide(
-                                              color: Colors.black38, width: 2.0),
+                                              color: Colors.white, width: 2.0),
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
                                           borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -465,13 +465,13 @@ class SignupScreen extends StatelessWidget {
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(50.0)),
                                           borderSide: BorderSide(
-                                              color: Colors.blue, width: 2),
+                                              color: Color(0xffc2ffc2), width: 2),
                                         ),
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(50.0)),
                                           borderSide: BorderSide(
-                                              color: Colors.black38, width: 2.0),
+                                              color: Colors.white, width: 2.0),
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
                                           borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -510,15 +510,15 @@ class SignupScreen extends StatelessWidget {
                                   Container(
                                     child: Card(
                                       elevation: 5,
+                                      shadowColor: Colors.black.withAlpha(15),
                                       borderOnForeground: false,
-                                      color: Colors.transparent,
+                                      color: Color(0xffc2ffc2),
                                       shape: RoundedRectangleBorder(
                                         side: BorderSide(
-                                            color: Colors.indigo.withAlpha(20),
+                                            color: Color(0xffc2ffc2).withAlpha(20),
                                             width: 2),
                                         borderRadius: BorderRadius.circular(55),
                                       ),
-                                      shadowColor: Colors.indigo.withAlpha(15),
                                       child: Stack(
                                         children: [
                                           Padding(
@@ -527,7 +527,15 @@ class SignupScreen extends StatelessWidget {
                                               mainAxisAlignment:
                                               MainAxisAlignment.center,
                                               children: [
-                                                Container(
+                                                Card(
+                                                  elevation: 3,
+                                                  color: Color(0xffc2ffc2),
+                                                  shape: RoundedRectangleBorder(
+                                                    side: BorderSide(
+                                                        color: Color(0xffc2ffc2),
+                                                        width: 2),
+                                                    borderRadius: BorderRadius.circular(50),
+                                                  ),
                                                   child: SizedBox(
                                                     width: 95,
                                                     height: 45,
@@ -542,7 +550,7 @@ class SignupScreen extends StatelessWidget {
                                                         backgroundColor:
                                                         MaterialStateProperty
                                                             .all<Color>(
-                                                            Colors.white),
+                                                            Color(0xffc2ffc2)),
                                                         shape: MaterialStateProperty
                                                             .all<
                                                             RoundedRectangleBorder>(

@@ -100,7 +100,7 @@ class LoginScreen extends StatelessWidget {
                       color: Color(0xff88b388).withAlpha(20),
                       shape: RoundedRectangleBorder(
                         side: BorderSide(
-                            color: Color(0xff88b388).withAlpha(70), width: 2),
+                            color: Color(0xffc2ffc2).withAlpha(70), width: 2),
                         borderRadius: BorderRadius.circular(55),
                       ),
                       shadowColor: Colors.indigoAccent.withAlpha(40),
@@ -133,7 +133,7 @@ class LoginScreen extends StatelessWidget {
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(Radius.circular(50.0)),
                                     borderSide: BorderSide(
-                                        color: Color(0xff88b388), width: 2),
+                                        color: Color(0xffc2ffc2), width: 2),
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -173,13 +173,13 @@ class LoginScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(50.0)),
                                       borderSide: BorderSide(
-                                          color: Color(0xff88b388), width: 2),
+                                          color: Color(0xffc2ffc2), width: 2),
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(50.0)),
                                       borderSide: BorderSide(
-                                          color: Color(0xff88b388), width: 2.0),
+                                          color: Color(0xffc2ffc2), width: 2.0),
                                     ),
                                     errorBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(Radius.circular(50.0)),
@@ -205,7 +205,7 @@ class LoginScreen extends StatelessWidget {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(50.0)),
                                       borderSide: BorderSide(
-                                          color: Color(0xff88b388), width: 2),
+                                          color: Color(0xffc2ffc2), width: 2),
                                     ),
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
