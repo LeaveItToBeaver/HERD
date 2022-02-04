@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:herd/models/post_model.dart';
-import 'package:herd/screens/screens.dart';
-import 'package:herd/widgets/user_profile_image.dart';
+import 'package:herd/widgets/post_information_new.dart';
+import 'package:herd/widgets/post_operation_text_widget.dart';
 
 class TextPost extends StatelessWidget {
   final Post post;
@@ -13,83 +13,31 @@ class TextPost extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Card(
-          elevation: 10,
-          color: Colors.black,
-          shadowColor: Colors.white10,
+    return Container(
+        child: Card(
+          elevation: 1,
+          color: Colors.white,
+          shadowColor: Colors.black,
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: const Color(0xffffe7c2), width: 5),
-            borderRadius: BorderRadius.circular(25),
+            side: BorderSide(color: Colors.transparent, width: 4),
+            borderRadius: BorderRadius.circular(30),
           ),
-          child: Stack(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () => Navigator.of(context).pushNamed(
-                      ProfileScreen.routeName,
-                      arguments: ProfileScreenArgs(userId: post.author.id),
-                    ),
-                    child: UserProfileImage(
-                      radius: 20,
-                      profileImageUrl: post.author.profileImageURL,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 8.0,
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            post.author.username,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                            ),
-                          ),
-                        ],  // children
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            post.author.firstName,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 10,
-                            ),
-                          ),
-                          Text(
-                            post.author.lastName,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 10,
-                            ),
-                          )
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            post.title,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  )
-                ],
+
+              NewPostInformation(post: post),
+
+              GestureDetector(
+                onTap: () {},
+                child: PostOperationText(post: post),
               ),
+
             ],
           ),
         ),
-      ],
-    );
+      );
   }
 }

@@ -60,13 +60,15 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProfileBloc, ProfileState>(listener: (context, state) {
+    return BlocConsumer<ProfileBloc, ProfileState>(
+        listener: (context, state) {
       if (state.status == ProfileStatus.error) {
         showDialog(
             context: context,
             builder: (context) => ErrorDialog(
                   content: state.failure.message,
-                ));
+                )
+        );
       }
     }, builder: (context, state) {
       return Scaffold(
@@ -108,7 +110,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                 actions: <Widget>[
                   if (state.isCurrentUser)
                     IconButton(
-                      onPressed: null,
+                      onPressed: () => {
+                        //TODO: Add route to settings.
+                      },
                       icon: const Icon(
                         Icons.settings_rounded,
                         color: Colors.white,

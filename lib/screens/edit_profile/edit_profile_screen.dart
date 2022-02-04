@@ -11,7 +11,6 @@ import 'package:herd/screens/profile/bloc/profile_bloc.dart';
 import 'package:herd/widgets/user_cover_image.dart';
 import 'package:herd/widgets/widgets.dart';
 import 'package:image_cropper/image_cropper.dart';
-import 'package:image_picker/image_picker.dart';
 
 class EditProfileScreenArgs {
   final BuildContext context;
@@ -83,6 +82,8 @@ class EditProfileScreen extends StatelessWidget {
                             color: Colors.white.withAlpha(30),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,7 +91,7 @@ class EditProfileScreen extends StatelessWidget {
                                   children: [
                                     Icon(
                                       Icons.camera_alt_rounded,
-                                      size: 100,
+                                      size: 200,
                                     ),
                                     Text(
                                       "Tap here to add a cover photo.",
@@ -132,7 +133,7 @@ class EditProfileScreen extends StatelessWidget {
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(50.0)),
                                 borderSide: BorderSide(
-                                    color: Colors.blue, width: 2
+                                    color: Colors.greenAccent, width: 2
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
@@ -170,7 +171,7 @@ class EditProfileScreen extends StatelessWidget {
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(50.0)),
                                   borderSide: BorderSide(
-                                      color: Colors.blue, width: 2
+                                      color: Colors.greenAccent, width: 2
                                   ),
                                 ),
                                 enabledBorder: OutlineInputBorder(
@@ -199,7 +200,9 @@ class EditProfileScreen extends StatelessWidget {
                                 : null,
                           ),
                           const SizedBox(height: 28.0,),
-                          TextButton(
+                          SizedBox(
+                            height: 50,
+                            child: TextButton(
                               onPressed: () => _submitForm(
                                 context,
                                 state.status == EditProfileStatus.submitting,
@@ -210,19 +213,20 @@ class EditProfileScreen extends StatelessWidget {
                                   color: Colors.black,
                                 ),
                               ),
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                Colors.white
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(
+                                    Color(0xffffe7c2),
+                                  ),
+                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(25.0),
+                                      )
+                                  )
                               ),
-                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                )
-                              )
                             ),
                           ),
                         ],
-                      ) ,
+                      ),
                     ),
                   ),
                 ],

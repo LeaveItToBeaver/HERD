@@ -98,15 +98,15 @@ class User extends Equatable {
     final data = doc.data();
     return User(
       id: doc.id,
-      username: data['username'] ?? '',
-      email: data['email'] ?? '',
-      profileImageURL: data['profileImageURL'] ?? '',
-      coverImageURL: data['coverImageURL'] ?? '',
-      firstName: data['firstName'] ?? '',
-      lastName: data['lastName'] ?? '',
-      followers: (data['followers'] ?? 0).toInt(),
-      following: (data['following'] ?? 0).toInt(),
-      bio: data['bio'] ?? '',
+      username: (data as dynamic)['username'] ?? '',
+      email: (data as dynamic)['email'] ?? '',
+      profileImageURL: (data as dynamic)['profileImageURL'] ?? '',
+      coverImageURL: (data as dynamic)['coverImageURL'] ?? '',
+      firstName: (data as dynamic)['firstName'] ?? '',
+      lastName: (data as dynamic)['lastName'] ?? '',
+      followers: ((data as dynamic)['followers'] ?? 0).toInt(),
+      following: ((data as dynamic)['following'] ?? 0).toInt(),
+      bio:  (data as dynamic)['bio'] ?? '',
     );
   }
 }

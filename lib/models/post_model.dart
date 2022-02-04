@@ -86,7 +86,7 @@ class Post extends Equatable {
   static Future<Post> fromDocument(DocumentSnapshot doc) async {
    if (doc == null) return null;
    final data = doc.data();
-   final authorRef = data['author'] as DocumentReference;
+   final authorRef = (data as dynamic)['author'] as DocumentReference;
    if (authorRef != null){
 
      final authorDoc = await authorRef.get();
@@ -95,14 +95,14 @@ class Post extends Equatable {
        return Post(
            id: doc.id,
            author: User.fromDocument(authorDoc),
-           isImage: (data['imageUrl'] == null),
-           imageUrl: data['imageUrl'] ?? '',
-           caption: data['caption'] ?? '',
-           title: data['title'] ?? '',
-           commentNum: (data['commentTotal'] ?? 0).toInt(),
-           likes: (data['likes'] ?? 0).toInt(),
-           dislikes: (data['dislikes'] ?? 0).toInt(),
-           date: (data['date'] as Timestamp).toDate(),
+           isImage: ((data as dynamic)['imageUrl'] == null),
+           imageUrl: (data as dynamic)['imageUrl'] ?? '',
+           caption: (data as dynamic)['caption'] ?? '',
+           title: (data as dynamic)['title'] ?? '',
+           commentNum: ((data as dynamic)['commentTotal'] ?? 0).toInt(),
+           likes: ((data as dynamic)['likes'] ?? 0).toInt(),
+           dislikes: ((data as dynamic)['dislikes'] ?? 0).toInt(),
+           date: ((data as dynamic)['date'] as Timestamp).toDate(),
        );
      }
    }

@@ -4,3 +4,7 @@ export 'wave_widget_0.dart';
 export 'wave_widget_1.dart';
 export 'user_profile_image.dart';
 export 'post_view.dart';
+export 'post_information_new.dart';
+export 'post_operation_text_widget.dart';
+export 'post_operation_widget.dart';
+export 'user_cover_image.dart';

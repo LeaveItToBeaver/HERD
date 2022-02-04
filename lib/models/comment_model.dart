@@ -59,7 +59,7 @@ class Comment extends Equatable {
   static Future<Comment> fromDocument(DocumentSnapshot doc) async {
     if (doc == null) return null;
     final data = doc.data();
-    final authorRef = data['author'] as DocumentReference;
+    final authorRef = (data as dynamic)['author'] as DocumentReference;
     if(authorRef != null) {
 
       final authorDoc = await authorRef.get();
@@ -68,9 +68,9 @@ class Comment extends Equatable {
         return Comment(
           id: doc.id,
           author: User.fromDocument(authorDoc),
-          postId: data['postId'] ?? '',
-          content: data['content'] ?? '',
-          date: (data['date'] as Timestamp).toDate(),
+          postId: (data as dynamic)['postId'] ?? '',
+          content: (data as dynamic)['content'] ?? '',
+          date: ((data as dynamic)['date'] as Timestamp).toDate(),
         );
       }
     }
