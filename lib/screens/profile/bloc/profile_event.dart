@@ -19,7 +19,6 @@ class ProfileLoadUser extends ProfileEvent {
 
 class ProfileToggleListView extends ProfileEvent {
   final bool isListView;
-
   const ProfileToggleListView({@required this.isListView});
 
   @override
