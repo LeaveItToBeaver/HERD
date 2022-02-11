@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:herd/models/post_model.dart';
-import 'package:herd/widgets/post_information_new.dart';
-import 'package:herd/widgets/post_operation_text_widget.dart';
+import 'package:herd/widgets/post_widgets/post_information.dart';
+import 'package:herd/widgets/post_widgets/post_operation_text_widget.dart';
 
 class TextPost extends StatelessWidget {
   final Post post;
@@ -16,7 +16,7 @@ class TextPost extends StatelessWidget {
     return Container(
         child: Card(
           elevation: 1,
-          color: Colors.white,
+          color: Colors.white70,
           shadowColor: Colors.black,
           shape: RoundedRectangleBorder(
             side: BorderSide(color: Colors.transparent, width: 4),
@@ -34,7 +34,6 @@ class TextPost extends StatelessWidget {
                 onTap: () {},
                 child: PostOperationText(post: post),
               ),
-
             ],
           ),
         ),

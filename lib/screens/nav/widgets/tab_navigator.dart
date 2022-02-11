@@ -9,6 +9,7 @@ import 'package:herd/screens/create_post/create_post_cubit/create_post_cubit.dar
 import 'package:herd/screens/profile/bloc/profile_bloc.dart';
 import 'package:herd/screens/profile/profile_screen.dart';
 import 'package:herd/screens/screens.dart';
+import 'package:herd/screens/search/cubit/search_cubit.dart';
 
 class TabNavigator extends StatelessWidget {
   static const String tabNavigatorRoot = '/';
@@ -48,7 +49,12 @@ class TabNavigator extends StatelessWidget {
   Widget _getScreen(BuildContext context, BottomNavItem item) {
     switch (item) {
       case BottomNavItem.search:
-        return SearchScreen();
+        return BlocProvider<SearchCubit>(
+          create: (context) => SearchCubit(
+              userRepository: context.read<UserRepository>()
+          ),
+          child: SearchScreen(),
+        );
       case BottomNavItem.feed:
         return FeedScreen();
       case BottomNavItem.create:

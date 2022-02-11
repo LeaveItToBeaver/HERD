@@ -5,10 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herd/blocs/auth/auth_bloc.dart';
 import 'package:herd/repositories/repositories.dart';
 import 'package:herd/screens/profile/widgets/widgets.dart';
-import 'package:herd/widgets/comment_view.dart';
-import 'package:herd/widgets/user_cover_image.dart';
+import 'package:herd/widgets/user_widgets/user_cover_image.dart';
 import 'package:herd/widgets/widgets.dart';
-import 'dart:io';
 
 import 'bloc/profile_bloc.dart';
 
@@ -114,7 +112,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                     ],
                   ),
                   actions: <Widget>[
-                    if (state.isCurrentUser)
+                    if (state.isCurrentUser) ...[
                       IconButton(
                         onPressed: () => {
                           //TODO: Add route to settings.
@@ -124,11 +122,12 @@ class _ProfileScreenState extends State<ProfileScreen>
                           color: Colors.white,
                         ),
                       ),
-                    IconButton(
-                      onPressed: () =>
-                          context.read<AuthBloc>().add(AuthLogoutRequested()),
-                      icon: const Icon(Icons.exit_to_app),
-                    ),
+                      IconButton(
+                        onPressed: () =>
+                            context.read<AuthBloc>().add(AuthLogoutRequested()),
+                        icon: const Icon(Icons.exit_to_app),
+                      ),
+                    ],
                   ],
                 ),
 
@@ -141,8 +140,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                   child: Padding(
                     padding: EdgeInsets.all(5),
                     child: Card(
-                      elevation: 10,
-                      shadowColor: Color(0xffc2ffc2),
+                      elevation: 5,
+                      shadowColor: Colors.grey,
                       borderOnForeground: false,
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
@@ -191,7 +190,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                       controller: _tabController,
                       indicator: BoxDecoration(
                         gradient: LinearGradient(
-                            colors: [const Color(0xffebc2ff), const Color(0xffa488b3)]
+                            colors: [const Color(0xffc2ffc2), const Color(0xff88b388)]
                         ),
                         borderRadius: BorderRadius.circular(50),
                         color: const Color(0xffc2ffc2),

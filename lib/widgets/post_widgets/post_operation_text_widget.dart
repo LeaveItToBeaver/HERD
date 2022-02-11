@@ -13,7 +13,7 @@ class PostOperationText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
-      color: Color(0xffffe7c2),
+      color: Colors.white,
       shadowColor: Colors.black,
       shape: RoundedRectangleBorder(
         side: BorderSide(color: Colors.transparent, width: 2),
@@ -74,7 +74,7 @@ class PostOperationText extends StatelessWidget {
                   ),
                 ),
                 Card(
-                  elevation: 0,
+                  elevation: 1,
                   color: Colors.white,
                   shadowColor: Colors.black,
                   shape: RoundedRectangleBorder(
@@ -92,7 +92,7 @@ class PostOperationText extends StatelessWidget {
                   ),
                 ),
                 Card(
-                  elevation: 0,
+                  elevation: 1,
                   color: Colors.white,
                   shadowColor: Colors.black,
                   shape: RoundedRectangleBorder(
@@ -111,7 +111,7 @@ class PostOperationText extends StatelessWidget {
                   ),
                 ),
                 Card(
-                  elevation: 0,
+                  elevation: 1,
                   color: Colors.white,
                   shadowColor: Colors.black,
                   shape: RoundedRectangleBorder(
@@ -130,7 +130,7 @@ class PostOperationText extends StatelessWidget {
                 ),
 
                 Card(
-                  elevation: 0,
+                  elevation: 1,
                   color: Colors.white,
                   shadowColor: Colors.black,
                   shape: RoundedRectangleBorder(

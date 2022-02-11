@@ -8,7 +8,7 @@ import 'package:herd/repositories/repositories.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:herd/screens/edit_profile/cubit/edit_profile_cubit.dart';
 import 'package:herd/screens/profile/bloc/profile_bloc.dart';
-import 'package:herd/widgets/user_cover_image.dart';
+import 'package:herd/widgets/user_widgets/user_cover_image.dart';
 import 'package:herd/widgets/widgets.dart';
 import 'package:image_cropper/image_cropper.dart';
 
@@ -68,13 +68,13 @@ class EditProfileScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: () => _selectedCoverImage(context),
                     child: isSelected ? UserCoverImage(
-                      isSelected: true,
+                      isSelected: false,
                       coverImageUrl: user.coverImageURL,
                       coverFile: state.coverImage,
                     ) : Stack(
                       children: [
                         UserCoverImage(
-                          isSelected: true,
+                          isSelected: false,
                           coverImageUrl: user.coverImageURL,
                           coverFile: state.coverImage,
                         ),
@@ -245,7 +245,6 @@ class EditProfileScreen extends StatelessWidget {
         title: 'Cover Photo'
     );
     if(pickedFile != null || pickedFile == null){
-      isSelected = true;
       context
       .read<EditProfileCubit>()
           .coverImageChanged(File(pickedFile.path));

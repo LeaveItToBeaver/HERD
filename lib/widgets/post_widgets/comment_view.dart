@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:herd/screens/screens.dart';
-import 'package:herd/widgets/user_profile_image.dart';
+import 'package:herd/widgets/user_widgets/user_profile_image.dart';
 import 'package:herd/models/comment_model.dart';
 
 class CommentView extends StatelessWidget {

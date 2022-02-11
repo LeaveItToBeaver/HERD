@@ -54,3 +54,7 @@ class ProfileToggleHistoryView extends ProfileEvent {
   // TODO: implement props
   List<Object> get props => [isHistoryView];
 }
+
+class ProfileFollowUser extends ProfileEvent {}
+
+class ProfileUnfollowUser extends ProfileEvent {}

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:herd/extensions/date_time_extension.dart';
 import 'package:herd/models/post_model.dart';
 import 'package:herd/screens/profile/profile_screen.dart';
-import 'package:herd/widgets/user_profile_image.dart';
+import 'package:herd/widgets/user_widgets/user_profile_image.dart';
 
 class NewPostInformation extends StatelessWidget {
   final Post post;
@@ -13,8 +13,8 @@ class NewPostInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 1,
-      color: Color(0xffffe7c2),
+      elevation: 2,
+      color: Colors.white,
       shadowColor: Colors.black,
       shape: RoundedRectangleBorder(
         side: BorderSide(color: Colors.transparent, width: 0),

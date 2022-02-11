@@ -16,25 +16,33 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.black,
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
-      selectedItemColor: Colors.deepPurple,
-      unselectedItemColor: Colors.grey,
-      currentIndex: BottomNavItem.values.indexOf(selectedItem),
-      onTap: onTap,
-      items: items
-          .map((item, icon) => MapEntry(
-        item.toString(),
-        BottomNavigationBarItem(
-          label: '',
-          icon: Icon(icon, size: 25.0),
+    return Card(
+        color: Colors.black,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: Colors.transparent, width: 2),
+          borderRadius: BorderRadius.circular(50),
         ),
-      ))
-          .values
-          .toList(),
-    );
+        child: BottomNavigationBar(
+          enableFeedback: true,
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.transparent,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedItemColor: Colors.greenAccent,
+          unselectedItemColor: Colors.grey,
+          currentIndex: BottomNavItem.values.indexOf(selectedItem),
+          onTap: onTap,
+          items: items
+              .map((item, icon) => MapEntry(
+            item.toString(),
+            BottomNavigationBarItem(
+              label: '',
+              icon: Icon(icon, size: 25.0),
+            ),
+          ))
+              .values
+              .toList(),
+        ),
+      );
   }
 }

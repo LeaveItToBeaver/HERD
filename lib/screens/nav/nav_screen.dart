@@ -65,6 +65,7 @@ class NavScreen extends StatelessWidget {
                     selectedItem == state.selectedItem);
               },
             ),
+            extendBody: true,
           );
         }
       ),
