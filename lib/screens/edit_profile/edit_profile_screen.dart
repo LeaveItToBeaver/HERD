@@ -74,7 +74,7 @@ class EditProfileScreen extends StatelessWidget {
                     ) : Stack(
                       children: [
                         UserCoverImage(
-                          isSelected: false,
+                          isSelected: true,
                           coverImageUrl: user.coverImageURL,
                           coverFile: state.coverImage,
                         ),

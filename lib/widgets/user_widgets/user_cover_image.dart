@@ -12,28 +12,25 @@ class UserCoverImage extends StatelessWidget{
     Key key,
     this.isSelected,
     this.coverImageUrl,
-    this.coverFile
+    this.coverFile,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-      if(isSelected) {
-        return Container(
-          child: Image(
-            image: coverFile != null
-                ? FileImage(coverFile)
-                : coverImageUrl.isNotEmpty
-                ? CachedNetworkImageProvider(coverImageUrl)
-                : null,
-            fit: BoxFit.cover,
-          ),
-        );
-      } else {
-        return Container(
-          child: Icon(
-            Icons.camera_alt_rounded,
-          ),
-        );
-      }
+    if (coverFile == null && coverImageUrl.isEmpty){
+      return Icon(
+        Icons.camera
+      );
+    }
+      return Container(
+        child: Image(
+          image: coverFile != null
+              ? FileImage(coverFile)
+              : coverImageUrl.isNotEmpty
+              ? CachedNetworkImageProvider(coverImageUrl)
+              : null,
+          fit: BoxFit.cover,
+        ),
+      );
     }
   }

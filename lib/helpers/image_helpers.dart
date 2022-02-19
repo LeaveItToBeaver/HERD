@@ -12,10 +12,9 @@ class ImageHelper {
     @required String title,
 }) async  {
     final pickedFile =
-      await ImagePicker().getImage(source: ImageSource.gallery);
+      await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null){
-      final croppedFile = await ImageCropper
-          .cropImage(
+      final croppedFile = await ImageCropper().cropImage(
         sourcePath: pickedFile.path,
         cropStyle: cropStyle,
         androidUiSettings: AndroidUiSettings(
