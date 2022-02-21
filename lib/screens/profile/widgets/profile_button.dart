@@ -48,17 +48,17 @@ class ProfileButton extends StatelessWidget {
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0),
-                    side: BorderSide(color: Colors.greenAccent, width: 3.0),
+                    side: BorderSide(color: Colors.red[200], width: 3.0),
                   )
               ),
             ) : ButtonStyle(
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25.0),
-                    side: BorderSide(color: Colors.red[200], width: 3.0),
+                    side: BorderSide(color: Colors.greenAccent, width: 3.0),
                   )
               ),
-            ),
+            ), 
             child: Text(
               isFollowing ? 'Unfollow' : 'Follow',
               style: TextStyle(

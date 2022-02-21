@@ -19,18 +19,19 @@ class EditProfileScreenArgs {
 }
 
 class EditProfileScreen extends StatelessWidget {
-  static const String routeName ='/editProfile';
+  static const String routeName = '/editProfile';
 
   static Route route({@required EditProfileScreenArgs args}) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
       builder: (context) => BlocProvider<EditProfileCubit>(
         create: (_) => EditProfileCubit(
-            userRepository: context.read<UserRepository>(),
-            storageRepository: context.read<StorageRepository>(),
-            profileBloc: args.context.read<ProfileBloc>(),
+          userRepository: context.read<UserRepository>(),
+          storageRepository: context.read<StorageRepository>(),
+          profileBloc: args.context.read<ProfileBloc>(),
         ),
-        child: EditProfileScreen(user: args.context.read<ProfileBloc>().state.user),
+        child: EditProfileScreen(
+            user: args.context.read<ProfileBloc>().state.user),
       ),
     );
   }
@@ -41,7 +42,7 @@ class EditProfileScreen extends StatelessWidget {
   EditProfileScreen({Key key, this.user}) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -49,17 +50,18 @@ class EditProfileScreen extends StatelessWidget {
           title: Text('Edit Profile'),
         ),
         body: BlocConsumer<EditProfileCubit, EditProfileState>(
-          listener: (context, state){
-            if (state.status == EditProfileStatus.success){
+          listener: (context, state) {
+            if (state.status == EditProfileStatus.success) {
               Navigator.of(context).pop();
-            } else if (state.status == EditProfileStatus.error){
+            } else if (state.status == EditProfileStatus.error) {
               showDialog(
-                  context: context,
-                  builder: (context) => ErrorDialog(content: state.failure.message),
+                context: context,
+                builder: (context) =>
+                    ErrorDialog(content: state.failure.message),
               );
             }
           },
-          builder: (context, state){
+          builder: (context, state) {
             return SingleChildScrollView(
               child: Column(
                 children: [
@@ -67,50 +69,55 @@ class EditProfileScreen extends StatelessWidget {
                     const LinearProgressIndicator(),
                   GestureDetector(
                     onTap: () => _selectedCoverImage(context),
-                    child: isSelected ? UserCoverImage(
-                      isSelected: false,
-                      coverImageUrl: user.coverImageURL,
-                      coverFile: state.coverImage,
-                    ) : Stack(
-                      children: [
-                        UserCoverImage(
-                          isSelected: true,
-                          coverImageUrl: user.coverImageURL,
-                          coverFile: state.coverImage,
-                        ),
-                          Card(
-                            color: Colors.white.withAlpha(30),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                    child: isSelected
+                        ? UserCoverImage(
+                            isSelected: false,
+                            coverImageUrl: user.coverImageURL,
+                            coverFile: state.coverImage,
+                          )
+                        : Stack(
+                            children: [
+                              UserCoverImage(
+                                isSelected: true,
+                                coverImageUrl: user.coverImageURL,
+                                coverFile: state.coverImage,
+                              ),
+                              Card(
+                                color: Colors.white.withAlpha(30),
+                                child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Icon(
-                                      Icons.camera_alt_rounded,
-                                      size: 200,
-                                    ),
-                                    Text(
-                                      "Tap here to add a cover photo.",
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                      ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.camera_alt_rounded,
+                                          size: 200,
+                                        ),
+                                        Text(
+                                          "Tap here to add a cover photo.",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                      ],
-                    ),
                   ),
-
                   if (state.status == EditProfileStatus.submitting)
                     const LinearProgressIndicator(),
-                  const SizedBox(height: 32.0,),
+                  const SizedBox(
+                    height: 32.0,
+                  ),
                   GestureDetector(
                     onTap: () => _selectedProfileImage(context),
                     child: UserProfileImage(
@@ -119,7 +126,6 @@ class EditProfileScreen extends StatelessWidget {
                       profileImage: state.profileImage,
                     ),
                   ),
-
                   Padding(
                     padding: const EdgeInsets.all(24.0),
                     child: Form(
@@ -131,15 +137,17 @@ class EditProfileScreen extends StatelessWidget {
                             initialValue: user.username,
                             decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50.0)),
                                 borderSide: BorderSide(
-                                    color: Colors.greenAccent, width: 2
-                                ),
+                                    color: Colors.greenAccent, width: 2),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50.0)),
                                 borderSide: BorderSide(
-                                  color: Colors.black38, width: 2.0,
+                                  color: Colors.black38,
+                                  width: 2.0,
                                 ),
                               ),
                               labelText: 'Username',
@@ -155,32 +163,36 @@ class EditProfileScreen extends StatelessWidget {
                               ),
                             ),
                             onChanged: (value) => context
-                            .read<EditProfileCubit>()
-                            .usernameChanged(value),
+                                .read<EditProfileCubit>()
+                                .usernameChanged(value),
                             validator: (value) => value.trim().isEmpty
                                 ? 'Username can not be empty.'
-                                : null ,
+                                : null,
                           ),
-                          const SizedBox(height: 16.0,),
+                          const SizedBox(
+                            height: 16.0,
+                          ),
                           TextFormField(
                             maxLines: 10,
                             minLines: 1,
                             maxLength: 250,
                             initialValue: user.bio,
                             decoration: InputDecoration(
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                  borderSide: BorderSide(
-                                      color: Colors.greenAccent, width: 2
-                                  ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50.0)),
+                                borderSide: BorderSide(
+                                    color: Colors.greenAccent, width: 2),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50.0)),
+                                borderSide: BorderSide(
+                                  color: Colors.black38,
+                                  width: 2.0,
                                 ),
-                                enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                  borderSide: BorderSide(
-                                    color: Colors.black38, width: 2.0,
-                                  ),
-                                ),
-                                labelText: 'Bio',
+                              ),
+                              labelText: 'Bio',
                               labelStyle: TextStyle(
                                 color: Colors.black,
                                 fontFamily: 'OpenSans',
@@ -199,7 +211,9 @@ class EditProfileScreen extends StatelessWidget {
                                 ? 'Sorry, gotta add something to your bio.'
                                 : null,
                           ),
-                          const SizedBox(height: 28.0,),
+                          const SizedBox(
+                            height: 28.0,
+                          ),
                           SizedBox(
                             height: 50,
                             child: TextButton(
@@ -214,20 +228,23 @@ class EditProfileScreen extends StatelessWidget {
                                 ),
                               ),
                               style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
                                     Color(0xffffe7c2),
                                   ),
-                                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
                                       RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(25.0),
-                                      )
-                                  )
-                              ),
+                                    borderRadius: BorderRadius.circular(25.0),
+                                  ))),
                             ),
                           ),
                         ],
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 100,
                   ),
                 ],
               ),
@@ -238,24 +255,17 @@ class EditProfileScreen extends StatelessWidget {
     );
   }
 
-  void _selectedCoverImage (BuildContext context) async {
+  void _selectedCoverImage(BuildContext context) async {
     final pickedFile = await ImageHelper.pickImageFromGallary(
-        context: context,
-        cropStyle: CropStyle.rectangle,
-        title: 'Cover Photo'
-    );
-    if(pickedFile != null || pickedFile == null){
-      context
-      .read<EditProfileCubit>()
-          .coverImageChanged(File(pickedFile.path));
+        context: context, cropStyle: CropStyle.rectangle, title: 'Cover Photo');
+    if (pickedFile != null || pickedFile == null) {
+      context.read<EditProfileCubit>().coverImageChanged(File(pickedFile.path));
     }
   }
 
-  void _selectedProfileImage (BuildContext context) async {
+  void _selectedProfileImage(BuildContext context) async {
     final pickedFile = await ImageHelper.pickImageFromGallary(
-        context: context,
-        cropStyle: CropStyle.circle,
-        title: 'Profile Image');
+        context: context, cropStyle: CropStyle.circle, title: 'Profile Image');
     if (pickedFile != null) {
       context
           .read<EditProfileCubit>()
@@ -263,7 +273,7 @@ class EditProfileScreen extends StatelessWidget {
     }
   }
 
-  void _submitForm (BuildContext context, bool isSubmitting){
+  void _submitForm(BuildContext context, bool isSubmitting) {
     if (_formKey.currentState.validate() && !isSubmitting) {
       context.read<EditProfileCubit>().submit();
     }
