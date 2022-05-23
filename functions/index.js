@@ -9,7 +9,7 @@ exports.onFollowUser = functions.firestore
     const userId = context.params.userId;
     const followerId = context.params.followerId;
 
-    // Increment followed user's followers count.
+    // Inrement followed user's followers count.
     const followedUserRef = admin.firestore().collection('users').doc(userId);
     const followedUserDoc = await followedUserRef.get();
     if (followedUserDoc.get('followers') !== undefined) {

@@ -5,6 +5,7 @@ class Paths {
   static const String comments = 'comments';
   static const String followers = 'followers';
   static const String following = 'following';
+  static const String feeds = 'feeds';
 
   //subcollections
   static const String postComments = 'postComments';
@@ -13,4 +14,5 @@ class Paths {
 
   static const String userFollowing = 'userFollowing';
 
+  static const String userFeed = 'userFeed';
 }
