@@ -16,12 +16,18 @@ class PostView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: !post.isImage ? PhotoPost(
-          post: post,
-          photoImageURL: post.imageUrl,
-        isLiked: false,
-      )
-        : TextPost(post: post),
+      child: !post.isImage
+          ? PhotoPost(
+              post: post,
+              photoImageURL: post.imageUrl,
+              isLiked: false,
+              isDisliked: false,
+            )
+          : TextPost(
+              post: post,
+              isDisliked: false,
+              isLiked: false,
+            ),
     );
   }
 }
