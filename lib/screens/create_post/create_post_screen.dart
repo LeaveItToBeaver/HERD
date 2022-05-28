@@ -24,26 +24,24 @@ class CreatePostScreen extends StatelessWidget {
           title: Text("Create a post."),
         ),
         body: BlocConsumer<CreatePostCubit, CreatePostState>(
-          listener: (context, state){
+          listener: (context, state) {
             if (state.status == CreatePostStatus.success) {
               _formKey.currentState.reset();
               context.read<CreatePostCubit>().reset();
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('We\'re throwing together your post now.'),
-                    duration: const Duration(seconds: 1),
-                    backgroundColor: Colors.green,
-                  )
-              );
-            } else if (state.status == CreatePostStatus.error){
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text('We\'re throwing together your post now.'),
+                duration: const Duration(seconds: 1),
+                backgroundColor: Colors.green,
+              ));
+            } else if (state.status == CreatePostStatus.error) {
               showDialog(
-                  context: context,
-                  builder: (context) => 
-                ErrorDialog(content: state.failure.message),
+                context: context,
+                builder: (context) =>
+                    ErrorDialog(content: state.failure.message),
               );
             }
           },
-          builder: (context, state){
+          builder: (context, state) {
             return SingleChildScrollView(
               child: Column(
                 children: [
@@ -54,19 +52,18 @@ class CreatePostScreen extends StatelessWidget {
                       width: double.infinity,
                       color: Colors.grey[200],
                       child: state.postImage != null
-                      ? Image.file(state.postImage, fit: BoxFit.cover)
+                          ? Image.file(state.postImage, fit: BoxFit.cover)
                           : const Icon(
-                        Icons.image,
-                        color: Colors.black,
-                        size: 120,
-                      ),
+                              Icons.image,
+                              color: Colors.black,
+                              size: 120,
+                            ),
                     ),
                   ),
-
                   if (state.status == CreatePostStatus.submitting)
                     const LinearProgressIndicator(),
                   Padding(
-                      padding: const EdgeInsets.all(24.0),
+                    padding: const EdgeInsets.all(24.0),
                     child: Form(
                       key: _formKey,
                       child: Column(
@@ -75,24 +72,32 @@ class CreatePostScreen extends StatelessWidget {
                           TextFormField(
                             decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50.0)),
                                 borderSide: BorderSide(
-                                  color: Colors.blue, width: 2,
+                                  color: Colors.blue,
+                                  width: 2,
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50.0)),
                                 borderSide: BorderSide(
-                                  color: Colors.blue, width: 2,
+                                  color: Colors.blue,
+                                  width: 2,
                                 ),
                               ),
                               errorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                borderSide: BorderSide(color: Colors.red, width: 2.0),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50.0)),
+                                borderSide:
+                                    BorderSide(color: Colors.red, width: 2.0),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                borderSide: BorderSide(color: Colors.red, width: 2.0),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50.0)),
+                                borderSide:
+                                    BorderSide(color: Colors.red, width: 2.0),
                               ),
                               labelText: 'Title',
                               labelStyle: TextStyle(
@@ -110,23 +115,29 @@ class CreatePostScreen extends StatelessWidget {
                                 .read<CreatePostCubit>()
                                 .titleChanged(value),
                             validator: (value) => value.trim().isEmpty
-                            ? "Title Cannot Be Empty."
-                            : null,
+                                ? "Title Cannot Be Empty."
+                                : null,
                           ),
-                          const SizedBox(height: 15,),
+                          const SizedBox(
+                            height: 15,
+                          ),
                           TextFormField(
                             maxLines: null,
                             decoration: InputDecoration(
                               focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50.0)),
                                 borderSide: BorderSide(
-                                  color: Colors.blue, width: 2,
+                                  color: Colors.blue,
+                                  width: 2,
                                 ),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(50.0)),
                                 borderSide: BorderSide(
-                                  color: Colors.blue, width: 2,
+                                  color: Colors.blue,
+                                  width: 2,
                                 ),
                               ),
                               labelText: 'Your post text goes here.',
@@ -145,8 +156,8 @@ class CreatePostScreen extends StatelessWidget {
                                 .read<CreatePostCubit>()
                                 .captionChanged(value),
                             validator: (value) => value.trim().isEmpty
-                            ? null // They don't have to post a text body.
-                            : null,
+                                ? null // They don't have to post a text body.
+                                : null,
                           ),
                           SizedBox(
                             height: 20,
@@ -158,8 +169,8 @@ class CreatePostScreen extends StatelessWidget {
                                 onPressed: () => _submitForm(
                                     context,
                                     state.postImage,
-                                    state.status == CreatePostStatus.submitting
-                                ),
+                                    state.status ==
+                                        CreatePostStatus.submitting),
                                 child: const Text(
                                   "Post",
                                   style: TextStyle(
@@ -167,15 +178,14 @@ class CreatePostScreen extends StatelessWidget {
                                   ),
                                 ),
                                 style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all<Color>(
-                                        Colors.green
-                                    ),
-                                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Colors.green),
+                                    shape: MaterialStateProperty.all<
+                                            RoundedRectangleBorder>(
                                         RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(25.0),
-                                        )
-                                    )
-                                ),
+                                      borderRadius: BorderRadius.circular(25.0),
+                                    ))),
                               ),
                             ),
                           ),
@@ -194,18 +204,17 @@ class CreatePostScreen extends StatelessWidget {
 
   void _selectPostImage(BuildContext context) async {
     final pickedFile = await ImageHelper.pickImageFromGallary(
-        context: context,
-        cropStyle: CropStyle.rectangle,
-        title: 'Create Post',
+      context: context,
+      cropStyle: CropStyle.rectangle,
+      title: 'Create Post',
     );
-    if (pickedFile != null){
+    if (pickedFile != null) {
       context.read<CreatePostCubit>().postImageChanged(pickedFile);
     }
   }
 
-  void _submitForm(BuildContext context, File postImage, bool isSubmitting){
-    if (_formKey.currentState.validate()
-    && !isSubmitting){
+  void _submitForm(BuildContext context, File postImage, bool isSubmitting) {
+    if (_formKey.currentState.validate() && !isSubmitting) {
       context.read<CreatePostCubit>().submit();
     }
   }

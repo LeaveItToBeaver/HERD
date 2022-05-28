@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'caption_widget.dart';
 import 'package:herd/models/models.dart';
 
-
 class PostOperation extends StatelessWidget {
   final Post post;
-  const PostOperation({
-    @required this.post,
-    Key key}) : super(key: key);
+  const PostOperation({@required this.post, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +25,6 @@ class PostOperation extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-
                 Card(
                   elevation: 0,
                   color: Colors.white,
@@ -43,7 +39,7 @@ class PostOperation extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: EdgeInsets.all(10),
-                      child:Row(
+                      child: Row(
                         children: [
                           Column(
                             children: [
@@ -81,8 +77,7 @@ class PostOperation extends StatelessWidget {
                       child: IconButton(
                         onPressed: () => {},
                         icon: Icon(Icons.share_rounded),
-                      )
-                  ),
+                      )),
                 ),
                 Card(
                   elevation: 1,
@@ -100,8 +95,7 @@ class PostOperation extends StatelessWidget {
                         onPressed: () => {},
                         highlightColor: Colors.transparent,
                         icon: Icon(Icons.comment_rounded),
-                      )
-                  ),
+                      )),
                 ),
                 Card(
                   elevation: 1,
@@ -118,10 +112,8 @@ class PostOperation extends StatelessWidget {
                       child: IconButton(
                         onPressed: () => {},
                         icon: Icon(Icons.arrow_upward_rounded),
-                      )
-                  ),
+                      )),
                 ),
-
                 Card(
                   elevation: 1,
                   color: Colors.white,
@@ -143,7 +135,6 @@ class PostOperation extends StatelessWidget {
               ],
             ),
           ),
-
           CaptionWidget(post: post),
         ],
       ),

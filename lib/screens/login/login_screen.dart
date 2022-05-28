@@ -48,7 +48,6 @@ class LoginScreen extends StatelessWidget {
             resizeToAvoidBottomInset: false,
             body: Stack(
               children: <Widget>[
-
                 //Animation
                 AnimatedPositioned(
                   duration: Duration(milliseconds: 500),
@@ -124,19 +123,19 @@ class LoginScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 12.0),
 
-///Email Text Box
+                              ///Email Text Box
                               TextFormField(
-                                style: TextStyle(
-                                  color: Colors.black
-                                ),
+                                style: TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
                                   focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50.0)),
                                     borderSide: BorderSide(
                                         color: Color(0xffc2ffc2), width: 2),
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(50.0)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(50.0)),
                                     borderSide: BorderSide(
                                         color: Colors.white, width: 2.0),
                                   ),
@@ -161,78 +160,92 @@ class LoginScreen extends StatelessWidget {
                               ),
                               const SizedBox(height: 17.0),
 
-///Password Text Box
+                              ///Password Text Box
                               Container(
                                 child: TextFormField(
-                                  style: TextStyle(
-                                      color: Colors.black
-                                  ),
+                                  style: TextStyle(color: Colors.black),
                                   obscureText: true,
-                                  decoration: loginErr ? InputDecoration(
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(50.0)),
-                                      borderSide: BorderSide(
-                                          color: Color(0xffc2ffc2), width: 2),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(50.0)),
-                                      borderSide: BorderSide(
-                                          color: Color(0xffc2ffc2), width: 2.0),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                      borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                      borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                    ),
-                                    labelText: 'Password',
-                                    labelStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: 'OpenSans',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    prefixIcon: Icon(
-                                      Icons.lock,
-                                      color: Colors.white,
-                                    ),
-                                  ) : InputDecoration(
-                                    focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(50.0)),
-                                      borderSide: BorderSide(
-                                          color: Color(0xffc2ffc2), width: 2),
-                                    ),
-                                    enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(50.0)),
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 2.0),
-                                    ),
-                                    errorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                      borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                    ),
-                                    focusedErrorBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                      borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                    ),
-                                    labelText: 'Password',
-                                    labelStyle: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: 'OpenSans',
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                    prefixIcon: Icon(
-                                      Icons.lock,
-                                      color: Colors.white,
-                                    ),
-                                  ),
+                                  decoration: loginErr
+                                      ? InputDecoration(
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: Color(0xffc2ffc2),
+                                                width: 2),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: Color(0xffc2ffc2),
+                                                width: 2.0),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: Colors.red, width: 2.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: Colors.red, width: 2.0),
+                                          ),
+                                          labelText: 'Password',
+                                          labelStyle: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'OpenSans',
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          prefixIcon: Icon(
+                                            Icons.lock,
+                                            color: Colors.white,
+                                          ),
+                                        )
+                                      : InputDecoration(
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: Color(0xffc2ffc2),
+                                                width: 2),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: Colors.white,
+                                                width: 2.0),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: Colors.red, width: 2.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: Colors.red, width: 2.0),
+                                          ),
+                                          labelText: 'Password',
+                                          labelStyle: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'OpenSans',
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          prefixIcon: Icon(
+                                            Icons.lock,
+                                            color: Colors.white,
+                                          ),
+                                        ),
                                   onChanged: (value) => context
                                       .read<LoginCubit>()
                                       .passwordChanged(value),
@@ -242,16 +255,11 @@ class LoginScreen extends StatelessWidget {
                                 ),
                               ),
                               //SizedBox(height: 5.0),
-
-///Forgot Password Button
+                              ///Forgot Password Button
                               Container(
                                 child: TextButton(
-                                  onPressed: () =>
-                                      Navigator
-                                          .of(context)
-                                          .pushNamed(
-                                          ResetPassScreen
-                                              .routeName),
+                                  onPressed: () => Navigator.of(context)
+                                      .pushNamed(ResetPassScreen.routeName),
                                   style: ButtonStyle(
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
@@ -292,8 +300,7 @@ class LoginScreen extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
-
-                                            //Sign In Button
+//Sign In Button
                                             Container(
                                               child: SizedBox(
                                                 width: 95,
@@ -307,28 +314,30 @@ class LoginScreen extends StatelessWidget {
                                                   ),
                                                   style: ButtonStyle(
                                                     backgroundColor:
-                                                    MaterialStateProperty.all<Color>(
-                                                        Colors.white
-                                                    ),
-                                                    shape:
-                                                    MaterialStateProperty
-                                                        .all<RoundedRectangleBorder>(
+                                                        MaterialStateProperty
+                                                            .all<Color>(
+                                                                Colors.white),
+                                                    shape: MaterialStateProperty
+                                                        .all<
+                                                            RoundedRectangleBorder>(
                                                       RoundedRectangleBorder(
-                                                        borderRadius: BorderRadius
-                                                            .circular(25.0),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(25.0),
                                                       ),
                                                     ),
                                                   ),
                                                   onPressed: () => _submitForm(
                                                       context,
-                                                      state.status == LoginStatus.submitting
-                                                  ),
+                                                      state.status ==
+                                                          LoginStatus
+                                                              .submitting),
                                                 ),
                                               ),
                                             ),
                                             SizedBox(width: 24.0),
 
-///Register Button
+                                            ///Register Button
                                             Container(
                                               child: SizedBox(
                                                 width: 95,
@@ -344,10 +353,10 @@ class LoginScreen extends StatelessWidget {
                                                     backgroundColor:
                                                         MaterialStateProperty
                                                             .all<Color>(
-                                                                Colors.white
-                                                        ),
+                                                                Colors.white),
                                                     shape: MaterialStateProperty
-                                                        .all<RoundedRectangleBorder>(
+                                                        .all<
+                                                            RoundedRectangleBorder>(
                                                       RoundedRectangleBorder(
                                                         borderRadius:
                                                             BorderRadius
@@ -356,11 +365,10 @@ class LoginScreen extends StatelessWidget {
                                                     ),
                                                   ),
                                                   onPressed: () =>
-                                                      Navigator
-                                                          .of(context)
+                                                      Navigator.of(context)
                                                           .pushNamed(
-                                                          SignupScreen
-                                                          .routeName),
+                                                              SignupScreen
+                                                                  .routeName),
                                                 ),
                                               ),
                                             ),
@@ -386,8 +394,8 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  void _submitForm(BuildContext context, bool isSubmitting){
-    if (_formKey.currentState.validate() && !isSubmitting){
+  void _submitForm(BuildContext context, bool isSubmitting) {
+    if (_formKey.currentState.validate() && !isSubmitting) {
       context.read<LoginCubit>().loginInWithCredentials();
     }
   }

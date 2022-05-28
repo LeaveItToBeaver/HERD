@@ -15,22 +15,23 @@ class ProfileScreenArgs {
 
   const ProfileScreenArgs({@required this.userId});
 }
+
 class ProfileScreen extends StatefulWidget {
   static const String routeName = '/profile';
 
   static Route route({@required ProfileScreenArgs args}) {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-        builder: (context) => BlocProvider<ProfileBloc> (
-          create: (_) => ProfileBloc(
-            userRepository: context.read<UserRepository>(),
-            postRepository: context.read<PostRepository>(),
-            authBloc: context.read<AuthBloc>(),
-          )..add(
+      builder: (context) => BlocProvider<ProfileBloc>(
+        create: (_) => ProfileBloc(
+          userRepository: context.read<UserRepository>(),
+          postRepository: context.read<PostRepository>(),
+          authBloc: context.read<AuthBloc>(),
+        )..add(
             ProfileLoadUser(userId: args.userId),
           ),
-          child: ProfileScreen(),
-        ),
+        child: ProfileScreen(),
+      ),
     );
   }
 
@@ -46,10 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(
-        length: 3,
-        vsync: this
-    );
+    _tabController = TabController(length: 3, vsync: this);
     _scrollViewController = ScrollController();
   }
 
@@ -61,27 +59,24 @@ class _ProfileScreenState extends State<ProfileScreen>
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProfileBloc, ProfileState>(
-        listener: (context, state) {
+    return BlocConsumer<ProfileBloc, ProfileState>(listener: (context, state) {
       if (state.status == ProfileStatus.error) {
         showDialog(
             context: context,
             builder: (context) => ErrorDialog(
                   content: state.failure.message,
-                )
-        );
+                ));
       }
     }, builder: (context, state) {
       return Scaffold(
         backgroundColor: Colors.white,
         body: _buildBody(state),
       );
-    }
-    );
+    });
   }
 
-  Widget _buildBody(ProfileState state){
-    switch(state.status) {
+  Widget _buildBody(ProfileState state) {
+    switch (state.status) {
       case ProfileStatus.loading:
         return Center(child: CircularProgressIndicator());
       default:
@@ -94,7 +89,8 @@ class _ProfileScreenState extends State<ProfileScreen>
           },
           child: NestedScrollView(
             controller: _scrollViewController,
-            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
               return [
                 SliverAppBar(
                   pinned: true,
@@ -105,9 +101,9 @@ class _ProfileScreenState extends State<ProfileScreen>
                     children: <Widget>[
                       Positioned.fill(
                           child: UserCoverImage(
-                            isSelected: false,
-                            coverImageUrl: state.user.coverImageURL,
-                          )),
+                        isSelected: false,
+                        coverImageUrl: state.user.coverImageURL,
+                      )),
                     ],
                   ),
                   actions: <Widget>[
@@ -129,7 +125,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                     ],
                   ],
                 ),
-
                 SliverToBoxAdapter(
                   child: SizedBox(
                     height: 20,
@@ -144,7 +139,8 @@ class _ProfileScreenState extends State<ProfileScreen>
                       borderOnForeground: false,
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Color(0xffc2ffc2).withAlpha(85), width: 2),
+                        side: BorderSide(
+                            color: Color(0xffc2ffc2).withAlpha(85), width: 2),
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: Column(
@@ -180,7 +176,6 @@ class _ProfileScreenState extends State<ProfileScreen>
                     ),
                   ),
                 ),
-
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.all(5),
@@ -188,9 +183,10 @@ class _ProfileScreenState extends State<ProfileScreen>
                       automaticIndicatorColorAdjustment: true,
                       controller: _tabController,
                       indicator: BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: [const Color(0xffc2ffc2), const Color(0xff88b388)]
-                        ),
+                        gradient: LinearGradient(colors: [
+                          const Color(0xffc2ffc2),
+                          const Color(0xff88b388)
+                        ]),
                         borderRadius: BorderRadius.circular(50),
                         color: const Color(0xffc2ffc2),
                       ),
@@ -198,30 +194,27 @@ class _ProfileScreenState extends State<ProfileScreen>
                         Tab(
                           child: Align(
                             alignment: Alignment.center,
-                            child: Text('Posts',
-                              style: TextStyle(
-                                  color: Colors.black
-                              ),
+                            child: Text(
+                              'Posts',
+                              style: TextStyle(color: Colors.black),
                             ),
                           ),
                         ),
                         Tab(
                           child: Align(
                             alignment: Alignment.center,
-                            child: Text('Comments',
-                              style: TextStyle(
-                                  color: Colors.black
-                              ),
+                            child: Text(
+                              'Comments',
+                              style: TextStyle(color: Colors.black),
                             ),
                           ),
                         ),
                         Tab(
                           child: Align(
                             alignment: Alignment.center,
-                            child: Text('About',
-                              style: TextStyle(
-                                  color: Colors.black
-                              ),
+                            child: Text(
+                              'About',
+                              style: TextStyle(color: Colors.black),
                             ),
                           ),
                         ),
@@ -231,33 +224,29 @@ class _ProfileScreenState extends State<ProfileScreen>
                 ),
               ];
             },
-
-            body: TabBarView(
-              controller: _tabController,
-                children: <Widget>[
-                  ListView.builder(
-                    itemBuilder: (BuildContext context, int index){
-                      final post = state.posts[index];
-                      return PostView(post: post);
-                    },
-                    itemCount: state.posts.length,
-                  ),
-                  ListView.builder(
-                    itemBuilder: (BuildContext context, int index){
-                      final post = state.posts[index];
-                      return PostView(post: post);
-                    },
-                    itemCount: state.posts.length,
-                  ),
-                  ListView.builder(
-                    itemBuilder: (BuildContext context, int index){
-                      final post = state.posts[index];
-                      return PostView(post: post);
-                    },
-                    itemCount: state.posts.length,
-                  ),
-                ]
-            ),
+            body: TabBarView(controller: _tabController, children: <Widget>[
+              ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  final post = state.posts[index];
+                  return PostView(post: post);
+                },
+                itemCount: state.posts.length,
+              ),
+              ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  final post = state.posts[index];
+                  return PostView(post: post);
+                },
+                itemCount: state.posts.length,
+              ),
+              ListView.builder(
+                itemBuilder: (BuildContext context, int index) {
+                  final post = state.posts[index];
+                  return PostView(post: post);
+                },
+                itemCount: state.posts.length,
+              ),
+            ]),
           ),
         );
     }

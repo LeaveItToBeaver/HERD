@@ -1,6 +1,7 @@
 part of 'signup_cubit.dart';
 
-enum SignupStatus {initial, submitting, success, error}
+enum SignupStatus { initial, submitting, success, error }
+
 class SignupState extends Equatable {
   final String firstName;
   final String lastName;
@@ -11,11 +12,11 @@ class SignupState extends Equatable {
   final Failure failure;
 
   bool get isFormValid =>
-      firstName.isNotEmpty
-      && lastName.isNotEmpty
-      && username.isNotEmpty
-      && email.isNotEmpty
-      && password.isNotEmpty;
+      firstName.isNotEmpty &&
+      lastName.isNotEmpty &&
+      username.isNotEmpty &&
+      email.isNotEmpty &&
+      password.isNotEmpty;
 
   SignupState copyWith({
     String firstName,
@@ -46,6 +47,7 @@ class SignupState extends Equatable {
       failure: failure ?? this.failure,
     );
   }
+
   const SignupState({
     @required this.firstName,
     @required this.lastName,
@@ -72,6 +74,6 @@ class SignupState extends Equatable {
   bool get stringify => true;
 
   @override
-  List<Object> get props => [firstName, lastName, username, email, password, status, failure];
+  List<Object> get props =>
+      [firstName, lastName, username, email, password, status, failure];
 }
-

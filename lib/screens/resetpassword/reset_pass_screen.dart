@@ -6,19 +6,17 @@ import 'package:herd/screens/resetpassword/cubit/reset_pass_cubit.dart';
 import 'package:herd/widgets/error_dialog.dart';
 import 'package:herd/widgets/widgets.dart';
 
-class ResetPassScreen extends StatelessWidget{
+class ResetPassScreen extends StatelessWidget {
   static const String routeName = '/resetPass';
 
   static Route route() {
     return MaterialPageRoute(
-      settings: const RouteSettings(name: routeName),
-      builder: (context) =>
-          BlocProvider<ResetPassCubit>(
-              create: (_) =>
-                  ResetPassCubit(authRepository: context.read<AuthRepository>()),
-            child: ResetPassScreen(),
-          )
-    );
+        settings: const RouteSettings(name: routeName),
+        builder: (context) => BlocProvider<ResetPassCubit>(
+              create: (_) => ResetPassCubit(
+                  authRepository: context.read<AuthRepository>()),
+              child: ResetPassScreen(),
+            ));
   }
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -38,18 +36,18 @@ class ResetPassScreen extends StatelessWidget{
         onTap: () => FocusScope.of(context).unfocus(),
         child: BlocConsumer<ResetPassCubit, ResetPassState>(
           listener: (context, state) {
-            if (state.status == ResetStatus.error){
+            if (state.status == ResetStatus.error) {
               showDialog(
-                  context: context,
-                  builder: (context) => ErrorDialog(
-                      content: state.failure.message,
-                  ),
+                context: context,
+                builder: (context) => ErrorDialog(
+                  content: state.failure.message,
+                ),
               );
             }
           },
           builder: (context, state) {
             return Scaffold(
-            backgroundColor: Colors.white,
+              backgroundColor: Colors.white,
               resizeToAvoidBottomInset: false,
               body: Stack(
                 children: <Widget>[
@@ -112,154 +110,172 @@ class ResetPassScreen extends StatelessWidget{
                           shadowColor: Colors.indigoAccent.withAlpha(40),
                           child: Padding(
                             padding: EdgeInsets.all(24.0),
-                              child: Form(
-                                key: _formKey,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    const Text(
-                                      'Forgot your password?',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                      ),
-                                      textAlign: TextAlign.center,
+                            child: Form(
+                              key: _formKey,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    'Forgot your password?',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
                                     ),
-                                    const SizedBox(height: 12.0),
-                                    Container(
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            child:
-                                            TextFormField(
-                                              decoration: InputDecoration(
-                                                focusedBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                  BorderRadius.all(Radius.circular(50.0)),
-                                                  borderSide: BorderSide(
-                                                      color: Colors.blue, width: 2),
-                                                ),
-                                                enabledBorder: OutlineInputBorder(
-                                                  borderRadius:
-                                                  BorderRadius.all(Radius.circular(50.0)),
-                                                  borderSide: BorderSide(
-                                                      color: Colors.black38, width: 2.0),
-                                                ),
-                                                focusedErrorBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                                  borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                                ),
-                                                errorBorder: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                                  borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                                ),
-                                                labelText: 'Email',
-                                                labelStyle: TextStyle(
-                                                  color: Colors.black,
-                                                  fontFamily: 'OpenSans',
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                                prefixIcon: Icon(
-                                                  Icons.email,
-                                                  color: Colors.black,
-                                                ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 12.0),
+                                  Container(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(50.0)),
+                                                borderSide: BorderSide(
+                                                    color: Colors.blue,
+                                                    width: 2),
                                               ),
-                                              onChanged: (value) => context
-                                                  .read<ResetPassCubit>()
-                                                  .emailChanged(value),
-                                              validator: (value) => !regExEmail.hasMatch(value)
-                                                  ? 'Please enter a valid email.'
-                                                  : null,
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(50.0)),
+                                                borderSide: BorderSide(
+                                                    color: Colors.black38,
+                                                    width: 2.0),
+                                              ),
+                                              focusedErrorBorder:
+                                                  OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(50.0)),
+                                                borderSide: BorderSide(
+                                                    color: Colors.red,
+                                                    width: 2.0),
+                                              ),
+                                              errorBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(50.0)),
+                                                borderSide: BorderSide(
+                                                    color: Colors.red,
+                                                    width: 2.0),
+                                              ),
+                                              labelText: 'Email',
+                                              labelStyle: TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'OpenSans',
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                              prefixIcon: Icon(
+                                                Icons.email,
+                                                color: Colors.black,
+                                              ),
                                             ),
+                                            onChanged: (value) => context
+                                                .read<ResetPassCubit>()
+                                                .emailChanged(value),
+                                            validator: (value) => !regExEmail
+                                                    .hasMatch(value)
+                                                ? 'Please enter a valid email.'
+                                                : null,
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      child: Card(
-                                        elevation: 5,
-                                        borderOnForeground: false,
-                                        color: Colors.transparent,
-                                        shape: RoundedRectangleBorder(
-                                          side: BorderSide(
-                                              color: Colors.indigo.withAlpha(20),
-                                              width: 2),
-                                          borderRadius: BorderRadius.circular(55),
                                         ),
-                                        shadowColor: Colors.indigo.withAlpha(15),
-                                        child: Stack(
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.all(12),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                                children: [
-                                                  Container(
-                                                    child: SizedBox(
-                                                      width: 95,
-                                                      height: 45,
-                                                      child: TextButton(
-                                                        child: Text(
-                                                          'Reset',
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                          ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    child: Card(
+                                      elevation: 5,
+                                      borderOnForeground: false,
+                                      color: Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        side: BorderSide(
+                                            color: Colors.indigo.withAlpha(20),
+                                            width: 2),
+                                        borderRadius: BorderRadius.circular(55),
+                                      ),
+                                      shadowColor: Colors.indigo.withAlpha(15),
+                                      child: Stack(
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.all(12),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  child: SizedBox(
+                                                    width: 95,
+                                                    height: 45,
+                                                    child: TextButton(
+                                                      child: Text(
+                                                        'Reset',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
                                                         ),
-                                                        style: ButtonStyle(
-                                                          backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all<Color>(
-                                                              Colors.white),
-                                                          shape: MaterialStateProperty
-                                                              .all<
-                                                              RoundedRectangleBorder>(
-                                                            RoundedRectangleBorder(
-                                                              borderRadius:
-                                                              BorderRadius
-                                                                  .circular(25.0),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        onPressed: () => _submitForm(
-                                                            context,
-                                                            state.status == ResetStatus.submitting),
                                                       ),
+                                                      style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStateProperty
+                                                                .all<Color>(
+                                                                    Colors
+                                                                        .white),
+                                                        shape: MaterialStateProperty
+                                                            .all<
+                                                                RoundedRectangleBorder>(
+                                                          RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        25.0),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      onPressed: () => _submitForm(
+                                                          context,
+                                                          state.status ==
+                                                              ResetStatus
+                                                                  .submitting),
                                                     ),
                                                   ),
-                                                  SizedBox(width: 24.0),
-                                                  Container(
-                                                    child: SizedBox(
-                                                      width: 95,
-                                                      height: 45,
-                                                      child: TextButton(
-                                                        child: Text(
-                                                          'Back',
-                                                          style: TextStyle(
-                                                            color: Colors.black,
+                                                ),
+                                                SizedBox(width: 24.0),
+                                                Container(
+                                                  child: SizedBox(
+                                                    width: 95,
+                                                    height: 45,
+                                                    child: TextButton(
+                                                      child: Text(
+                                                        'Back',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+                                                      style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStateProperty
+                                                                .all<Color>(
+                                                                    Colors
+                                                                        .white),
+                                                        shape: MaterialStateProperty
+                                                            .all<
+                                                                RoundedRectangleBorder>(
+                                                          RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        25.0),
                                                           ),
                                                         ),
-                                                        style: ButtonStyle(
-                                                          backgroundColor:
-                                                          MaterialStateProperty
-                                                              .all<Color>(
-                                                              Colors.white
-                                                          ),
-                                                          shape: MaterialStateProperty
-                                                              .all<RoundedRectangleBorder>(
-                                                            RoundedRectangleBorder(
-                                                              borderRadius:
-                                                              BorderRadius
-                                                                  .circular(25.0),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      onPressed: () => Navigator.of(context).pop(),
+                                                      ),
+                                                      onPressed: () =>
+                                                          Navigator.of(context)
+                                                              .pop(),
                                                     ),
                                                   ),
                                                 ),
@@ -287,24 +303,23 @@ class ResetPassScreen extends StatelessWidget{
     );
   }
 
-  void _submitForm(BuildContext context, bool isSubmitting){
-    if (_formKey.currentState.validate() && !isSubmitting){
+  void _submitForm(BuildContext context, bool isSubmitting) {
+    if (_formKey.currentState.validate() && !isSubmitting) {
       // set up the button
       Widget okButton = TextButton(
-        child: Text("Thanks",),
+        child: Text(
+          "Thanks",
+        ),
         onPressed: () => Navigator.of(context).pop(),
       );
 
       // set up the AlertDialog
       AlertDialog alert = AlertDialog(
         shape: RoundedRectangleBorder(
-          side: BorderSide(
-              color: Colors.indigo.withAlpha(20),
-              width: 2
-          ),
+          side: BorderSide(color: Colors.indigo.withAlpha(20), width: 2),
           borderRadius: BorderRadius.circular(20),
         ),
-        backgroundColor: Colors.blueGrey[50],//.withAlpha(55),
+        backgroundColor: Colors.blueGrey[50], //.withAlpha(55),
         title: Text("Reset Password"),
         content: Text("So we sent you an email to let you reset your "
             "password. Try not to forget it this time."),

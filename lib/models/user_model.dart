@@ -14,18 +14,18 @@ class User extends Equatable {
   final int following;
   final String bio;
 
-  const User({
-    @required this.id,
-    @required this.username,
-    @required this.email,
-    @required this.profileImageURL,
-    @required this.coverImageURL,
-    @required this.firstName,
-    @required this.lastName,
-    @required this.followers,
-    @required this.following,
-    @required this.bio});
-  
+  const User(
+      {@required this.id,
+      @required this.username,
+      @required this.email,
+      @required this.profileImageURL,
+      @required this.coverImageURL,
+      @required this.firstName,
+      @required this.lastName,
+      @required this.followers,
+      @required this.following,
+      @required this.bio});
+
   static const empty = User(
       id: '',
       username: '',
@@ -36,22 +36,21 @@ class User extends Equatable {
       lastName: '',
       followers: 0,
       following: 0,
-      bio: ''
-  );
+      bio: '');
 
   @override
   List<Object> get props => [
-    id,
-    username,
-    email,
-    profileImageURL,
-    coverImageURL,
-    firstName,
-    lastName,
-    followers,
-    following,
-    bio,
-  ];
+        id,
+        username,
+        email,
+        profileImageURL,
+        coverImageURL,
+        firstName,
+        lastName,
+        followers,
+        following,
+        bio,
+      ];
 
   User copyWith({
     String id,
@@ -80,7 +79,7 @@ class User extends Equatable {
   }
 
   Map<String, dynamic> toDocument() {
-    return{
+    return {
       'username': username,
       'email': email,
       'profileImageURL': profileImageURL,
@@ -106,7 +105,7 @@ class User extends Equatable {
       lastName: (data as dynamic)['lastName'] ?? '',
       followers: ((data as dynamic)['followers'] ?? 0).toInt(),
       following: ((data as dynamic)['following'] ?? 0).toInt(),
-      bio:  (data as dynamic)['bio'] ?? '',
+      bio: (data as dynamic)['bio'] ?? '',
     );
   }
 }

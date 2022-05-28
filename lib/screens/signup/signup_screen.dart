@@ -17,12 +17,11 @@ class SignupScreen extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute(
       settings: const RouteSettings(name: routeName),
-      builder: (context) =>
-          BlocProvider<SignupCubit>(
-            create: (_) =>
-                SignupCubit(authRepository: context.read<AuthRepository>()),
-            child: SignupScreen(),
-          ),
+      builder: (context) => BlocProvider<SignupCubit>(
+        create: (_) =>
+            SignupCubit(authRepository: context.read<AuthRepository>()),
+        child: SignupScreen(),
+      ),
     );
   }
 
@@ -34,8 +33,7 @@ class SignupScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final bottom = MediaQuery.of(context).viewInsets.bottom;
     final bool keyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
-    Pattern passCheck =
-        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$';
+    Pattern passCheck = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$';
     Pattern emailCheck =
         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
     RegExp regExEmail = new RegExp(emailCheck);
@@ -43,558 +41,602 @@ class SignupScreen extends StatelessWidget {
 
     return WillPopScope(
       onWillPop: () async => false,
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: BlocConsumer<SignupCubit, SignupState>(
-              listener: (context, state) {
-            if (state.status == SignupStatus.error) {
-              showDialog(
-                context: context,
-                builder: (context) => ErrorDialog(
-                  content: state.failure.message,
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child:
+            BlocConsumer<SignupCubit, SignupState>(listener: (context, state) {
+          if (state.status == SignupStatus.error) {
+            showDialog(
+              context: context,
+              builder: (context) => ErrorDialog(
+                content: state.failure.message,
+              ),
+            );
+          }
+        }, builder: (context, state) {
+          return Scaffold(
+            backgroundColor: Colors.white,
+            resizeToAvoidBottomInset: false,
+            body: Stack(
+              children: <Widget>[
+                //Animation
+                AnimatedPositioned(
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeOutQuad,
+                  top: keyboardOpen ? -size.height / 3.7 : 0.0,
+                  child: WaveWidget_0(
+                    size: size,
+                    yOffset: size.height / 2.170,
+                    color: Color(0xff88b388),
+                  ),
                 ),
-              );
-            }
-          }, builder: (context, state) {
-            return Scaffold(
-              backgroundColor: Colors.white,
-              resizeToAvoidBottomInset: false,
-              body: Stack(
-                children: <Widget>[
+                AnimatedPositioned(
+                  duration: Duration(milliseconds: 10),
+                  curve: Curves.easeInOut,
+                  top: keyboardOpen ? -size.height / 3.7 : 0.0,
+                  child: WaveWidget_1(
+                    size: size,
+                    yOffset: size.height / 2.130,
+                    color: Color(0xffa488b3),
+                  ),
+                ),
+                AnimatedPositioned(
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.easeOutQuad,
+                  top: keyboardOpen ? -size.height / 3.7 : 0.0,
+                  child: WaveWidget_0(
+                    size: size,
+                    yOffset: size.height / 2.120,
+                    color: Color(0xffc2ffc2),
+                  ),
+                ),
+                AnimatedPositioned(
+                  duration: Duration(milliseconds: 10),
+                  curve: Curves.easeInOut,
+                  top: keyboardOpen ? -size.height / 3.7 : 0.0,
+                  child: WaveWidget_1(
+                    size: size,
+                    yOffset: size.height / 2.070,
+                    color: Colors.white,
+                  ),
+                ),
 
-                  //Animation
-                  AnimatedPositioned(
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.easeOutQuad,
-                    top: keyboardOpen ? -size.height / 3.7 : 0.0,
-                    child: WaveWidget_0(
-                      size: size,
-                      yOffset: size.height / 2.170,
-                      color: Color(0xff88b388),
-                    ),
-                  ),
-                  AnimatedPositioned(
-                    duration: Duration(milliseconds: 10),
-                    curve: Curves.easeInOut,
-                    top: keyboardOpen ? -size.height / 3.7 : 0.0,
-                    child: WaveWidget_1(
-                      size: size,
-                      yOffset: size.height / 2.130,
-                      color: Color(0xffa488b3),
-                    ),
-                  ),
-                  AnimatedPositioned(
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.easeOutQuad,
-                    top: keyboardOpen ? -size.height / 3.7 : 0.0,
-                    child: WaveWidget_0(
-                      size: size,
-                      yOffset: size.height / 2.120,
-                      color: Color(0xffc2ffc2),
-                    ),
-                  ),
-                  AnimatedPositioned(
-                    duration: Duration(milliseconds: 10),
-                    curve: Curves.easeInOut,
-                    top: keyboardOpen ? -size.height / 3.7 : 0.0,
-                    child: WaveWidget_1(
-                      size: size,
-                      yOffset: size.height / 2.070,
-                      color: Colors.white,
-                    ),
-                  ),
-
-                  Center(
-                    child: SingleChildScrollView(
-                      reverse: true,
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(10, 22, 10, bottom),
-                        child: Card(
-                          elevation: 2,
-                          borderOnForeground: false,
-                          color: Colors.transparent,
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                                color: Colors.white60.withAlpha(50), width: 2
-                            ),
-                            borderRadius: BorderRadius.circular(55),
-                          ),
-                          shadowColor: Colors.indigoAccent.withAlpha(40),
-
-                          child: Padding(
-                            padding: EdgeInsets.all(12.0),
-                            child: Form(
-                              key: _formKey,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const Text(
-                                    'Sign Up',
-                                    style: TextStyle(
-                                      fontSize: 28,
+                Center(
+                  child: SingleChildScrollView(
+                    reverse: true,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(10, 22, 10, bottom),
+                      child: Card(
+                        elevation: 2,
+                        borderOnForeground: false,
+                        color: Colors.transparent,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              color: Colors.white60.withAlpha(50), width: 2),
+                          borderRadius: BorderRadius.circular(55),
+                        ),
+                        shadowColor: Colors.indigoAccent.withAlpha(40),
+                        child: Padding(
+                          padding: EdgeInsets.all(12.0),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Text(
+                                  'Sign Up',
+                                  style: TextStyle(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                const SizedBox(height: 12.0),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Flexible(
+                                      flex: 1,
+                                      fit: FlexFit.tight,
+                                      child: TextFormField(
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: Color(0xffc2ffc2),
+                                                width: 2),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: Colors.white,
+                                                width: 2.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: Colors.red, width: 2.0),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: Colors.red, width: 2.0),
+                                          ),
+                                          labelText: 'First Name',
+                                          labelStyle: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'OpenSans',
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        onChanged: (value) => context
+                                            .read<SignupCubit>()
+                                            .firstNameChanged(value),
+                                        validator: (value) =>
+                                            value.trim().isEmpty ? null : null,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Flexible(
+                                      flex: 1,
+                                      fit: FlexFit.tight,
+                                      child: TextFormField(
+                                        decoration: InputDecoration(
+                                          isDense: true,
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: Color(0xffc2ffc2),
+                                                width: 2),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: Colors.white,
+                                                width: 2.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: Colors.red, width: 2.0),
+                                          ),
+                                          errorBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50.0)),
+                                            borderSide: BorderSide(
+                                                color: Colors.red, width: 2.0),
+                                          ),
+                                          labelText: 'Last Name',
+                                          labelStyle: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'OpenSans',
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        onChanged: (value) => context
+                                            .read<SignupCubit>()
+                                            .lastNameChanged(value),
+                                        validator: (value) =>
+                                            value.trim().isEmpty ? null : null,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 12),
+                                TextFormField(
+                                  decoration: InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(50.0)),
+                                      borderSide: BorderSide(
+                                          color: Color(0xffc2ffc2), width: 2),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(50.0)),
+                                      borderSide: BorderSide(
+                                          color: Colors.white, width: 2.0),
+                                    ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(50.0)),
+                                      borderSide: BorderSide(
+                                          color: Colors.red, width: 2.0),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(50.0)),
+                                      borderSide: BorderSide(
+                                          color: Colors.red, width: 2.0),
+                                    ),
+                                    labelText: 'Username',
+                                    labelStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'OpenSans',
+                                      fontSize: 15,
                                       fontWeight: FontWeight.bold,
+                                    ),
+                                    prefixIcon: Icon(
+                                      Icons.account_circle_rounded,
                                       color: Colors.black,
                                     ),
-                                    textAlign: TextAlign.center,
                                   ),
-                                  const SizedBox(height: 12.0),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Flexible(
-                                        flex: 1,
-                                        fit: FlexFit.tight,
-                                        child: TextFormField(
-                                          decoration: InputDecoration(
-                                            isDense: true,
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                              BorderRadius.all(Radius.circular(50.0)),
-                                              borderSide: BorderSide(
-                                                  color: Color(0xffc2ffc2), width: 2),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                              BorderRadius.all(Radius.circular(50.0)),
-                                              borderSide: BorderSide(
-                                                  color: Colors.white, width: 2.0),
-                                            ),
-                                            focusedErrorBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                              borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                            ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                              borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                            ),
-                                            labelText: 'First Name',
-                                            labelStyle: TextStyle(
-                                              color: Colors.black,
-                                              fontFamily: 'OpenSans',
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          onChanged: (value) => context
-                                              .read<SignupCubit>()
-                                              .firstNameChanged(value),
-                                          validator: (value) => value.trim().isEmpty
-                                              ? null
-                                              : null,
-                                        ),
-                                      ),
-                                      SizedBox(width: 5,),
-                                      Flexible(
-                                        flex: 1,
-                                        fit: FlexFit.tight,
-                                        child: TextFormField(
-                                          decoration: InputDecoration(
-                                            isDense: true,
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                              BorderRadius.all(Radius.circular(50.0)),
-                                              borderSide: BorderSide(
-                                                  color: Color(0xffc2ffc2), width: 2),
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                              BorderRadius.all(Radius.circular(50.0)),
-                                              borderSide: BorderSide(
-                                                  color: Colors.white, width: 2.0),
-                                            ),
-                                            focusedErrorBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                              borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                            ),
-                                            errorBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                              borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                            ),
-                                            labelText: 'Last Name',
-                                            labelStyle: TextStyle(
-                                              color: Colors.black,
-                                              fontFamily: 'OpenSans',
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          onChanged: (value) => context
-                                              .read<SignupCubit>()
-                                              .lastNameChanged(value),
-                                          validator: (value) => value.trim().isEmpty
-                                              ? null
-                                              : null,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 12),
-                                  TextFormField(
-                                    decoration: InputDecoration(
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(Radius.circular(50.0)),
-                                        borderSide: BorderSide(
-                                            color: Color(0xffc2ffc2), width: 2),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(Radius.circular(50.0)),
-                                        borderSide: BorderSide(
-                                            color: Colors.white, width: 2.0),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                        borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                        borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                      ),
-                                      labelText: 'Username',
-                                      labelStyle: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'OpenSans',
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      prefixIcon: Icon(
-                                        Icons.account_circle_rounded,
-                                        color: Colors.black,
-                                      ),
+                                  onChanged: (value) => context
+                                      .read<SignupCubit>()
+                                      .usernameChanged(value),
+                                  validator: (value) => value.trim().isEmpty
+                                      ? 'Please enter a valid username.'
+                                      : null,
+                                ),
+                                const SizedBox(height: 12.0),
+                                TextFormField(
+                                  decoration: InputDecoration(
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(50.0)),
+                                      borderSide: BorderSide(
+                                          color: Color(0xffc2ffc2), width: 2),
                                     ),
-                                    onChanged: (value) => context
-                                        .read<SignupCubit>()
-                                        .usernameChanged(value),
-                                    validator: (value) => value.trim().isEmpty
-                                        ? 'Please enter a valid username.'
-                                        : null,
-                                  ),
-                                  const SizedBox(height: 12.0),
-                                  TextFormField(
-                                    decoration: InputDecoration(
-                                      focusedBorder: OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(Radius.circular(50.0)),
-                                        borderSide: BorderSide(
-                                            color: Color(0xffc2ffc2), width: 2),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.all(Radius.circular(50.0)),
-                                        borderSide: BorderSide(
-                                            color: Colors.white, width: 2.0),
-                                      ),
-                                      focusedErrorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                        borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                      ),
-                                      errorBorder: OutlineInputBorder(
-                                        borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                        borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                      ),
-                                      labelText: 'Email',
-                                      labelStyle: TextStyle(
-                                        color: Colors.black,
-                                        fontFamily: 'OpenSans',
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      prefixIcon: Icon(
-                                        Icons.email,
-                                        color: Colors.black,
-                                      ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(50.0)),
+                                      borderSide: BorderSide(
+                                          color: Colors.white, width: 2.0),
                                     ),
-                                    onChanged: (value) => context
-                                        .read<SignupCubit>()
-                                        .emailChanged(value),
-                                    validator: (value) => !regExEmail.hasMatch(value)
-                                        ? 'Please enter a valid email.'
-                                        : null,
-                                  ),
-                                  const SizedBox(height: 5.0),
-                                  Container(
-                                    child: Card(
-                                      color: Colors.white.withAlpha(90),
-                                      elevation: 2,
-                                      shadowColor: Colors.black.withAlpha(50),
-                                      shape: RoundedRectangleBorder(
-                                        side: BorderSide(
-                                            color: Colors.white,
-                                            width: 2),
-                                        borderRadius: BorderRadius.circular(55),
-                                      ),
-                                      child: Padding(
-                                          padding: EdgeInsets.all(10),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                    "Password must contain: ",
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontFamily: 'OpenSans',
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                    "One Uppercase Character",
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontFamily: 'OpenSans',
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                    "One Lowercase Character",
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontFamily: 'OpenSans',
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                    "One Special Character (ex. !@#%^)",
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontFamily: 'OpenSans',
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                    "At Least 6 Digits",
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontFamily: 'OpenSans',
-                                                    fontSize: 15,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                    focusedErrorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(50.0)),
+                                      borderSide: BorderSide(
+                                          color: Colors.red, width: 2.0),
+                                    ),
+                                    errorBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(50.0)),
+                                      borderSide: BorderSide(
+                                          color: Colors.red, width: 2.0),
+                                    ),
+                                    labelText: 'Email',
+                                    labelStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'OpenSans',
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    prefixIcon: Icon(
+                                      Icons.email,
+                                      color: Colors.black,
                                     ),
                                   ),
-                                  SizedBox(height: 5.0,),
-                                  Container(
-                                    child: TextFormField(
-                                      key: _passKey,
-                                      obscureText: true,
-                                      decoration: InputDecoration(
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(50.0)),
-                                          borderSide: BorderSide(
-                                              color: Color(0xffc2ffc2), width: 2),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(50.0)),
-                                          borderSide: BorderSide(
-                                              color: Colors.white, width: 2.0),
-                                        ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                          borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                          borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                        ),
-                                        labelText: 'Password',
-                                        labelStyle: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'OpenSans',
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        prefixIcon: Icon(
-                                          Icons.lock,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      onChanged: (value) => context
-                                          .read<SignupCubit>()
-                                          .passwordChanged(value),
-                                      //One lower,
-                                      //One Upper,
-                                      //One Digit,
-                                      //One Special Char
-                                      //at least 6 chars in length
-                                      validator: (value) => !regexPass.hasMatch(value)
-                                          ? 'Password not secure.'
+                                  onChanged: (value) => context
+                                      .read<SignupCubit>()
+                                      .emailChanged(value),
+                                  validator: (value) =>
+                                      !regExEmail.hasMatch(value)
+                                          ? 'Please enter a valid email.'
                                           : null,
+                                ),
+                                const SizedBox(height: 5.0),
+                                Container(
+                                  child: Card(
+                                    color: Colors.white.withAlpha(90),
+                                    elevation: 2,
+                                    shadowColor: Colors.black.withAlpha(50),
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          color: Colors.white, width: 2),
+                                      borderRadius: BorderRadius.circular(55),
                                     ),
-                                  ),
-                                  const SizedBox(height: 12.0),
-                                  Container(
-                                    child: TextFormField(
-                                      obscureText: true,
-                                      decoration: InputDecoration(
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(50.0)),
-                                          borderSide: BorderSide(
-                                              color: Color(0xffc2ffc2), width: 2),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(50.0)),
-                                          borderSide: BorderSide(
-                                              color: Colors.white, width: 2.0),
-                                        ),
-                                        focusedErrorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                          borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                        ),
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                                          borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                        ),
-                                        labelText: 'Confirm Password',
-                                        labelStyle: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'OpenSans',
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        prefixIcon: Icon(
-                                          Icons.lock,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                      onChanged: (value) => context
-                                          .read<SignupCubit>()
-                                          .passwordChanged(value),
-                                      //One lower,
-                                      //One Upper,
-                                      //One Digit,
-                                      //One Special Char
-                                      //at least 6 chars in length
-                                      validator: (value) => value != _passKey.currentState.value
-                                          ? 'Passwords fo not match.'
-                                          : null,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 12.0),
-                                  Container(
-                                    child: Card(
-                                      elevation: 5,
-                                      shadowColor: Colors.black.withAlpha(15),
-                                      borderOnForeground: false,
-                                      color: Color(0xffc2ffc2),
-                                      shape: RoundedRectangleBorder(
-                                        side: BorderSide(
-                                            color: Color(0xffc2ffc2).withAlpha(20),
-                                            width: 2),
-                                        borderRadius: BorderRadius.circular(55),
-                                      ),
-                                      child: Stack(
+                                    child: Padding(
+                                      padding: EdgeInsets.all(10),
+                                      child: Column(
                                         children: [
-                                          Padding(
-                                            padding: EdgeInsets.all(12),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                              children: [
-                                                Card(
-                                                  elevation: 3,
-                                                  color: Color(0xffc2ffc2),
-                                                  shape: RoundedRectangleBorder(
-                                                    side: BorderSide(
-                                                        color: Color(0xffc2ffc2),
-                                                        width: 2),
-                                                    borderRadius: BorderRadius.circular(50),
-                                                  ),
-                                                  child: SizedBox(
-                                                    width: 95,
-                                                    height: 45,
-                                                    child: TextButton(
-                                                      child: Text(
-                                                        'Sign Up',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                        ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "Password must contain: ",
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily: 'OpenSans',
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "One Uppercase Character",
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily: 'OpenSans',
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "One Lowercase Character",
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily: 'OpenSans',
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "One Special Character (ex. !@#%^)",
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily: 'OpenSans',
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                "At Least 6 Digits",
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily: 'OpenSans',
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 5.0,
+                                ),
+                                Container(
+                                  child: TextFormField(
+                                    key: _passKey,
+                                    obscureText: true,
+                                    decoration: InputDecoration(
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(50.0)),
+                                        borderSide: BorderSide(
+                                            color: Color(0xffc2ffc2), width: 2),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(50.0)),
+                                        borderSide: BorderSide(
+                                            color: Colors.white, width: 2.0),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(50.0)),
+                                        borderSide: BorderSide(
+                                            color: Colors.red, width: 2.0),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(50.0)),
+                                        borderSide: BorderSide(
+                                            color: Colors.red, width: 2.0),
+                                      ),
+                                      labelText: 'Password',
+                                      labelStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: 'OpenSans',
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      prefixIcon: Icon(
+                                        Icons.lock,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    onChanged: (value) => context
+                                        .read<SignupCubit>()
+                                        .passwordChanged(value),
+                                    //One lower,
+                                    //One Upper,
+                                    //One Digit,
+                                    //One Special Char
+                                    //at least 6 chars in length
+                                    validator: (value) =>
+                                        !regexPass.hasMatch(value)
+                                            ? 'Password not secure.'
+                                            : null,
+                                  ),
+                                ),
+                                const SizedBox(height: 12.0),
+                                Container(
+                                  child: TextFormField(
+                                    obscureText: true,
+                                    decoration: InputDecoration(
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(50.0)),
+                                        borderSide: BorderSide(
+                                            color: Color(0xffc2ffc2), width: 2),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(50.0)),
+                                        borderSide: BorderSide(
+                                            color: Colors.white, width: 2.0),
+                                      ),
+                                      focusedErrorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(50.0)),
+                                        borderSide: BorderSide(
+                                            color: Colors.red, width: 2.0),
+                                      ),
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(50.0)),
+                                        borderSide: BorderSide(
+                                            color: Colors.red, width: 2.0),
+                                      ),
+                                      labelText: 'Confirm Password',
+                                      labelStyle: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: 'OpenSans',
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      prefixIcon: Icon(
+                                        Icons.lock,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    onChanged: (value) => context
+                                        .read<SignupCubit>()
+                                        .passwordChanged(value),
+                                    //One lower,
+                                    //One Upper,
+                                    //One Digit,
+                                    //One Special Char
+                                    //at least 6 chars in length
+                                    validator: (value) =>
+                                        value != _passKey.currentState.value
+                                            ? 'Passwords fo not match.'
+                                            : null,
+                                  ),
+                                ),
+                                const SizedBox(height: 12.0),
+                                Container(
+                                  child: Card(
+                                    elevation: 5,
+                                    shadowColor: Colors.black.withAlpha(15),
+                                    borderOnForeground: false,
+                                    color: Color(0xffc2ffc2),
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          color:
+                                              Color(0xffc2ffc2).withAlpha(20),
+                                          width: 2),
+                                      borderRadius: BorderRadius.circular(55),
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.all(12),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Card(
+                                                elevation: 3,
+                                                color: Color(0xffc2ffc2),
+                                                shape: RoundedRectangleBorder(
+                                                  side: BorderSide(
+                                                      color: Color(0xffc2ffc2),
+                                                      width: 2),
+                                                  borderRadius:
+                                                      BorderRadius.circular(50),
+                                                ),
+                                                child: SizedBox(
+                                                  width: 95,
+                                                  height: 45,
+                                                  child: TextButton(
+                                                    child: Text(
+                                                      'Sign Up',
+                                                      style: TextStyle(
+                                                        color: Colors.black,
                                                       ),
-                                                      style: ButtonStyle(
-                                                        backgroundColor:
-                                                        MaterialStateProperty
-                                                            .all<Color>(
-                                                            Color(0xffc2ffc2)),
-                                                        shape: MaterialStateProperty
-                                                            .all<
-                                                            RoundedRectangleBorder>(
-                                                          RoundedRectangleBorder(
-                                                            borderRadius:
-                                                            BorderRadius
-                                                                .circular(25.0),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      onPressed: () => _submitForm(
-                                                          context,
-                                                          state.status == SignupStatus.submitting),
                                                     ),
+                                                    style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStateProperty
+                                                              .all<Color>(Color(
+                                                                  0xffc2ffc2)),
+                                                      shape: MaterialStateProperty
+                                                          .all<
+                                                              RoundedRectangleBorder>(
+                                                        RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      25.0),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    onPressed: () => _submitForm(
+                                                        context,
+                                                        state.status ==
+                                                            SignupStatus
+                                                                .submitting),
                                                   ),
                                                 ),
-                                                SizedBox(width: 24.0),
-                                                Container(
-                                                  child: SizedBox(
-                                                    width: 95,
-                                                    height: 45,
-                                                    child: TextButton(
-                                                      child: Text(
-                                                        'Back',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                        ),
+                                              ),
+                                              SizedBox(width: 24.0),
+                                              Container(
+                                                child: SizedBox(
+                                                  width: 95,
+                                                  height: 45,
+                                                  child: TextButton(
+                                                    child: Text(
+                                                      'Back',
+                                                      style: TextStyle(
+                                                        color: Colors.black,
                                                       ),
-                                                      style: ButtonStyle(
-                                                        backgroundColor:
-                                                        MaterialStateProperty
-                                                            .all<Color>(
-                                                            Colors.white
-                                                        ),
-                                                        shape: MaterialStateProperty
-                                                            .all<RoundedRectangleBorder>(
-                                                          RoundedRectangleBorder(
-                                                            borderRadius:
-                                                            BorderRadius
-                                                                .circular(25.0),
+                                                    ),
+                                                    style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStateProperty
+                                                              .all<Color>(
+                                                                  Colors.white),
+                                                      shape: MaterialStateProperty
+                                                          .all<
+                                                              RoundedRectangleBorder>(
+                                                        RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      25.0),
                                                         ),
                                                       ),
                                                     ),
-                                                      onPressed: () => Navigator.of(context).pop(),
+                                                    onPressed: () =>
+                                                        Navigator.of(context)
+                                                            .pop(),
                                                   ),
                                                 ),
                                               ),
@@ -617,12 +659,12 @@ class SignupScreen extends StatelessWidget {
             ),
           );
         }),
-        ),
+      ),
     );
   }
 
-  void _submitForm(BuildContext context, bool isSubmitting){
-    if (_formKey.currentState.validate() && !isSubmitting){
+  void _submitForm(BuildContext context, bool isSubmitting) {
+    if (_formKey.currentState.validate() && !isSubmitting) {
       context.read<SignupCubit>().signUpInWithCredentials();
     }
   }

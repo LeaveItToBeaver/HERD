@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:herd/config/paths.dart';
 import 'package:herd/models/models.dart';
 
-
 class Comment extends Equatable {
   final String id;
   final String postId;
@@ -12,7 +11,7 @@ class Comment extends Equatable {
   final String content;
   final DateTime date;
 
-  const Comment ({
+  const Comment({
     this.id,
     @required this.postId,
     @required this.author,
@@ -22,12 +21,12 @@ class Comment extends Equatable {
 
   @override
   List<Object> get props => [
-    id,
-    postId,
-    author,
-    content,
-    date,
-  ];
+        id,
+        postId,
+        author,
+        content,
+        date,
+      ];
 
   Comment copyWith({
     String id,
@@ -45,12 +44,11 @@ class Comment extends Equatable {
     );
   }
 
-
-  Map <String, dynamic> toDocument(){
-    return{
+  Map<String, dynamic> toDocument() {
+    return {
       'postId': postId,
       'author':
-        FirebaseFirestore.instance.collection(Paths.users).doc(author.id),
+          FirebaseFirestore.instance.collection(Paths.users).doc(author.id),
       'content': content,
       'date': Timestamp.fromDate(date),
     };
@@ -60,11 +58,10 @@ class Comment extends Equatable {
     if (doc == null) return null;
     final data = doc.data();
     final authorRef = (data as dynamic)['author'] as DocumentReference;
-    if(authorRef != null) {
-
+    if (authorRef != null) {
       final authorDoc = await authorRef.get();
 
-      if(authorDoc.exists){
+      if (authorDoc.exists) {
         return Comment(
           id: doc.id,
           author: User.fromDocument(authorDoc),

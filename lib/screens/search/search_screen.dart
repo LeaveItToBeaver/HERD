@@ -8,13 +8,13 @@ import 'cubit/search_cubit.dart';
 import 'package:herd/widgets/widgets.dart';
 
 class SearchScreen extends StatefulWidget {
-  static const String routeName ='/search';
+  static const String routeName = '/search';
 
   @override
   _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen>{
+class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController _textController = TextEditingController();
 
   @override
@@ -30,22 +30,22 @@ class _SearchScreenState extends State<SearchScreen>{
       child: Container(
         child: Column(
           children: [
-            Expanded(
-                child: Container(
-                  child: BlocBuilder<SearchCubit, SearchState>(
-                    builder: (context, state) {
-                      switch (state.status) {
-                        case SearchStatus.error:
-                          return CenteredText(
-                            text: state.failure.message,
-                          );
-                        case SearchStatus.loading:
-                          return const Center(child: CircularProgressIndicator());
-                      //case SearchStatus.initial:
-                        case SearchStatus.loaded:
-                          return state.users.isNotEmpty ? ListView.builder(
+            Expanded(child: Container(
+              child: BlocBuilder<SearchCubit, SearchState>(
+                builder: (context, state) {
+                  switch (state.status) {
+                    case SearchStatus.error:
+                      return CenteredText(
+                        text: state.failure.message,
+                      );
+                    case SearchStatus.loading:
+                      return const Center(child: CircularProgressIndicator());
+                    //case SearchStatus.initial:
+                    case SearchStatus.loaded:
+                      return state.users.isNotEmpty
+                          ? ListView.builder(
                               itemCount: state.users.length,
-                              itemBuilder: (BuildContext context, int index){
+                              itemBuilder: (BuildContext context, int index) {
                                 final user = state.users[index];
                                 return ListTile(
                                   leading: UserProfileImage(
@@ -58,21 +58,20 @@ class _SearchScreenState extends State<SearchScreen>{
                                   ),
                                   onTap: () => Navigator.of(context).pushNamed(
                                     ProfileScreen.routeName,
-                                    arguments: ProfileScreenArgs(userId: user.id),
+                                    arguments:
+                                        ProfileScreenArgs(userId: user.id),
                                   ),
                                 );
-                              }
-                          ) : CenteredText(
-                            text: "No users were found.",
-                          );
-                        default:
-                          return const SizedBox.shrink(
-                          );
-                      }
-                    },
-                  ),
-                )
-            ),
+                              })
+                          : CenteredText(
+                              text: "No users were found.",
+                            );
+                    default:
+                      return const SizedBox.shrink();
+                  }
+                },
+              ),
+            )),
             Padding(
               padding: EdgeInsets.all(20),
               child: TextField(
@@ -80,13 +79,11 @@ class _SearchScreenState extends State<SearchScreen>{
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                    borderSide: BorderSide(
-                        color: Color(0xffc2ffc2), width: 2),
+                    borderSide: BorderSide(color: Color(0xffc2ffc2), width: 2),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                    borderSide: BorderSide(
-                        color: Colors.black, width: 2.0),
+                    borderSide: BorderSide(color: Colors.black, width: 2.0),
                   ),
                   labelText: 'Search',
                   labelStyle: TextStyle(
@@ -113,7 +110,7 @@ class _SearchScreenState extends State<SearchScreen>{
                 textInputAction: TextInputAction.search,
                 textAlignVertical: TextAlignVertical.center,
                 onSubmitted: (value) {
-                  if(value.trim().isNotEmpty){
+                  if (value.trim().isNotEmpty) {
                     context.read<SearchCubit>().searchUsers(value.trim());
                   }
                 },

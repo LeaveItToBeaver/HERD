@@ -6,9 +6,7 @@ import 'package:herd/widgets/user_widgets/user_profile_image.dart';
 
 class NewPostInformation extends StatelessWidget {
   final Post post;
-  const NewPostInformation({
-    @required this.post,
-    Key key}) : super(key: key);
+  const NewPostInformation({@required this.post, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +36,10 @@ class NewPostInformation extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: Column(
-                children: [
-                  Padding(
-                      padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
                   child: Row(
                     children: [
                       Expanded(
@@ -60,25 +58,25 @@ class NewPostInformation extends StatelessWidget {
                     ],
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            post.title,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          post.title,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    ),
+                      ),
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   ),
-                ],
-              ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

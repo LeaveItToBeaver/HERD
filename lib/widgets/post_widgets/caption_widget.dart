@@ -4,13 +4,11 @@ import 'package:herd/models/post_model.dart';
 
 class CaptionWidget extends StatelessWidget {
   final Post post;
-  const CaptionWidget({
-    @required this.post,
-    Key key}) : super(key: key);
+  const CaptionWidget({@required this.post, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if(post.caption.isNotEmpty){
+    if (post.caption.isNotEmpty) {
       return Container(
         child: Padding(
           padding: EdgeInsets.fromLTRB(12, 0, 12, 12),
@@ -18,17 +16,17 @@ class CaptionWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(
-                  child: Text(
-                    post.caption,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                child: Text(
+                  post.caption,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
         ),
       );
-    } else if(post.caption.isEmpty){
+    } else if (post.caption.isEmpty) {
       return Container();
     }
   }

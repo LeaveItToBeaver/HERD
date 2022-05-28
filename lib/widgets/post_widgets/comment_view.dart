@@ -48,7 +48,7 @@ class CommentView extends StatelessWidget {
                           fontSize: 15,
                         ),
                       ),
-                    ],  // children
+                    ], // children
                   ),
                   Row(
                     children: [
@@ -68,9 +68,7 @@ class CommentView extends StatelessWidget {
                       )
                     ],
                   ),
-                  Container(
-
-                  ),
+                  Container(),
                 ],
               )
             ],
