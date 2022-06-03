@@ -18,6 +18,11 @@ class PostRepository extends BasePostRepository {
   }
 
   @override
+  Future<void> deletePost({@required Post post}) async {
+    await _firebaseFirestore.collection(Paths.posts).doc().delete();
+  }
+
+  @override
   Future<void> createComment({@required Comment comment}) async {
     await _firebaseFirestore
         .collection(Paths.comments)

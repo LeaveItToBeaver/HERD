@@ -14,11 +14,11 @@ class CreatePostCubit extends Cubit<CreatePostState> {
   final StorageRepository _storageRepository;
   final AuthBloc _authBloc;
 
-  CreatePostCubit({
-    @required PostRepository postRepository,
-    @required StorageRepository storageRepository,
-    @required AuthBloc authBloc
-  }) : _postRepository = postRepository,
+  CreatePostCubit(
+      {@required PostRepository postRepository,
+      @required StorageRepository storageRepository,
+      @required AuthBloc authBloc})
+      : _postRepository = postRepository,
         _storageRepository = storageRepository,
         _authBloc = authBloc,
         super(CreatePostState.initial());
@@ -49,8 +49,9 @@ class CreatePostCubit extends Cubit<CreatePostState> {
     try {
       final author = User.empty.copyWith(id: _authBloc.state.user.uid);
 
-      if(state.postImage != null) {
-        final postImageUrl = await _storageRepository.uploadPostImage(image: state.postImage);
+      if (state.postImage != null) {
+        final postImageUrl =
+            await _storageRepository.uploadPostImage(image: state.postImage);
         final post = Post(
             author: author,
             imageUrl: postImageUrl,
@@ -59,15 +60,12 @@ class CreatePostCubit extends Cubit<CreatePostState> {
             title: state.title,
             likes: 0,
             dislikes: 0,
-            date: DateTime.now()
-        );
+            date: DateTime.now());
 
-        await _postRepository.createPost(
-            post: post
-        );
+        await _postRepository.createPost(post: post);
 
         emit(state.copyWith(status: CreatePostStatus.success));
-      } else if (state.postImage == null){
+      } else if (state.postImage == null) {
         final post = Post(
             author: author,
             imageUrl: null,
@@ -76,12 +74,9 @@ class CreatePostCubit extends Cubit<CreatePostState> {
             title: state.title,
             likes: 0,
             dislikes: 0,
-            date: DateTime.now()
-        );
+            date: DateTime.now());
 
-        await _postRepository.createPost(
-            post: post
-        );
+        await _postRepository.createPost(post: post);
 
         emit(state.copyWith(status: CreatePostStatus.success));
       }
@@ -95,14 +90,11 @@ class CreatePostCubit extends Cubit<CreatePostState> {
           dislikes: 0,
           date: DateTime.now()
       );*/
-    }
-    catch (err) {
+    } catch (err) {
       emit(state.copyWith(
           status: CreatePostStatus.error,
-          failure: const Failure(
-              message: "We were unable to create your post"
-          )
-      ));
+          failure:
+              const Failure(message: "We were unable to create your post")));
     }
   }
 

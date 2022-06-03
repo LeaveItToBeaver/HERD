@@ -2,6 +2,7 @@ import 'package:herd/models/models.dart';
 
 abstract class BasePostRepository {
   Future<void> createPost({Post post});
+  Future<void> deletePost({Post post});
 
   Future<void> createComment({Comment comment});
   void createLike({Post post, String userId});

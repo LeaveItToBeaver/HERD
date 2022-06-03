@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:herd/models/post_model.dart';
 import 'package:herd/widgets/post_widgets/post_information.dart';
-import 'package:herd/widgets/post_widgets/post_operation_widget.dart';
+import 'package:herd/widgets/post_widgets/post_operation_photo.dart';
 import 'dart:io';
 
 class PhotoPost extends StatelessWidget {
@@ -25,11 +25,11 @@ class PhotoPost extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Card(
-        elevation: 1,
-        color: Colors.white70,
+        elevation: 5,
+        color: Colors.white,
         shadowColor: Colors.black,
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: Colors.transparent, width: 4),
+          side: BorderSide(color: Colors.white, width: 0),
           borderRadius: BorderRadius.circular(30),
         ),
         child: Column(

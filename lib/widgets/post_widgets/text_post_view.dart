@@ -3,6 +3,8 @@ import 'package:herd/models/post_model.dart';
 import 'package:herd/widgets/post_widgets/post_information.dart';
 import 'package:herd/widgets/post_widgets/post_operation_text_widget.dart';
 
+import 'caption_widget.dart';
+
 class TextPost extends StatelessWidget {
   final Post post;
   final bool isLiked;
@@ -19,11 +21,11 @@ class TextPost extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Card(
-        elevation: 1,
-        color: Colors.white70,
+        elevation: 5,
+        color: Colors.white,
         shadowColor: Colors.black,
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: Colors.transparent, width: 4),
+          side: BorderSide(color: Colors.white, width: 0),
           borderRadius: BorderRadius.circular(30),
         ),
         child: Column(
@@ -32,6 +34,13 @@ class TextPost extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             NewPostInformation(post: post),
+            GestureDetector(
+              onTap: () {},
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(5, 10, 5, 0),
+                child: CaptionWidget(post: post),
+              ),
+            ),
             GestureDetector(
               onTap: () {},
               child: PostOperationText(post: post),

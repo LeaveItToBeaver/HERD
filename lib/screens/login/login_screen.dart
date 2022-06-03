@@ -94,12 +94,13 @@ class LoginScreen extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(22.0),
                     child: Card(
-                      elevation: 2,
+                      elevation: 10,
                       borderOnForeground: false,
                       color: Color(0xff88b388).withAlpha(20),
                       shape: RoundedRectangleBorder(
                         side: BorderSide(
-                            color: Color(0xffc2ffc2).withAlpha(70), width: 2),
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            width: 2),
                         borderRadius: BorderRadius.circular(55),
                       ),
                       shadowColor: Colors.indigoAccent.withAlpha(40),
@@ -249,9 +250,10 @@ class LoginScreen extends StatelessWidget {
                                   onChanged: (value) => context
                                       .read<LoginCubit>()
                                       .passwordChanged(value),
-                                  validator: (value) => value.length < 6
-                                      ? 'Email or Password is incorrect.'
-                                      : null,
+                                  validator: (value) =>
+                                      loginErr || value.length < 6
+                                          ? 'Email or Password is incorrect.'
+                                          : null,
                                 ),
                               ),
                               //SizedBox(height: 5.0),
@@ -282,14 +284,13 @@ class LoginScreen extends StatelessWidget {
 
                               Container(
                                 child: Card(
-                                  elevation: 5,
+                                  elevation: 0,
                                   shadowColor: Colors.black,
                                   borderOnForeground: false,
                                   color: Color(0xffc2ffc2),
                                   shape: RoundedRectangleBorder(
                                     side: BorderSide(
-                                        color: Colors.indigo.withAlpha(20),
-                                        width: 2),
+                                        color: Colors.white, width: 2),
                                     borderRadius: BorderRadius.circular(55),
                                   ),
                                   child: Stack(

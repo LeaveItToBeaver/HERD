@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:equatable/equatable.dart';
 import 'package:herd/models/failure_model.dart';
 import 'package:herd/repositories/auth/auth_repository.dart';
@@ -21,15 +22,12 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   void loginInWithCredentials() async {
-    if(!state.isFormValid
-        || state.status == LoginStatus.submitting) return;
+    if (!state.isFormValid || state.status == LoginStatus.submitting) return;
     emit(state.copyWith(status: LoginStatus.submitting));
     try {
-     await _authRepository.logInWithEmailAndPassword(
-          email: state.email,
-          password: state.password
-      );
-     emit(state.copyWith(status: LoginStatus.success));
+      await _authRepository.logInWithEmailAndPassword(
+          email: state.email, password: state.password);
+      emit(state.copyWith(status: LoginStatus.success));
     } on Failure catch (err) {
       emit(state.copyWith(failure: err, status: LoginStatus.error));
     }

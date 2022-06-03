@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'caption_widget.dart';
 import 'package:herd/models/models.dart';
 
-class PostOperationText extends StatelessWidget {
+class PostOperation extends StatelessWidget {
   final Post post;
-  const PostOperationText({@required this.post, Key key}) : super(key: key);
+  const PostOperation({@required this.post, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +13,13 @@ class PostOperationText extends StatelessWidget {
       color: Colors.white,
       shadowColor: Colors.black,
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.white, width: 0),
-        borderRadius: BorderRadius.circular(50),
+        side: BorderSide(color: Colors.white, width: 2),
+        borderRadius: BorderRadius.circular(25),
       ),
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.fromLTRB(1, 1, 1, 1),
+            padding: EdgeInsets.all(5),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -66,11 +66,11 @@ class PostOperationText extends StatelessWidget {
                   height: 50,
                   width: 50,
                   child: Card(
-                    elevation: 0,
+                    elevation: 1,
                     color: Colors.white,
                     shadowColor: Colors.black,
                     shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.white, width: 2),
+                      side: BorderSide(color: Colors.transparent, width: 2),
                       borderRadius: BorderRadius.circular(50),
                     ),
                     child: Ink(
@@ -88,11 +88,11 @@ class PostOperationText extends StatelessWidget {
                   height: 50,
                   width: 50,
                   child: Card(
-                    elevation: 0,
+                    elevation: 1,
                     color: Colors.white,
                     shadowColor: Colors.black,
                     shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.white, width: 0),
+                      side: BorderSide(color: Colors.transparent, width: 2),
                       borderRadius: BorderRadius.circular(50),
                     ),
                     child: Ink(
@@ -102,7 +102,7 @@ class PostOperationText extends StatelessWidget {
                         child: IconButton(
                           iconSize: 20,
                           onPressed: () => {},
-                          highlightColor: Colors.white,
+                          highlightColor: Colors.transparent,
                           icon: Icon(Icons.comment_rounded),
                         )),
                   ),
@@ -153,6 +153,7 @@ class PostOperationText extends StatelessWidget {
               ],
             ),
           ),
+          CaptionWidget(post: post),
         ],
       ),
     );

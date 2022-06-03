@@ -189,6 +189,9 @@ class CreatePostScreen extends StatelessWidget {
                               ),
                             ),
                           ),
+                          SizedBox(
+                            height: 50,
+                          )
                         ],
                       ),
                     ),

@@ -11,11 +11,11 @@ class NewPostInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2,
+      elevation: 5,
       color: Colors.white,
       shadowColor: Colors.black,
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.transparent, width: 0),
+        side: BorderSide(color: Colors.white, width: 0),
         borderRadius: BorderRadius.circular(25),
       ),
       child: Row(

@@ -1,6 +1,6 @@
 part of 'profile_bloc.dart';
 
-enum ProfileStatus {initial, loading, loaded, error}
+enum ProfileStatus { initial, loading, loaded, error }
 
 @immutable
 class ProfileState {
@@ -28,7 +28,7 @@ class ProfileState {
     @required this.failure,
   });
 
-  factory ProfileState.initial(){
+  factory ProfileState.initial() {
     return const ProfileState(
         user: User.empty,
         posts: [],
@@ -39,23 +39,22 @@ class ProfileState {
         isCurrentUser: false,
         isFollowing: false,
         status: ProfileStatus.initial,
-        failure: Failure()
-    );
+        failure: Failure());
   }
 
   @override
   List<Object> get props => [
-    user,
-    posts,
-    comments,
-    isListView,
-    isCommentView,
-    isHistoryView,
-    isCurrentUser,
-    isFollowing,
-    status,
-    failure,
-  ];
+        user,
+        posts,
+        comments,
+        isListView,
+        isCommentView,
+        isHistoryView,
+        isCurrentUser,
+        isFollowing,
+        status,
+        failure,
+      ];
 
   ProfileState copyWith({
     User user,
@@ -70,18 +69,16 @@ class ProfileState {
     Failure failure,
   }) {
     return ProfileState(
-    user: user ?? this.user,
-    posts: posts ?? this.posts,
-    comments: comments ?? this.comments,
-    isListView: isListView ?? this.isListView,
+      user: user ?? this.user,
+      posts: posts ?? this.posts,
+      comments: comments ?? this.comments,
+      isListView: isListView ?? this.isListView,
       isCommentView: isCommentView ?? this.isCommentView,
       isHistoryView: isHistoryView ?? this.isHistoryView,
-    isCurrentUser: isCurrentUser ?? this.isCurrentUser,
-    isFollowing: isFollowing ?? this.isFollowing,
-    status: status ?? this.status,
-    failure: failure ?? this.failure,
+      isCurrentUser: isCurrentUser ?? this.isCurrentUser,
+      isFollowing: isFollowing ?? this.isFollowing,
+      status: status ?? this.status,
+      failure: failure ?? this.failure,
     );
   }
 }
-
-
