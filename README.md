@@ -28,3 +28,5 @@ Some key things about this application and why I chose the Flutter framework
 Because of life making it more difficult to focus on passion projects like this, I have fallen behind in terms of keeping the framework up to date.
 
 To combat this, I will be making this repository public and re-creating the entire project from scratch so I can learn from my previous mistakes to make the next version much better. My next version will remain private for the time being, though if anyone wants to contribute to this project, they are more than welcome to. 
+
+## Of course since this was private, the commit comments are terrible; for that, I apologize. This is not how I normally commit my code in a professional setting. :P
