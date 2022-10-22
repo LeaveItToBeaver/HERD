@@ -15,8 +15,7 @@ class CustomRouter {
       case '/':
         return MaterialPageRoute(
             settings: const RouteSettings(name: '/'),
-            builder: (_) => const Scaffold()
-    );
+            builder: (_) => const Scaffold());
       case SplashScreen.routeName:
         return SplashScreen.route();
       case LoginScreen.routeName:
@@ -32,7 +31,7 @@ class CustomRouter {
     }
   }
 
-  static Route onGenerateNestedRoute(RouteSettings settings){
+  static Route onGenerateNestedRoute(RouteSettings settings) {
     print('Nested Route: ${settings.name}');
     switch (settings.name) {
       case ProfileScreen.routeName:

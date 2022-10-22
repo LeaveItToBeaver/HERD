@@ -50,14 +50,17 @@ class PostRepository extends BasePostRepository {
         .collection(Paths.posts)
         .where('author', isEqualTo: authorRef)
         .orderBy('date',
-            descending: true) //This needs to change to sort algorithm
+            descending: true) //TODO: This needs to change to sort algorithm
         .snapshots()
         .map((snap) => snap.docs.map((doc) => Post.fromDocument(doc)).toList());
   }
 
   @override
   Future<List<Post>> getUserFeed(
-      {@required String userId, String lastPostId}) async {
+      //Todo: Replace code below with where clause algorithm.
+      //Might have to be re-sorted in the feed_screen? IDK \(^_^)/
+      {@required String userId,
+      String lastPostId}) async {
     QuerySnapshot postsSnap;
     if (lastPostId == null) {
       postsSnap = await _firebaseFirestore
@@ -154,4 +157,6 @@ class PostRepository extends BasePostRepository {
     //     .doc(userId)
     //     .set({});
   }
+
+  void indexPostsFromLikes() {}
 }

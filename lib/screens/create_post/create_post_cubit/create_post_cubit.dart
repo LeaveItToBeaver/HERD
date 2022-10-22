@@ -60,7 +60,8 @@ class CreatePostCubit extends Cubit<CreatePostState> {
             title: state.title,
             likes: 0,
             dislikes: 0,
-            date: DateTime.now());
+            date: DateTime.now(),
+            commentNum: null);
 
         await _postRepository.createPost(post: post);
 
@@ -74,7 +75,8 @@ class CreatePostCubit extends Cubit<CreatePostState> {
             title: state.title,
             likes: 0,
             dislikes: 0,
-            date: DateTime.now());
+            date: DateTime.now(),
+            commentNum: null);
 
         await _postRepository.createPost(post: post);
 
