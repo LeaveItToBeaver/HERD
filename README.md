@@ -1,32 +1,54 @@
-# HERD
-### A social media app created using the Flutter framework
+# HERD: A New Approach to Social Media
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/55630532/137820122-3e484186-8cf7-430a-9e18-6353d200303d.jpg" alt="drawing" width="100"/>
-  <img src="https://user-images.githubusercontent.com/55630532/137820677-dfdab72a-3596-4b1f-8577-e479a5195c1c.png" width="100"/>
-</p>
+HERD is a cutting-edge social media application built using the Flutter framework, designed to challenge the status quo of content curation and user interaction on digital platforms. Unlike traditional social media giants that prioritize content they believe users want to see, HERD is built on the principle of democratizing data, giving control back to the users.
 
-Some key things about this application and why I chose the Flutter framework
-> **Future Proofing the application**
-  
-  - Flutter is a relatively new framework created by Google alongside the Dart programming language
-  - Every year the demand for software engineers familar with the Dart programming language goes up as more and more companies see Flutters efficiency
-  
-> **Seamless integration** with Firebase using the BLoC architecture allows for and incredibly fast client to server connection
+## Why Flutter?
 
-# What I have learned from building this
+- **Future-Proofing**: Flutter, alongside the Dart programming language, is a modern framework developed by Google. It is increasingly sought after by companies for its efficiency, making skills in Dart highly valuable.
+- **Seamless Integration**: Utilizing the BLoC architecture for seamless Firebase integration, HERD benefits from rapid client-server communication, essential for a real-time social media experience.
 
-  - A much better understanding of what it takes to build a large scale application as well as the overhead for mismanaged code
-  - Better collaboration techniques as I had a few people helping me build this
-  - User authentication security
-  - Real Time Database updates using streams and futures
-  - How to create a good architecture for your project using the MVVM Design Pattern whilst following best practices
-  - Graphic design principals for mobile applications
-  
-# Where am I going next with this code?
+## Core Philosophy
 
-Because of life making it more difficult to focus on passion projects like this, I have fallen behind in terms of keeping the framework up to date.
+HERD is driven by a commitment to ensure users see what they and their communities genuinely want, not just what algorithms predict. This philosophy is operationalized through:
 
-To combat this, I will be making this repository public and re-creating the entire project from scratch so I can learn from my previous mistakes to make the next version much better. My next version will remain private for the time being, though if anyone wants to contribute to this project, they are more than welcome to. 
+- **Ranked Choice Algorithm**: Users have the power to downvote content they deem negative or undesirable, ensuring a more positive and relevant content feed.
+- **Dual Feeds for Enhanced Privacy and Interaction**:
+  - A **Private Feed** for interactions with friends and family, ensuring personal moments are shared with those who matter most.
+  - A **Public Feed** with a hidden identity or persona, encouraging global interactions without compromising user privacy.
 
-## Of course since this was private, the commit comments are terrible; for that, I apologize. This is not how I normally commit my code in a professional setting. :P
+## What I've Learned
+
+Developing HERD has been an enriching journey, teaching me valuable lessons in:
+
+- Large-scale application development and the importance of efficient code management.
+- Advanced collaboration techniques, thanks to working with a talented team.
+- Ensuring user authentication security.
+- Implementing real-time database updates with streams and futures.
+- Architectural best practices, specifically the MVVM Design Pattern.
+- Principles of graphic design for mobile applications.
+
+## Next Steps
+
+As life's responsibilities grow, maintaining and updating the framework has become challenging. To address this, I've decided to:
+
+- Make the current repository public, inviting contributions and feedback.
+- Undertake a complete rebuild of the project from scratch, applying lessons learned to enhance the application. The next version will be kept private initially but contributions are welcome.
+
+## Tech Stack and Skills Showcased
+
+The development of HERD has allowed me to deepen my expertise in a variety of technologies and methodologies, including:
+
+- **Flutter & Dart**: For building a cross-platform application with a seamless user experience.
+- **Firebase**: Leveraging Firebase for authentication, database, and hosting services.
+- **BLoC Architecture**: For managing the app's state and ensuring a responsive and scalable application.
+- **Ranked Choice Algorithm**: Custom algorithm implementation for content curation based on user preferences.
+- **Security**: Implementing robust user authentication and data protection measures.
+- **Real-Time Updates**: Utilizing streams and futures for immediate content updates and interactions.
+- **MVVM Design Pattern**: Ensuring a clean separation of concerns for more maintainable code.
+
+## Open Invitation
+
+The journey of HERD is ongoing, and I welcome anyone passionate about changing how social media platforms operate to contribute. Let's build a social media environment where content is democratically chosen, and user privacy is paramount.
+
+*Note: The current public repository is not the final version of HERD, which remains a work in progress. My wedding website is the only project I've completed to date.*
+
