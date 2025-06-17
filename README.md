@@ -50,5 +50,5 @@ The development of HERD has allowed me to deepen my expertise in a variety of te
 
 The journey of HERD is ongoing, and I welcome anyone passionate about changing how social media platforms operate to contribute. Let's build a social media environment where content is democratically chosen, and user privacy is paramount.
 
-*Note: The current public repository is not the final version of HERD, which remains a work in progress. My wedding website is the only project I've completed to date.*
+*Note: The current public repository is not the final version of HERD, which remains a work in progress.*
 
